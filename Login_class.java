@@ -12,60 +12,82 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Login_class {
 	@FXML
 	private Button login_button;
-	
+
 	@FXML
 	private TextField username_id;
 	@FXML
 	private TextField password_id;
-	
-///////////////////////////////////////////////////////////////////////////////////////////////	
-	public void login_clicked(){
+
+	@FXML
+	private Label error_label;
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	public void login_clicked() throws InterruptedException {
 		/*
-		 * Method for click event of the login button. 
-		 * This calls another method that opens another scene.
-		 *  
-		 */
-		
-		//condition to determine if the username and password is correct. 
-		//if it is then it calls open new scene method. 
-		if((username_id.getText().equals("user")) && (password_id.getText().equals("pass"))){
-			open_new_scene("Server.fxml",login_button,"Server Page");
-			
-			
-			//else it prints on the console. 
-		}else{
-			System.out.println("wrong inputs.");
-		}
-	}
-	
-///////////////////////////////////////////////////////////////////////////////////////////////
-	public void open_new_scene(String fxml_filename, Button button, String title){
-		/*
-		 * This method takes in fxml filename in string format, button name, and the title of the new 
-		 * scene in string format.
+		 * Method for click event of the login button. This calls another method
+		 * that opens another scene.
 		 * 
 		 */
-		
-		//starts a new scene from button click and sets the title.
-		Stage stage = (Stage)button.getScene().getWindow();
+
+		button_action();
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	public void button_action() throws InterruptedException {
+		/*
+		 * This method determines if the username and passwords match. 
+		 * if they do it opens up to their rightful pages. 
+		 * if not it displays a red text that says wrong username or password.
+		 * 
+		 * This method calls another method. "open_new_scene" method. 
+		 */
+
+		if ((username_id.getText().equals("host")) && (password_id.getText().equals("host"))) {
+			open_new_scene("Host.fxml", login_button, "Host Page");
+
+		} else if ((username_id.getText().equals("manager")) && (password_id.getText().equals("manager"))) {
+			// open_new_scene("Manager.fxml", login_button, "Manager Page");
+
+		} else if ((username_id.getText().equals("server")) && (password_id.getText().equals("server"))) {
+			// open_new_scene("Server.fxml", login_button, "Server Page");
+		} else {
+			error_label.setTextFill(Color.RED);
+			error_label.setText("Username or Password is incorrect.");
+			error_label.setVisible(true);
+		}
+
+	}
+
+	public void open_new_scene(String fxml_filename, Button button, String title) {
+		/*
+		 * This method takes in fxml filename in string format, button name, and
+		 * the title of the new scene in string format.
+		 * 
+		 */
+
+		// starts a new scene from button click and sets the title.
+		Stage stage = (Stage) button.getScene().getWindow();
 		stage.setTitle(title);
 		Parent root = null;
-		try{
-			//loads another fxml page. 
-			root = FXMLLoader.load(getClass().getResource("/application/"+fxml_filename));
-			
+		try {
+			// loads another fxml page.
+			root = FXMLLoader.load(getClass().getResource("/application/" + fxml_filename));
+
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
-			
-		}catch(IOException e){
+
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//show the new stage. 
+		// show the new stage.
 		stage.show();
 	}
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
 }
