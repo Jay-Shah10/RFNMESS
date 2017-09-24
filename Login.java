@@ -52,12 +52,12 @@ public class Login extends BorderPane {
 		//vabox pane that is attached to the bottom of the page.
 		//shows the error message if the inputs are wrong. 
 		VBox box = new VBox();
-		box.setPadding(new Insets(5,5,5,5));
+		box.setPadding(new Insets(5,5,100,5));
 		box.getChildren().add(error_label);
 		box.setAlignment(Pos.TOP_CENTER);
 		
 		//sets the style for this page. 
-		this.setStyle("-fx-background-color:#8FBC8F;");
+		this.setStyle("-fx-background-color:#c6ecd9;");
 		this.setTop(vbox);
 		this.setCenter(grid);
 		this.setBottom(box);
