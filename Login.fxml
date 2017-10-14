@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Login_class">
+   <children>
+      <HBox fx:id="hbox" alignment="CENTER" fillHeight="false" layoutX="-6.0" prefHeight="472.0" prefWidth="523.0" stylesheets="@Login.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="333.0" prefWidth="404.0" style="-fx-background-color: #28a428; -fx-opacity: 0.7;">
+               <children>
+                  <Pane id="cover" fx:id="cover" layoutX="8.0" layoutY="1.0" prefHeight="332.0" prefWidth="389.0">
+                     <children>
+                        <Button fx:id="login_button" alignment="CENTER" layoutX="162.0" layoutY="235.0" mnemonicParsing="false" onAction="#login_clicked" prefWidth="65.0" text="Login" />
+                        <TextField fx:id="username_id" layoutX="111.0" layoutY="137.0" promptText="username" />
+                        <TextField fx:id="password_id" layoutX="111.0" layoutY="186.0" promptText="password" />
+                        <Label layoutX="151.0" layoutY="102.0" text="Please sign in " />
+                        <Label fx:id="error_label" layoutX="116.0" layoutY="294.0" prefHeight="17.0" prefWidth="249.0" text="Label" textAlignment="CENTER" visible="false" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
