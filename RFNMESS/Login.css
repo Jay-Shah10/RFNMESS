@@ -1,0 +1,11 @@
+@charset"utf-8";
+
+#cover{
+    -fx-fill:#28a428;
+    
+}
+
+#hbox{
+	-fx-background-image: url("RFNMESS_presentation_pic.png");
+	-fx-background-size:cover 
+}
