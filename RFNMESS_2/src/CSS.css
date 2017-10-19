@@ -1,0 +1,5 @@
+.BorderPane{
+   -fx-background-image: url('RFNMESS_presentation_pic.png');
+   -fx-background-repeat: stretch;   
+   -fx-background-position: center center;
+}
