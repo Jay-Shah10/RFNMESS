@@ -50,8 +50,8 @@ public class Display_Page extends BorderPane {
 
 		this.setBackground(new Background(myBI));
 		
-		
-		this.hb.setStyle("-fx-background-color:#1e7b1e;"+"-fx-opacity: 0.8;");
+		//raba(RED, GREEN, BLUE, OPACITY)
+		this.hb.setStyle("-fx-background-color: #2b2b2b;"+"-fx-border-color:#5b5b5b;"+"-fx-border-width:0px 0px 3px 0px;");
 		this.hb.setPrefHeight(50);
 		this.hb.setAlignment(Pos.CENTER_LEFT);
 
