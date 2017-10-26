@@ -15,12 +15,12 @@ public interface Employee {
 	void setAccessLevel(AccessLevel access);
 	
 	public static Employee getUserByLogin(String username, String login) {
+		if(username.equals("baduser")) { return null; }
+		
 		// TODO: Fetch Proper user
 		Employee emp = new EmployeeUser();
 		emp.setUsername("TestUser");
-		emp.setAccessLevel(AccessLevel.MasterAdmin);
-		
-		if(username=="baduser") emp = null;
+		emp.setAccessLevel(AccessLevel.MasterAdmin);	
 		
 		return emp;
 	}

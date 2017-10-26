@@ -19,6 +19,8 @@ import models.Employee;
 public class GUI_Main extends Application {
 	
 	private Stage applicationStage;
+	private StageView currentView = null;
+	
 	/**
 	 * List of controllers
 	 */
@@ -32,8 +34,6 @@ public class GUI_Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		Rectangle2D visual = Screen.getPrimary().getVisualBounds();
 		
 		applicationStage = primaryStage;
 
@@ -43,8 +43,7 @@ public class GUI_Main extends Application {
 		lg = new Login();
 		dp = new Display_Page("host", "host");
 		
-		applicationStage.setTitle("test login");
-		applicationStage.setScene(new Scene(lg, visual.getWidth(), visual.getHeight()));
+		setView(StageView.Login);
 		applicationStage.show();
 		
 		lg.addEventHandler(LoginEvent.AUTHENTICATING, 
@@ -53,7 +52,6 @@ public class GUI_Main extends Application {
 					Employee user = loginController.AuthenticateUser(event.getUsername(), event.getPassword());
 					if (user==null) {
 						// Stay on Login Page
-						// TODO: Add Error Message for login not valid
 						lg.postErrorMessage("Username and password do not match.");
 					} else {
 						//User logged in proceed to other view.
@@ -68,14 +66,15 @@ public class GUI_Main extends Application {
 					e.printStackTrace();
 					loginController.Logout();
 					lg.postErrorMessage("Could not login, previous session in progress. Previous session has been terminated, please try again.");
+					setView(StageView.Login);
 				}
 			}
 		);
 		
 		lg.addEventHandler(LoginEvent.AUTHENTICATED, 
 			(event) -> {
-				//TODO: Switch views
-				switchView(StageView.Host);
+				//TODO: make view based on current user
+				setView(StageView.Host);
 				//open_host_scene(btnLogin, "Host Page", username.getText(), password.getText());
 			}
 		);
@@ -84,19 +83,24 @@ public class GUI_Main extends Application {
 
 	}
 	
-	public void switchView(StageView view) {
-		Rectangle2D visual = Screen.getPrimary().getVisualBounds();
-		switch(view) {
-		case Host:
-			applicationStage.setTitle("Host View");
-			applicationStage.setScene(new Scene(dp,visual.getWidth(), visual.getHeight()));
-			break;
-		case Login:
-			break;
-		case Order:
-			break;
-		default:
-			break;
+	public void setView(StageView view) {
+		if(currentView != view) {
+			Rectangle2D visual = Screen.getPrimary().getVisualBounds();
+			switch(view) {
+				case Host:
+					applicationStage.setTitle("Host Page");
+					applicationStage.setScene(new Scene(dp,visual.getWidth(), visual.getHeight()));
+					break;
+				case Login:
+					applicationStage.setTitle("Login Page");
+					applicationStage.setScene(new Scene(lg, visual.getWidth(), visual.getHeight()));
+					break;
+				case Order:
+					break;
+				default:
+					break;
+			}
+			currentView = view;
 		}
 	}
 

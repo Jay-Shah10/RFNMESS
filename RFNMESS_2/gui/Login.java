@@ -1,6 +1,7 @@
 package gui;
 import java.io.IOException;
 
+import controllers.LoginController;
 import events.LoginEvent;
 import javafx.application.*;
 import javafx.collections.*;
@@ -19,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import models.Employee;
 import javafx.scene.layout.*;
 
 public class Login extends BorderPane {
@@ -115,12 +117,15 @@ public class Login extends BorderPane {
 		
 		//login button's options on click. 
 		btnLogin.setOnAction(
-				(event)->{
-					this.fireEvent(new LoginEvent(LoginEvent.AUTHENTICATING));
-				});
+			(event)->{
+				LoginEvent evt = new LoginEvent(LoginEvent.AUTHENTICATING);
+				evt.setUsername(this.getUsername());
+				evt.setPassword(this.getPassword());
+				this.fireEvent(evt);
+			}
+		);
 		
 	}
-	
 	
 /////////////////////////////////////////////////////////////////////
 	public void open_host_scene(Button button, String title, String username, String password){
