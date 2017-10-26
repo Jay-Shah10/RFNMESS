@@ -38,7 +38,7 @@ public class Display_Page extends BorderPane {
 	
 	//////////////////////////////////////////////////////////
 	public Display_Page(String username, String password) {
-		
+		// asgasrgr
 		Region r = new Region();
 		this.hb.setHgrow(r, Priority.ALWAYS);
 		Region r2 = new Region();
