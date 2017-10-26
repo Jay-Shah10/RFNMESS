@@ -1,6 +1,7 @@
 package gui;
 import java.io.IOException;
 
+import events.LoginEvent;
 import javafx.application.*;
 import javafx.collections.*;
 import javafx.css.*;
@@ -22,17 +23,50 @@ import javafx.scene.layout.*;
 
 public class Login extends BorderPane {
 	
+	private TextField username;
+	private PasswordField password;
+	private Button btnLogin;
+	private Label error_label;
+	
+	public String getUsername() {
+		return username.getText();
+	}
+	
+	public String getPassword() {
+		return password.getText();
+	}
+	
+	public void disableLogin() {
+		btnLogin.setDisable(true);
+	}
+	
+	public void enableLogin() {
+		btnLogin.setDisable(false);
+	}
+	
+	public void postErrorMessage(String msg) {
+		error_label.setText(msg);
+		
+		error_label.setVisible(true);
+	}
+	
+	public void clearErrorMessage() {
+		error_label.setText("");
+		error_label.setVisible(false);
+	}
+	
 	public Login(){
 		//Initialized objects. 
-		TextField username = new TextField();
-		PasswordField password = new PasswordField();
+		username = new TextField();
+		password = new PasswordField();
 		
-		Button Login = new Button("Login");
+		btnLogin = new Button("Login");
 		
 		Label title = new Label("Please Username and Password");
 		title.setStyle("-fx-text-fill: #ffffff");
-		Label error_label = new Label();
+		error_label = new Label();
 		error_label.setVisible(false);
+		error_label.setTextFill(Color.RED);
 		
 		//Gride pane is located in the center of the border pane. 
 		//holds the text field for user name, and password
@@ -46,7 +80,7 @@ public class Login extends BorderPane {
 		username.setPromptText("Username");
 		password.setPromptText("Password");
 		grid.add(password, 0, 2);
-		grid.add(Login, 0, 3);
+		grid.add(btnLogin, 0, 3);
 		grid.add(error_label, 0, 4);
 		
 		/*
@@ -80,22 +114,9 @@ public class Login extends BorderPane {
 		//this.setBottom(box);
 		
 		//login button's options on click. 
-		Login.setOnAction(
+		btnLogin.setOnAction(
 				(event)->{
-					if ((username.getText().equals("host")) && (password.getText().equals("host"))) {
-						//opens up a new page which displays what hosts see. 
-						open_host_scene(Login, "Host Page", username.getText(), password.getText());
-
-					} else if ((username.getText().equals("manager")) && (password.getText().equals("manager"))) {
-						// open_new_scene("Manager.fxml", login_button, "Manager Page");
-
-					} else if ((username.getText().equals("server")) && (password.getText().equals("server"))) {
-						// open_new_scene("Server.fxml", login_button, "Server Page");
-					} else {
-						error_label.setTextFill(Color.RED);
-						error_label.setText("Username or Password is incorrect.");
-						error_label.setVisible(true);
-					}
+					this.fireEvent(new LoginEvent(LoginEvent.AUTHENTICATING));
 				});
 		
 	}
