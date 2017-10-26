@@ -29,6 +29,8 @@ public class Display_Page extends BorderPane {
 	public Label name = new Label("Name");
 	public Host_2 h2 = new Host_2();
 	
+	// asdfadsfasds
+	
 	//////////////////////////////////////////////////////////
 	public Display_Page(Host_2 h){
 		this.h2 = h;
