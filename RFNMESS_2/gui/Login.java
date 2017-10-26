@@ -127,53 +127,6 @@ public class Login extends BorderPane {
 		
 	}
 	
-/////////////////////////////////////////////////////////////////////
-	public void open_host_scene(Button button, String title, String username, String password){
-		/*
-		 * This method takes in button name and title for the page. 
-		 * This is for host page. 
-		 * 
-		 */
-		// starts a new scene from button click and sets the title.
-		Display_Page dp = new Display_Page(username, password);
-		Rectangle2D visual = Screen.getPrimary().getVisualBounds();
-		Stage stage = (Stage) button.getScene().getWindow();
-		stage.setTitle(title);
-		stage.setScene(new Scene(dp,visual.getWidth(), visual.getHeight()));
-		stage.show();
-	}
-	
-/////////////////////////////////////////////////////////////////////
-
-	public void open_manager_scene(Button button, String title){
-		/*
-		 * This method takes in button name and title for the page. 
-		 * This is for manager page. 
-		 * 
-		 */
-		// starts a new scene from button click and sets the title.
-		
-		Stage stage = (Stage) button.getScene().getWindow();
-		stage.setTitle(title);
-		//stage.setScene(new Scene(hp,900,500));
-		stage.show();
-	}
-/////////////////////////////////////////////////////////////////////
-	
-	public void open_server_scene(Button button, String title){
-		/*
-		 * This method takes in button name and title for the page. 
-		 * This is for server page. 
-		 * 
-		 */
-		// starts a new scene from button click and sets the title.
-		
-		Stage stage = (Stage) button.getScene().getWindow();
-		stage.setTitle(title);
-		//stage.setScene(new Scene(hp,900,500));
-		stage.show();
-	}
-	
 	
 
 }

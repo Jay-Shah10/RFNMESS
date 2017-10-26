@@ -1,7 +1,7 @@
 package gui;
 
-import controllers.LoginController;
-import events.LoginEvent;
+import controllers.*;
+import events.*;
 import javafx.application.*;
 import javafx.collections.*;
 import javafx.css.*;
@@ -14,7 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import models.Employee;
+import models.*;
 
 public class GUI_Main extends Application {
 	
@@ -25,6 +25,7 @@ public class GUI_Main extends Application {
 	 * List of controllers
 	 */
 	LoginController loginController;
+	SeatingController seatingController;
 	
 	/**
 	 * List of views
@@ -39,6 +40,9 @@ public class GUI_Main extends Application {
 
 		loginController = new LoginController();
 		loginController.start();
+		
+		seatingController = new SeatingController();
+		seatingController.start(/* TODO: Insert Restaurant model*/);
 		
 		lg = new Login();
 		dp = new Display_Page("host", "host");
@@ -75,6 +79,8 @@ public class GUI_Main extends Application {
 			(event) -> {
 				//TODO: make view based on current user
 				setView(StageView.Host);
+				
+				
 				//open_host_scene(btnLogin, "Host Page", username.getText(), password.getText());
 			}
 		);
