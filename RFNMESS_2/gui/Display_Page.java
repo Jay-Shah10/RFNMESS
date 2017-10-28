@@ -61,6 +61,7 @@ public class Display_Page extends BorderPane {
 		this.setTop(hb);
 		
 		setCenterScene(username, password);
+		setRightScene(username, password);
 		
 		
 	}
@@ -85,7 +86,7 @@ public class Display_Page extends BorderPane {
 		
 	}
 	
-	private void setRightPage(String username, String password) {
+	private void setRightScene(String username, String password) {
 		// TODO Auto-generated method stub
 		if(username.equals("host")&&(password.equals("host"))){
 			this.setMargin(h2.getRight(), new Insets(10,10,10,10));
