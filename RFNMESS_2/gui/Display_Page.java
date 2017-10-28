@@ -3,6 +3,7 @@ package gui;
 import javafx.application.*;
 import javafx.collections.*;
 import javafx.css.*;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -27,9 +28,8 @@ public class Display_Page extends BorderPane {
 	public HBox hb = new HBox();
 	public MenuButton menubutton = new MenuButton();
 	public Label name = new Label("Name");
-	public Host_2_view h2 = new Host_2_view();
+	private Host_2_view h2 = new Host_2_view();
 	
-	// asdfadsfasds
 	
 	//////////////////////////////////////////////////////////
 	public Display_Page(Host_2_view h){
@@ -91,7 +91,8 @@ public class Display_Page extends BorderPane {
 		 * method to display just the host page in the center of the main borderpane. 
 		 */
 		if (username.equals("host") && password.equals("host")){
-			this.setCenter(h2);
+			this.setMargin(h2.getCenter(), new Insets(10,10,10,10));
+			this.setCenter(h2.getCenter());
 		}
 	}
 
