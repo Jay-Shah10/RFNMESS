@@ -27,12 +27,12 @@ public class Display_Page extends BorderPane {
 	public HBox hb = new HBox();
 	public MenuButton menubutton = new MenuButton();
 	public Label name = new Label("Name");
-	public Host_2 h2 = new Host_2();
+	public Host_2_view h2 = new Host_2_view();
 	
 	// asdfadsfasds
 	
 	//////////////////////////////////////////////////////////
-	public Display_Page(Host_2 h){
+	public Display_Page(Host_2_view h){
 		this.h2 = h;
 	}
 	
