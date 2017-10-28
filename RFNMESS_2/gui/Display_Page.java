@@ -25,9 +25,7 @@ public class Display_Page extends BorderPane {
 	 * 
 	 */
 
-	public HBox hb = new HBox();
-	public MenuButton menubutton = new MenuButton();
-	public Label name = new Label("Name");
+	
 	private Host_2_view h2 = new Host_2_view();
 	
 	
@@ -39,26 +37,15 @@ public class Display_Page extends BorderPane {
 	//////////////////////////////////////////////////////////
 	public Display_Page(String username, String password) {
 		// asgasrgr
-		Region r = new Region();
-		this.hb.setHgrow(r, Priority.ALWAYS);
-		Region r2 = new Region();
-		r2.setPrefWidth(15);
-		addMenuItems(this.menubutton);
-
-		//setting background.
-		BackgroundSize bgsize = new BackgroundSize(100, 100, true, true, true, true);
-		BackgroundImage myBI = new BackgroundImage(new Image("RFNMESS_presentation_pic.png"), BackgroundRepeat.REPEAT,
-				BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, bgsize);
-
+		BackgroundSize bgsize = new BackgroundSize(100,100,true,true,true,true);
+		BackgroundImage myBI= new BackgroundImage(new Image("RFNMESS_presentation_pic.png"),
+		        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+		          bgsize);
 		this.setBackground(new Background(myBI));
 		
 		
-		this.hb.setStyle("-fx-background-color:#1e7b1e;"+"-fx-opacity: 0.8;");
-		this.hb.setPrefHeight(50);
-		this.hb.setAlignment(Pos.CENTER_LEFT);
-
-		this.hb.getChildren().addAll(menubutton, r, name, r2);
-		this.setTop(hb);
+		Top_Menu_bar tmb = new Top_Menu_bar();
+		this.setTop(tmb);		
 		
 		setCenterScene(username, password);
 		setRightScene(username, password);
