@@ -60,7 +60,7 @@ public class Display_Page extends BorderPane {
 		this.hb.getChildren().addAll(menubutton, r, name, r2);
 		this.setTop(hb);
 		
-		LoginMiddle(username, password);
+		setCenterScene(username, password);
 		
 		
 	}
