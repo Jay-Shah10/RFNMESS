@@ -84,9 +84,18 @@ public class Display_Page extends BorderPane {
 		
 		
 	}
+	
+	private void setRightPage(String username, String password) {
+		// TODO Auto-generated method stub
+		if(username.equals("host")&&(password.equals("host"))){
+			this.setMargin(h2.getRight(), new Insets(10,10,10,10));
+			this.setRight(h2.getRight());
+		}
+		
+	}
 ////////////////////////////////////////////////////////
 	
-	public void LoginMiddle(String username, String password){
+	public void setCenterScene(String username, String password){
 		/*
 		 * method to display just the host page in the center of the main borderpane. 
 		 */
