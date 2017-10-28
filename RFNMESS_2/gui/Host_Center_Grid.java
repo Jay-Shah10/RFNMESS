@@ -105,6 +105,8 @@ public class Host_Center_Grid extends GridPane {
 		// adds to some bellow row 4
 		add(r_12, 0, 7);
 		setVgrow(r_12, Priority.ALWAYS);
+		
+		this.setStyle("-fx-background-color: rgba(256,256,256 ,0.8);");
 	}
 
 	public void addMenuItem(MenuButton mb) {
