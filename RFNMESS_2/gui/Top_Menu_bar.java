@@ -54,6 +54,10 @@ public class Top_Menu_bar extends HBox {
 		this.getChildren().addAll(menubutton, r, namelabel);
 
 	}
+	
+	public void setUserName(String n) {
+		namelabel.setText(n);
+	}
 
 	///////////////////////////////////////////////
 	public void addMenuItems(MenuButton mb) {

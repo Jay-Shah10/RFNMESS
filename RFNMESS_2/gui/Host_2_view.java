@@ -4,6 +4,9 @@ import java.io.IOException;
 import javafx.application.*;
 import javafx.collections.*;
 import javafx.css.*;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -71,8 +74,7 @@ public class Host_2_view implements views.View {
 	}
 
 	@Override
-	public Node getTop() {
-		// TODO Auto-generated method stub
-		return null;
+	public <T extends Event> void addEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler) {
+		this.center.addEventHandler(eventType, eventHandler);
 	}
 }

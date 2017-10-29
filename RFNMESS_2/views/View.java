@@ -3,15 +3,19 @@
  */
 package views;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Node;
 /**
  * @author jay_s
  *
  */
 public interface View {
-	Node getTop();
+	Node getCenter();
 	Node getRight();
 	Node getLeft();
 	Node getBottom();
 	
+	<T extends Event> void addEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler);
 }

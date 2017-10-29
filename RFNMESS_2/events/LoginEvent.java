@@ -3,9 +3,11 @@
  */
 package events;
 
+import gui.StageView;
 import javafx.event.Event;
 import javafx.event.EventTarget;
 import javafx.event.EventType;
+import models.Employee;
 
 /**
  * @author nryle
@@ -14,8 +16,8 @@ import javafx.event.EventType;
 public class LoginEvent extends Event {
 	private String 				username,
 								password;
-	
 	private boolean				authenticated;
+	private StageView			defaultView = StageView.Host;
 	
 	public String getUsername() {
 		return username;
@@ -35,6 +37,14 @@ public class LoginEvent extends Event {
 	public void setAuthenticated(boolean auth) {
 		authenticated = auth;
 	}
+
+	public StageView getDefaultView() {
+		return defaultView;
+	}
+	public void setDefaultView(StageView v) {
+		defaultView = v;
+	}
+	
 
 	/**
 	 * 
@@ -77,6 +87,33 @@ public class LoginEvent extends Event {
 		// TODO Auto-generated constructor stub
 		
 		authenticated = false;
+	}
+	
+	public LoginEvent(Employee emp, EventTarget target, EventType<? extends Event> type) {
+		super(emp, target, type);
+		
+		if(emp==null) {
+			authenticated = false;
+		}
+		else {
+			authenticated = true;
+			this.setUsername(emp.getUsername());
+			this.setAuthenticated(true);
+			
+			switch(emp.getAccessLevel()) {
+				case Default:
+				case Host:
+				case MasterAdmin:
+				default:
+					this.setDefaultView(StageView.Host);
+					break;
+				case Server:
+				case Kitchen:
+				case Manager:
+					this.setDefaultView(StageView.Order);
+					break;
+			}
+		}
 	}
 
 }

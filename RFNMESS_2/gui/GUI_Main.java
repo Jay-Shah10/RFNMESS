@@ -20,22 +20,23 @@ public class GUI_Main extends Application {
 	
 	private Stage applicationStage;
 	private StageView currentView = null;
+	private Display_Page masterPane;
 	
 	/**
 	 * List of controllers
 	 */
-	LoginController loginController;
-	SeatingController seatingController;
+	private LoginController loginController;
+	private SeatingController seatingController;
 	
 	/**
 	 * List of views
 	 */
-	Login lg;
-	Display_Page dp;
+	private Login lg;
+	private Host_2_view hostView;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+		Rectangle2D visual = Screen.getPrimary().getVisualBounds();
 		applicationStage = primaryStage;
 
 		loginController = new LoginController();
@@ -44,8 +45,12 @@ public class GUI_Main extends Application {
 		seatingController = new SeatingController();
 		seatingController.start(/* TODO: Insert Restaurant model*/);
 		
+		masterPane = new Display_Page();
+		applicationStage.setScene(new Scene(masterPane,visual.getWidth(), visual.getHeight()));
+		applicationStage.setTitle("RFNMESS | Restaurant Franchise Network Managment Enterpise Software System");
+		
 		lg = new Login();
-		dp = new Display_Page("host", "host");
+		hostView = new Host_2_view();
 		
 		setView(StageView.Login);
 		applicationStage.show();
@@ -59,11 +64,9 @@ public class GUI_Main extends Application {
 						lg.postErrorMessage("Username and password do not match.");
 					} else {
 						//User logged in proceed to other view.
-						LoginEvent authenticatedEvent = new LoginEvent(LoginEvent.AUTHENTICATED);
-						authenticatedEvent.setUsername(user.getUsername());
-						authenticatedEvent.setAuthenticated(true);
+						LoginEvent authenticatedEvent = new LoginEvent(user, lg.getCenter(), LoginEvent.AUTHENTICATED);
 						lg.clearErrorMessage();
-						lg.fireEvent(authenticatedEvent);
+						lg.getCenter().fireEvent(authenticatedEvent);
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -78,10 +81,7 @@ public class GUI_Main extends Application {
 		lg.addEventHandler(LoginEvent.AUTHENTICATED, 
 			(event) -> {
 				//TODO: make view based on current user
-				setView(StageView.Host);
-				
-				
-				//open_host_scene(btnLogin, "Host Page", username.getText(), password.getText());
+				setView(event.getDefaultView());
 			}
 		);
 
@@ -91,15 +91,12 @@ public class GUI_Main extends Application {
 	
 	public void setView(StageView view) {
 		if(currentView != view) {
-			Rectangle2D visual = Screen.getPrimary().getVisualBounds();
 			switch(view) {
 				case Host:
-					applicationStage.setTitle("Host Page");
-					applicationStage.setScene(new Scene(dp,visual.getWidth(), visual.getHeight()));
+					masterPane.setView(hostView);
 					break;
 				case Login:
-					applicationStage.setTitle("Login Page");
-					applicationStage.setScene(new Scene(lg, visual.getWidth(), visual.getHeight()));
+					masterPane.setView(lg);
 					break;
 				case Order:
 					break;
