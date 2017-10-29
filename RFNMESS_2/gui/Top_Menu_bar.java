@@ -23,7 +23,7 @@ import javafx.scene.layout.Region;
 public class Top_Menu_bar extends HBox {
 	
 	MenuButton menubutton = new MenuButton("...");
-	Label namelabel = new Label();
+	Label namelabel = new Label("Name");
 
 	public Top_Menu_bar() {
 		/*
@@ -36,11 +36,13 @@ public class Top_Menu_bar extends HBox {
 		this.setHgrow(r, Priority.ALWAYS);
 		this.setPadding(new Insets(10, 10, 10, 10));
 		this.setAlignment(Pos.CENTER_LEFT);
+		this.namelabel.setStyle("-fx-text-fill:#ffff;");
+		
 		BackgroundSize bgsize = new BackgroundSize(100, 100, true, true, true, true);
 		BackgroundImage myBI = new BackgroundImage(new Image("RFNMESS_presentation_pic.png"), BackgroundRepeat.REPEAT,
 				BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, bgsize);
-
 		this.setBackground(new Background(myBI));
+		
 		this.setStyle("-fx-background-color: #2b2b2b;" + "-fx-border-color:#5b5b5b;" + "-fx-border-width:0px 0px 3px 0px;");
 		this.setPrefHeight(50);
 
