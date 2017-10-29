@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 public class Host_Right extends VBox {
 	
@@ -16,7 +17,7 @@ public class Host_Right extends VBox {
 	public Host_Right() {
 
 		// adds CSS to the Pane and properties to the pane.
-		setStyle("-fx-background-color:#ff8c1a");
+		setStyle("-fx-background-color: rgba(52, 52, 49, 0.83)");
 		this.setSpacing(10);
 		this.setPadding(new Insets(5, 5, 5, 5));
 		this.setMaxWidth(300);
@@ -24,14 +25,24 @@ public class Host_Right extends VBox {
 		// adds all the items to the Pane.
 		TextField tf = new TextField();
 		Region r = new Region();
+		
 		ComboBox<Integer> cb = new ComboBox();
 		TextArea ta = new TextArea();
+		
 		Button reserve = new Button("Reserve");
+	
 		Button to_go = new Button("To-Go!");
 		Button in_house = new Button("In-House");
+		
 		Label party_name = new Label("Enter Party Name:");
+		party_name.setStyle("-fx-text-fill: #fff");
+		
 		Label table_reservation_label = new Label("Pick a table form below: ");
+		table_reservation_label.setStyle("-fx-text-fill: #fff");
+		
 		Label up_next = new Label("Next Table:");
+		up_next.setStyle("-fx-text-fill: #fff");
+		
 		Button finished = new Button("Delete");
 		ComboBox finished_table = new ComboBox();
 
