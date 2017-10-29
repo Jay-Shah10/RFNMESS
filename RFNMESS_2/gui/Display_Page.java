@@ -44,6 +44,7 @@ public class Display_Page extends BorderPane {
 		this.setBackground(new Background(myBI));
 		
 		
+		//sets the top of the border pane to be menu
 		Top_Menu_bar tmb = new Top_Menu_bar();
 		this.setTop(tmb);		
 		
