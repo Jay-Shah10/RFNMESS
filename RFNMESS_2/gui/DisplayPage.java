@@ -1,4 +1,4 @@
-package gui;
+	package gui;
 
 import javafx.application.*;
 import javafx.collections.*;
@@ -15,7 +15,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import views.View;
 
-public class Display_Page extends BorderPane {
+public class DisplayPage extends BorderPane {
 	
 	/*
 	 * This is the main display page. 
@@ -41,7 +41,7 @@ public class Display_Page extends BorderPane {
 		this.setBottom(v.getBottom());
 	}
 	
-	public Display_Page() {
+	public DisplayPage() {
 		initialize();
 	}
 	

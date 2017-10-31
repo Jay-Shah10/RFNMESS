@@ -20,21 +20,21 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.layout.*;
 
-public class Host_2_view implements views.View {
+public class HostView implements views.View {
 	
 	private Node left,right,center,bottom;
 	
-	public Host_2_view(){
+	public HostView(){
 		
 	
-		Host_Center_Grid gp = new Host_Center_Grid();
+		HostCenterGrid gp = new HostCenterGrid();
 		this.center = gp;
 		
 		/*
 		 * this is for the right side of the border pane
 		 */
 		
-		Host_Right vb = new Host_Right();
+		HostRight vb = new HostRight();
 		this.right = vb;
 		
 		

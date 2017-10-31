@@ -16,11 +16,11 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import models.*;
 
-public class GUI_Main extends Application {
+public class GUIMain extends Application {
 	
 	private Stage applicationStage;
 	private StageView currentView = null;
-	private Display_Page masterPane;
+	private DisplayPage masterPane;
 	
 	/**
 	 * List of controllers
@@ -32,7 +32,7 @@ public class GUI_Main extends Application {
 	 * List of views
 	 */
 	private Login lg;
-	private Host_2_view hostView;
+	private HostView hostView;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -45,12 +45,12 @@ public class GUI_Main extends Application {
 		seatingController = new SeatingController();
 		seatingController.start(/* TODO: Insert Restaurant model*/);
 		
-		masterPane = new Display_Page();
+		masterPane = new DisplayPage();
 		applicationStage.setScene(new Scene(masterPane,visual.getWidth(), visual.getHeight()));
 		applicationStage.setTitle("RFNMESS | Restaurant Franchise Network Managment Enterpise Software System");
 		
 		lg = new Login();
-		hostView = new Host_2_view();
+		hostView = new HostView();
 		
 		setView(StageView.Login);
 		applicationStage.show();
