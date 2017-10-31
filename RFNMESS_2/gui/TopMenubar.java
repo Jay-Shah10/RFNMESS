@@ -20,12 +20,12 @@ import javafx.scene.layout.Region;
  * @author jay_s
  *
  */
-public class Top_Menu_bar extends HBox {
+public class TopMenubar extends HBox {
 	
 	MenuButton menubutton = new MenuButton("...");
 	Label namelabel = new Label("Name");
 
-	public Top_Menu_bar() {
+	public TopMenubar() {
 		/*
 		 * This Class only holds the top portion of the master borderpane.
 		 * 

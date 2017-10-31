@@ -54,7 +54,7 @@ public class DisplayPage extends BorderPane {
 		
 		
 		//sets the top of the border pane to be menu
-		Top_Menu_bar tmb = new Top_Menu_bar();
+		TopMenubar tmb = new TopMenubar();
 		tmb.setUserName("Name");
 		this.setTop(tmb);		
 	}
