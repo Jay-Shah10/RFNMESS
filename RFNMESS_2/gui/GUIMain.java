@@ -7,6 +7,7 @@ import javafx.collections.*;
 import javafx.css.*;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -56,7 +57,7 @@ public class GUIMain extends Application {
 		setView(StageView.Login);
 		applicationStage.show();
 		
-		lg.addEventHandler(LoginEvent.AUTHENTICATING, 
+		lg.setOnLoggingIn( 
 			(event) -> {
 				try {
 					Employee user = loginController.AuthenticateUser(event.getUsername(), event.getPassword());
@@ -67,26 +68,31 @@ public class GUIMain extends Application {
 						//User logged in proceed to other view.
 						LoginEvent authenticatedEvent = new LoginEvent(user, lg.getCenter(), LoginEvent.AUTHENTICATED);
 						lg.clearErrorMessage();
-						lg.getCenter().fireEvent(authenticatedEvent);
+						((Node) event.getTarget()).fireEvent(authenticatedEvent);
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					loginController.Logout();
+					loginController.logout();
 					lg.postErrorMessage("Could not login, previous session in progress. Previous session has been terminated, please try again.");
 					setView(StageView.Login);
 				}
 			}
 		);
 		
-		lg.addEventHandler(LoginEvent.AUTHENTICATED, 
+		lg.setOnLoggedIn(
 			(event) -> {
 				//TODO: make view based on current user
 				setView(event.getDefaultView());
 			}
 		);
 
-		
+		masterPane.setOnLogout(
+			(event) -> {
+				loginController.logout();
+				masterPane.setView(lg);
+			}
+		);
 
 	}
 	
