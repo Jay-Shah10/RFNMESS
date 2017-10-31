@@ -1,6 +1,9 @@
-package gui;
+package views;
 
 import java.io.IOException;
+
+import gui.HostCenterGrid;
+import gui.HostRight;
 import javafx.application.*;
 import javafx.collections.*;
 import javafx.css.*;

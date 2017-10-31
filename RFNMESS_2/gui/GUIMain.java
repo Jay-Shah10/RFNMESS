@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import models.*;
+import views.HostView;
 
 public class GUIMain extends Application {
 	
