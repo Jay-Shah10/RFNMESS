@@ -5,9 +5,9 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.*;
 
-public class Host_Center_Grid extends GridPane {
+public class HostCenterGrid extends GridPane {
 
-	public Host_Center_Grid() {
+	public HostCenterGrid() {
 		this.setPadding(new Insets(15, 5, 5, 5));
 
 		MenuButton mb1 = new MenuButton("1");
@@ -105,6 +105,11 @@ public class Host_Center_Grid extends GridPane {
 		// adds to some bellow row 4
 		add(r_12, 0, 7);
 		setVgrow(r_12, Priority.ALWAYS);
+		
+		this.setStyle(
+				"-fx-background-color: rgba(52, 52, 49, 0.83);" + 
+				"-fx-border-radius: 50;"
+		);
 	}
 
 	public void addMenuItem(MenuButton mb) {
