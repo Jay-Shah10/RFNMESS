@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import models.*;
-import views.OrderView;
+import views.HostView;
 
 public class GUIMain extends Application {
 	
@@ -34,7 +34,6 @@ public class GUIMain extends Application {
 	 */
 	private Login lg;
 	private HostView hostView;
-	private OrderView orderView;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -53,7 +52,6 @@ public class GUIMain extends Application {
 		
 		lg = new Login();
 		hostView = new HostView();
-		orderView = new OrderView();
 		
 		setView(StageView.Login);
 		applicationStage.show();
@@ -96,8 +94,7 @@ public class GUIMain extends Application {
 		if(currentView != view) {
 			switch(view) {
 				case Host:
-					//masterPane.setView(hostView);
-					masterPane.setView(orderView);
+					masterPane.setView(hostView);
 					break;
 				case Login:
 					masterPane.setView(lg);
