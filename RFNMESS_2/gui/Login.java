@@ -127,15 +127,19 @@ public class Login implements View {
 		return null;
 	}
 
-	@Override
-	public <T extends Event> void addEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler) {
-		this.grid.addEventHandler(eventType, eventHandler);
-	}
+	
 	
 	public void setOnLoggingIn(EventHandler<LoginEvent> eh) {
 		this.btnLogin.addEventHandler(LoginEvent.AUTHENTICATING, eh);
 	}
 	public void setOnLoggedIn(EventHandler<LoginEvent> eh) {
 		this.btnLogin.addEventHandler(LoginEvent.AUTHENTICATED, eh);
+	}
+
+	public void clear() {
+		// TODO Auto-generated method stub
+		this.clearErrorMessage();
+		this.username.setText("");
+		this.password.setText("");
 	}
 }

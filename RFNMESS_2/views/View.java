@@ -17,5 +17,5 @@ public interface View {
 	Node getLeft();
 	Node getBottom();
 	
-	<T extends Event> void addEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler);
+	
 }

@@ -76,8 +76,5 @@ public class HostView implements views.View {
 		return this.bottom;
 	}
 
-	@Override
-	public <T extends Event> void addEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler) {
-		this.center.addEventHandler(eventType, eventHandler);
-	}
+	
 }

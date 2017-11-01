@@ -67,7 +67,7 @@ public class GUIMain extends Application {
 					} else {
 						//User logged in proceed to other view.
 						LoginEvent authenticatedEvent = new LoginEvent(user, lg.getCenter(), LoginEvent.AUTHENTICATED);
-						lg.clearErrorMessage();
+						lg.clear();
 						((Node) event.getTarget()).fireEvent(authenticatedEvent);
 					}
 				} catch (Exception e) {
@@ -90,7 +90,7 @@ public class GUIMain extends Application {
 		masterPane.setOnLogout(
 			(event) -> {
 				loginController.logout();
-				masterPane.setView(lg);
+				setView(StageView.Login);
 			}
 		);
 
