@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.layout.*;
 
@@ -87,12 +88,15 @@ public class HostView implements views.View {
 		return this.bottom;
 	}
 
-	public void setOnReserve() {
-
+	public Rectangle getTable() {
+		return t.getTable();
 	}
 
-	public void selectTable(TableImageButtons t) {
-		this.t = t;
+	public void setOnReserve() {
+		/*
+		 * This method will set the table image to reserve. 
+		 */
+		
 	}
 
 	public void refreshRight() {
@@ -100,7 +104,7 @@ public class HostView implements views.View {
 		 * display the new updated info to the right side of the gridPane. this new
 		 * updated info is from the table(number) clicked, party name, and may time.
 		 */
-		
+
 	}
 
 }
