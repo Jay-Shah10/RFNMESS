@@ -1,8 +1,4 @@
-/.classpath
-/.project
-/RFNMESS_presentation_pic.png
-/controllers/
+/views/
 /events/
 /gui/
 /models/
-/views/

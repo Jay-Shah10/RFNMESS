@@ -1,32 +1,12 @@
 package gui;
-import java.io.IOException;
-
-import controllers.LoginController;
 import events.LoginEvent;
-import javafx.application.*;
-import javafx.collections.*;
-import javafx.css.*;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-import models.Employee;
 import views.View;
-import javafx.scene.layout.*;
 
 public class Login implements View {
 	
