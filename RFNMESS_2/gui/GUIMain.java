@@ -3,20 +3,11 @@ package gui;
 import controllers.*;
 import events.*;
 import javafx.application.*;
-import javafx.collections.*;
-import javafx.css.*;
-import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
+import javafx.geometry.*;
+import javafx.scene.*;
+import javafx.stage.*;
 import models.*;
-import views.HostView;
+import views.*;
 
 public class GUIMain extends Application {
 	
@@ -35,6 +26,7 @@ public class GUIMain extends Application {
 	 */
 	private Login lg;
 	private HostView hostView;
+	private OrderView orderView;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -50,9 +42,11 @@ public class GUIMain extends Application {
 		masterPane = new DisplayPage();
 		applicationStage.setScene(new Scene(masterPane,visual.getWidth(), visual.getHeight()));
 		applicationStage.setTitle("RFNMESS | Restaurant Franchise Network Managment Enterpise Software System");
+		applicationStage.getScene().getStylesheets().add("gui/CSS.css");
 		
 		lg = new Login();
 		hostView = new HostView();
+		orderView = new OrderView();
 		
 		setView(StageView.Login);
 		applicationStage.show();
@@ -106,6 +100,7 @@ public class GUIMain extends Application {
 					masterPane.setView(lg);
 					break;
 				case Order:
+					masterPane.setView(orderView);
 					break;
 				default:
 					break;
