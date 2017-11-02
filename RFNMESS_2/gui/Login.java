@@ -70,8 +70,8 @@ public class Login implements View {
 		
 		btnLogin = new Button("Login");
 		
-		Label title = new Label("Please Username and Password");
-		title.setStyle("-fx-text-fill: #ffffff");
+		Label title = new Label("Please Enter Username and Password");
+		title.setStyle("-fx-text-fill: #FFFFFF;"+"-fx-font-weight: bold;");
 		error_label = new Label();
 		error_label.setVisible(false);
 		error_label.setTextFill(Color.RED);
@@ -97,7 +97,7 @@ public class Login implements View {
 				LoginEvent evt = new LoginEvent(LoginEvent.AUTHENTICATING);
 				evt.setUsername(this.getUsername());
 				evt.setPassword(this.getPassword());
-				grid.fireEvent(evt);
+				btnLogin.fireEvent(evt);
 			}
 		);
 		
@@ -127,11 +127,19 @@ public class Login implements View {
 		return null;
 	}
 
-	@Override
-	public <T extends Event> void addEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler) {
-		this.grid.addEventHandler(eventType, eventHandler);
+	
+	
+	public void setOnLoggingIn(EventHandler<LoginEvent> eh) {
+		this.btnLogin.addEventHandler(LoginEvent.AUTHENTICATING, eh);
 	}
-	
-	
+	public void setOnLoggedIn(EventHandler<LoginEvent> eh) {
+		this.btnLogin.addEventHandler(LoginEvent.AUTHENTICATED, eh);
+	}
 
+	public void clear() {
+		// TODO Auto-generated method stub
+		this.clearErrorMessage();
+		this.username.setText("");
+		this.password.setText("");
+	}
 }

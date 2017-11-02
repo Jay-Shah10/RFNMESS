@@ -3,6 +3,9 @@
  */
 package gui;
 
+import events.LoginEvent;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -20,12 +23,14 @@ import javafx.scene.layout.Region;
  * @author jay_s
  *
  */
-public class Top_Menu_bar extends HBox {
+public class TopMenubar extends HBox {
 	
 	MenuButton menubutton = new MenuButton("...");
 	Label namelabel = new Label("Name");
+	private MenuItem logoutButton;
+	private Login lg;
 
-	public Top_Menu_bar() {
+	public TopMenubar() {
 		/*
 		 * This Class only holds the top portion of the master borderpane.
 		 * 
@@ -68,17 +73,27 @@ public class Top_Menu_bar extends HBox {
 		/*
 		 * Method to add all menu items to the menubutton.
 		 */
-		MenuItem logout_button = new MenuItem("Log out");
-		mb.getItems().add(logout_button);
+		logoutButton = new MenuItem("Log out");
+		mb.getItems().add(logoutButton);
+			
 	}
 
-	////////////////////////////////////////////////
+////////////////////////////////////////////////
 	public void setName(String name) {
 		/*
 		 * this adds different names depending on who logs in.
 		 */
 		this.namelabel.setText(name);
 	}
-
+	
+////////////////////////////////////////////////
+	public void setOnLogout(EventHandler<ActionEvent> eh) {
+		/*
+		 * Needs to close the current view and then show the login page. 
+		 */
+		logoutButton.setOnAction(eh);
+		
+		
+	}
 
 }

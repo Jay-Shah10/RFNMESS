@@ -1,6 +1,10 @@
-package gui;
+package views;
 
 import java.io.IOException;
+
+import gui.HostCenterGrid;
+import gui.HostRight;
+import gui.TableImageButtons;
 import javafx.application.*;
 import javafx.collections.*;
 import javafx.css.*;
@@ -17,39 +21,46 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.layout.*;
 
-public class Host_2_view implements views.View {
-	
-	private Node left,right,center,bottom;
-	
-	public Host_2_view(){
-		
-	
-		Host_Center_Grid gp = new Host_Center_Grid();
+public class HostView implements views.View {
+
+	private Node left, right, center, bottom;
+	private String selectTable;
+	public TableImageButtons t;
+	public HostCenterGrid gp;
+	public HostRight vb;
+
+	public HostView() {
+
+		gp = new HostCenterGrid();
 		this.center = gp;
-		
+
 		/*
 		 * this is for the right side of the border pane
 		 */
-		
-		Host_Right vb = new Host_Right();
+
+		vb = new HostRight();
 		this.right = vb;
-		
-		
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see views.View#getLeft()
 	 */
 	public Node getLeft() {
 		// TODO Auto-generated method stub
-		
+
 		return this.left;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see views.View#getRight()
 	 */
 	public Node getRight() {
@@ -57,7 +68,9 @@ public class Host_2_view implements views.View {
 		return this.right;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see views.View#getCenter()
 	 */
 	public Node getCenter() {
@@ -65,7 +78,9 @@ public class Host_2_view implements views.View {
 		return this.center;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see views.View#getBottom()
 	 */
 	public Node getBottom() {
@@ -73,8 +88,23 @@ public class Host_2_view implements views.View {
 		return this.bottom;
 	}
 
-	@Override
-	public <T extends Event> void addEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler) {
-		this.center.addEventHandler(eventType, eventHandler);
+	public Rectangle getTable() {
+		return t.getTable();
 	}
+
+	public void setOnReserve() {
+		/*
+		 * This method will set the table image to reserve. 
+		 */
+		
+	}
+
+	public void refreshRight() {
+		/*
+		 * display the new updated info to the right side of the gridPane. this new
+		 * updated info is from the table(number) clicked, party name, and may time.
+		 */
+
+	}
+
 }

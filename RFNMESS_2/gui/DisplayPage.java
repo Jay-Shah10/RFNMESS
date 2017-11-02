@@ -1,8 +1,10 @@
-package gui;
+	package gui;
 
 import javafx.application.*;
 import javafx.collections.*;
 import javafx.css.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -15,7 +17,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import views.View;
 
-public class Display_Page extends BorderPane {
+public class DisplayPage extends BorderPane {
 	
 	/*
 	 * This is the main display page. 
@@ -26,6 +28,8 @@ public class Display_Page extends BorderPane {
 	 * This page consists of a border pane, top is the "menu area" and below each scene will change. 
 	 * 
 	 */
+	
+	private TopMenubar tmb;
 	
 	public void setView(View v) {
 		this.setLeft(v.getLeft());
@@ -41,7 +45,7 @@ public class Display_Page extends BorderPane {
 		this.setBottom(v.getBottom());
 	}
 	
-	public Display_Page() {
+	public DisplayPage() {
 		initialize();
 	}
 	
@@ -54,7 +58,7 @@ public class Display_Page extends BorderPane {
 		
 		
 		//sets the top of the border pane to be menu
-		Top_Menu_bar tmb = new Top_Menu_bar();
+		tmb = new TopMenubar();
 		tmb.setUserName("Name");
 		this.setTop(tmb);		
 	}
@@ -69,5 +73,8 @@ public class Display_Page extends BorderPane {
 		mb.getItems().add(logout);
 		
 	}
-
+	
+	public void setOnLogout(EventHandler<ActionEvent> eh) {
+		tmb.setOnLogout(eh);
+	}
 }

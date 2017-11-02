@@ -10,11 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-public class Host_Right extends VBox {
+public class HostRight extends VBox {
 	
 	private ArrayList tables = new ArrayList();
 
-	public Host_Right() {
+	public HostRight() {
 
 		// adds CSS to the Pane and properties to the pane.
 		setStyle("-fx-background-color: rgba(52, 52, 49, 0.83)");

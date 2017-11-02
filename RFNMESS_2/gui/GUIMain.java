@@ -7,6 +7,7 @@ import javafx.collections.*;
 import javafx.css.*;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -15,12 +16,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import models.*;
+import views.HostView;
 
-public class GUI_Main extends Application {
+public class GUIMain extends Application {
 	
 	private Stage applicationStage;
 	private StageView currentView = null;
-	private Display_Page masterPane;
+	private DisplayPage masterPane;
 	
 	/**
 	 * List of controllers
@@ -32,7 +34,7 @@ public class GUI_Main extends Application {
 	 * List of views
 	 */
 	private Login lg;
-	private Host_2_view hostView;
+	private HostView hostView;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -45,17 +47,17 @@ public class GUI_Main extends Application {
 		seatingController = new SeatingController();
 		seatingController.start(/* TODO: Insert Restaurant model*/);
 		
-		masterPane = new Display_Page();
+		masterPane = new DisplayPage();
 		applicationStage.setScene(new Scene(masterPane,visual.getWidth(), visual.getHeight()));
 		applicationStage.setTitle("RFNMESS | Restaurant Franchise Network Managment Enterpise Software System");
 		
 		lg = new Login();
-		hostView = new Host_2_view();
+		hostView = new HostView();
 		
 		setView(StageView.Login);
 		applicationStage.show();
 		
-		lg.addEventHandler(LoginEvent.AUTHENTICATING, 
+		lg.setOnLoggingIn( 
 			(event) -> {
 				try {
 					Employee user = loginController.AuthenticateUser(event.getUsername(), event.getPassword());
@@ -65,27 +67,32 @@ public class GUI_Main extends Application {
 					} else {
 						//User logged in proceed to other view.
 						LoginEvent authenticatedEvent = new LoginEvent(user, lg.getCenter(), LoginEvent.AUTHENTICATED);
-						lg.clearErrorMessage();
-						lg.getCenter().fireEvent(authenticatedEvent);
+						lg.clear();
+						((Node) event.getTarget()).fireEvent(authenticatedEvent);
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					loginController.Logout();
+					loginController.logout();
 					lg.postErrorMessage("Could not login, previous session in progress. Previous session has been terminated, please try again.");
 					setView(StageView.Login);
 				}
 			}
 		);
 		
-		lg.addEventHandler(LoginEvent.AUTHENTICATED, 
+		lg.setOnLoggedIn(
 			(event) -> {
 				//TODO: make view based on current user
 				setView(event.getDefaultView());
 			}
 		);
 
-		
+		masterPane.setOnLogout(
+			(event) -> {
+				loginController.logout();
+				setView(StageView.Login);
+			}
+		);
 
 	}
 	
