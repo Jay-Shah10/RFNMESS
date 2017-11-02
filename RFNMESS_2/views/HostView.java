@@ -37,7 +37,7 @@ public class HostView implements views.View {
 
 	public HostView() {
 
-		gp = new HostCenterGrid();
+		//gp = new HostCenterGrid();
 		nc = new NewCenter();
 		this.center = nc;
 
@@ -45,7 +45,7 @@ public class HostView implements views.View {
 		 * this is for the right side of the border pane
 		 */
 
-		vb = new HostRight();
+		vb = new HostRight(); 
 		this.right = vb;
 
 	}

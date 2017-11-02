@@ -11,9 +11,14 @@ public class TableImageButtons extends Rectangle {
 	public Color c; 
 	
 	public TableImageButtons(double width, double height)  {
+		/*
+		 * This class creates tables and gives them properties. 
+		 * This calss 
+		 */
 		this.setWidth(width);
 		this.setHeight(height);
 		this.setFill(Color.GRAY);
+		
 		
 	}
 	
@@ -30,6 +35,7 @@ public class TableImageButtons extends Rectangle {
 	public double getXPosition(double xposition) {
 		return this.XPosition = xposition;
 	}
+	
 	
 	
 
