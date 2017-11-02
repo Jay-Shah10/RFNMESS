@@ -33,11 +33,9 @@ public class HostView implements views.View {
 		/*
 		 * this is for the right side of the border pane
 		 */
-		
+	
 		HostRight vb = new HostRight();
 		this.right = vb;
-		
-		
 	}
 
 	/* (non-Javadoc)
