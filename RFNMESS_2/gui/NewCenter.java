@@ -4,7 +4,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class NewCenter extends StackPane {
+public class NewCenter extends StackPane {  
 	
 	public TableImageButtons tib; 
 	
@@ -15,7 +15,7 @@ public class NewCenter extends StackPane {
 		 * 
 		 */
 		
-		this.setStyle("-fx-background-color: #ffff");
+		this.setStyle("-fx-background-color: #ffffff");
 		tib = new TableImageButtons(150, 100);
 		
 		// set translatex changes the x values in the direction you want to move the table. 
