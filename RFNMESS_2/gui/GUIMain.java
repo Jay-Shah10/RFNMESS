@@ -100,7 +100,7 @@ public class GUIMain extends Application {
 					masterPane.setView(lg);
 					break;
 				case Order:
-					masterPane.setView(orderView);
+					masterPane.setView(hostView);
 					break;
 				default:
 					break;
