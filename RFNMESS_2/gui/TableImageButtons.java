@@ -3,16 +3,18 @@ package gui;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class TableImageButtons {
+public class TableImageButtons extends Rectangle {
 	
-	public Rectangle table;
+	public Rectangle rec; 
 	public double height, length; 
+	public double YPosition, XPosition;
+	public Color c; 
 	
-	public TableImageButtons() {
-		table = new Rectangle();
-		table.setHeight(this.getHeight(10));
-		table.setWidth(this.getLength(15));
-		defaultView(this.table);
+	public TableImageButtons(double width, double height)  {
+		this.setWidth(width);
+		this.setHeight(height);
+		this.setFill(Color.GRAY);
+		
 	}
 	
 	public double getHeight(double height) {
@@ -22,20 +24,13 @@ public class TableImageButtons {
 		return this.length = length; 
 	}
 	
-	
-	public Rectangle getTable() {
-		return this.table;
+	public double getYPosistion(double yposition) {
+		return this.YPosition = yposition;
+	}
+	public double getXPosition(double xposition) {
+		return this.XPosition = xposition;
 	}
 	
 	
-	public void defaultView(Rectangle r) {
-		this.table = r; 
-		r.setFill(Color.GRAY);
-		//r.setFill(Color.rgb(red, green, blue, opacity));
-	}
-	public void newView(Rectangle nr) {
-		this.table = nr; 
-		nr.setFill(Color.RED);
-		//nr.setFill(Color.rgb(red, green, blue, opacity));
-	}
+
 }

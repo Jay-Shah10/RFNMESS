@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import gui.HostCenterGrid;
 import gui.HostRight;
+import gui.NewCenter;
 import gui.TableImageButtons;
 import javafx.application.*;
 import javafx.collections.*;
@@ -32,11 +33,13 @@ public class HostView implements views.View {
 	public TableImageButtons t;
 	public HostCenterGrid gp;
 	public HostRight vb;
+	public NewCenter nc;
 
 	public HostView() {
 
 		gp = new HostCenterGrid();
-		this.center = gp;
+		nc = new NewCenter();
+		this.center = nc;
 
 		/*
 		 * this is for the right side of the border pane
@@ -86,10 +89,6 @@ public class HostView implements views.View {
 	public Node getBottom() {
 		// TODO Auto-generated method stub
 		return this.bottom;
-	}
-
-	public Rectangle getTable() {
-		return t.getTable();
 	}
 
 	public void setOnReserve() {
