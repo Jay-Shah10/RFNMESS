@@ -33,7 +33,7 @@ public class Top_Menu_bar extends HBox {
 		Region r = new Region();
 
 		// HBox property
-		this.setHgrow(r, Priority.ALWAYS);
+		setHgrow(r, Priority.ALWAYS);
 		this.setPadding(new Insets(10, 10, 10, 10));
 		this.setAlignment(Pos.CENTER_LEFT);
 		this.namelabel.setStyle("-fx-text-fill:#ffff;");
@@ -43,7 +43,11 @@ public class Top_Menu_bar extends HBox {
 				BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, bgsize);
 		this.setBackground(new Background(myBI));
 		
-		this.setStyle("-fx-background-color: #2b2b2b;" + "-fx-border-color:#5b5b5b;" + "-fx-border-width:0px 0px 3px 0px;");
+		this.setStyle(
+			"-fx-background-color: #2b2b2b;" + 
+			"-fx-border-color:#5b5b5b;" + 
+			"-fx-border-width:0px 0px 3px 0px;"
+		);
 		this.setPrefHeight(50);
 
 		// all the items that go into the HBox.
