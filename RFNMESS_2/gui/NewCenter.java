@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -22,14 +23,20 @@ public class NewCenter extends StackPane {
 		 * which holds bunch of tables. 
 		 * set translate x changes the x values in the direction you want to move the table.
 		 * set translate y changes the y values in the direction you want to move the table.
+		 * 
+		 * These "tables" could also just be buttons with effects on them. 
+		 * Clicking would be easier. 
 		 */
 
 		this.setStyle("-fx-background-color: rgba(52, 52, 49, 0.83);");
+		Button b = new Button();
+		
 		
 		//first top row.
 		table1 = new TableImageButtons(200, 100);
 		table1.setTranslateX(-300);
 		table1.setTranslateY(-300);
+		b.setGraphic(table1);
 		
 		table2 = new TableImageButtons(200, 100);
 		table2.setTranslateX(-600);
@@ -58,11 +65,12 @@ public class NewCenter extends StackPane {
 		
 		table9 = new TableImageButtons(200,100);
 		table9.setTranslateY(300);
+		
 		//table9.setTranslateX(600);
 		//table9.setOnMouseClicked(new EventHandler<moustClicked>);
 		
 		
-		this.getChildren().addAll(table1, table2, table3, table4, table5, table6, table7, table8, table9);
+		this.getChildren().addAll(b, table2, table3, table4, table5, table6, table7, table8, table9);
 
 	}
 
