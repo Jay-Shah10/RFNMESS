@@ -43,7 +43,7 @@ public class OrderView implements View {
 	@Override
 	public Node getRight() {
 		// TODO Auto-generated method stub
-		return right;
+		return new OrderPageRight();
 	}
 
 	/* (non-Javadoc)
@@ -52,7 +52,7 @@ public class OrderView implements View {
 	@Override
 	public Node getLeft() {
 		// TODO Auto-generated method stub
-		return left;
+		return new OrderPageLeft();
 	}
 
 	/* (non-Javadoc)
@@ -74,7 +74,7 @@ public class OrderView implements View {
 	}
 	
 	public OrderView() {
-		search = new TextField();
+		/*search = new TextField();
 		left.getChildren().add(search);
 		search.setPromptText("Search for all Menu Items");
 		search.setEditable(true);
@@ -104,6 +104,7 @@ public class OrderView implements View {
 		food.setPrefSize(300, 500);
 		food.setEditable(false);
 		food.setPromptText("Food List!");
+	*/
 	}
 
 }
