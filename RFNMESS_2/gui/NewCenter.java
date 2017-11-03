@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 
 public class NewCenter extends StackPane {
 
-	public Rectangle table1;
+	private Rectangle table1;
 	private Rectangle table2;
 	private Rectangle table3;
 	private Rectangle table4;
@@ -29,14 +29,14 @@ public class NewCenter extends StackPane {
 		 */
 
 		this.setStyle("-fx-background-color: rgba(52, 52, 49, 0.83);");
-		Button b = new Button();
+		
 		
 		
 		//first top row.
 		table1 = new TableImageButtons(200, 100);
 		table1.setTranslateX(-300);
 		table1.setTranslateY(-300);
-		b.setGraphic(table1);
+		
 		
 		table2 = new TableImageButtons(200, 100);
 		table2.setTranslateX(-600);
@@ -70,7 +70,7 @@ public class NewCenter extends StackPane {
 		//table9.setOnMouseClicked(new EventHandler<moustClicked>);
 		
 		
-		this.getChildren().addAll(b, table2, table3, table4, table5, table6, table7, table8, table9);
+		this.getChildren().addAll(table1, table2, table3, table4, table5, table6, table7, table8, table9);
 
 	}
 
