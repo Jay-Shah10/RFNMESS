@@ -13,11 +13,14 @@ public class TableImageButtons extends Rectangle {
 	public TableImageButtons(double width, double height)  {
 		/*
 		 * This class creates tables and gives them properties. 
-		 * This calss 
+		 * This class. 
+		 * 
+		 * For future, add border and make it look more 3-d. try to get rounded corners. 
 		 */
+		
 		this.setWidth(width);
 		this.setHeight(height);
-		this.setFill(Color.GRAY);
+		this.setStyle("-fx-fill: rgba(166,166,166,1);");
 		
 		
 	}
