@@ -33,6 +33,8 @@ public class DisplayPage extends BorderPane {
 	
 	public void setView(View v) {
 		this.setLeft(v.getLeft());
+		if(v.getLeft() != null)	
+			setMargin(v.getLeft(), new Insets(20,20,20,20));
 		
 		this.setRight(v.getRight());
 		if(v.getRight() != null)	

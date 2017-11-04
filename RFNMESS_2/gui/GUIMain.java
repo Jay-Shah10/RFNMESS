@@ -27,6 +27,7 @@ public class GUIMain extends Application {
 	private Login lg;
 	private HostView hostView;
 	private OrderView orderView;
+	private KitchenView kitchenView;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -47,6 +48,7 @@ public class GUIMain extends Application {
 		lg = new Login();
 		hostView = new HostView();
 		orderView = new OrderView();
+		kitchenView = new KitchenView();
 		
 		setView(StageView.Login);
 		applicationStage.show();
@@ -101,6 +103,9 @@ public class GUIMain extends Application {
 					break;
 				case Order:
 					masterPane.setView(orderView);
+					break;
+				case Kitchen:
+					masterPane.setView(kitchenView);
 					break;
 				default:
 					break;
