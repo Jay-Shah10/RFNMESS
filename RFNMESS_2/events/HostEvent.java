@@ -1,6 +1,8 @@
 package events;
 
-import gui.HostCenterGrid;
+
+import dataCollection.HostRightData;
+import gui.HostRight;
 import gui.TableImageButton;
 import javafx.event.Event;
 import javafx.event.EventTarget;
@@ -11,10 +13,14 @@ public class HostEvent extends Event {
 	/**
 	 * 
 	 */
-	public TableImageButton tib;
-
-	public TableImageButton getRectangle() {
-		return tib;
+	private HostRightData hrd; 
+	private HostRight hr;
+	
+	public HostRightData getNode() {
+		return this.hrd;
+	}
+	public HostRight getNodes() {
+		return this.hr;
 	}
 
 	private String partyField;
@@ -27,16 +33,17 @@ public class HostEvent extends Event {
 	public static final EventType<HostEvent> reserveClicked = new EventType<>(Event.ANY, "Reserved");
 
 	public String getPartyField() {
-		return this.partyField;
+		return this.hr.getPartyText();
 	}
 
 	public int getTableNumber() {
-		return this.tableNumber;
+		return this.hr.getComboBox();
 	}
 
 	public HostEvent(Object source, EventTarget target, EventType<? extends HostEvent> type) {
 		super(source, target, type);
-
+		
+		this.hrd = ((HostRight)target).getText();
 	}
 
 }

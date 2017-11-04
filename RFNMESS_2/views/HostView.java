@@ -2,6 +2,9 @@ package views;
 
 import java.io.IOException;
 
+import Homework4.PointSourceWidgetEvent;
+import dataCollection.HostRightData;
+import events.HostEvent;
 import gui.HostCenterGrid;
 import gui.HostRight;
 import gui.NewCenter;
@@ -44,6 +47,11 @@ public class HostView implements views.View {
 
 		vb = new HostRight(); 
 		this.right = vb;
+		
+		vb.addEventHandler(HostEvent.reserveClicked, event -> {
+			vb.setTextArea();
+		});
+
 
 	}
 

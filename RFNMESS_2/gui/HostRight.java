@@ -4,6 +4,9 @@ import javafx.scene.control.Button;
 
 import java.util.*;
 
+import Homework4.TextSourceEvent;
+import dataCollection.HostRightData;
+import events.HostEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
@@ -31,19 +34,18 @@ public class HostRight extends VBox {
 		Region hr = new Region();
 
 		// From top to bottom:
-		// pary name label
-		// textfield
+		// party name label
+		// text field
 		// combo box
 		// reserve button
 		// text area
 		// combo box
-		// delet button
+		// delete button
 		// to go button
 		// and in house button
 
 		party_name = new Label("Enter Party Name:");
 		party_name.setStyle("-fx-text-fill: #fff");
-
 		tf = new TextField();
 
 		table_reservation_label = new Label("Pick a table form below: ");
@@ -51,17 +53,14 @@ public class HostRight extends VBox {
 
 		cb = new ComboBox<Integer>();
 		cb.getItems().add(null);
-
 		// adds items to the combo box.
 		for (int i = 1; i < 10; i++) {
 			cb.getItems().add(i);
 		}
 
 		reserve = new Button("Reserve");
-
 		up_next = new Label("Next Table:");
 		up_next.setStyle("-fx-text-fill: #fff");
-
 		ta = new TextArea();
 
 		finishedTable = new ComboBox<Integer>();
@@ -69,19 +68,14 @@ public class HostRight extends VBox {
 		for (int j = 1; j < 10; j++) {
 			finishedTable.getItems().add(j);
 		}
-
 		finished = new Button("Delete");
-
 		// adds property to the region.
 		VBox.setVgrow(r, Priority.ALWAYS);
-
 		to_go = new Button("To-Go!");
 		in_house = new Button("In-House");
-
+		
 		hb = new HBox();
-
 		HBox.setHgrow(hr, Priority.ALWAYS);
-
 		hb.getChildren().addAll(to_go, hr, in_house);
 		/*
 		 * First the cb box allows them to click which table they want to reserve.
@@ -94,8 +88,14 @@ public class HostRight extends VBox {
 		// adds all items to the vbox to display.
 		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, ta, finishedTable, finished,
 				r, hb);
+		
+		this.reserve.setOnAction((event)->
+		{
+			this.fireEvent(new HostEvent(reserve, this, HostEvent.reserveClicked));
+		});
 
 	}
+	
 
 	public String getPartyText() {
 		return this.tf.getText();
@@ -125,7 +125,10 @@ public class HostRight extends VBox {
 		return this.to_go;
 	}
 
-	public void setTextArea(String s) {
-		this.ta.appendText(s);
+	public void setTextArea() {
+		this.ta.appendText(cb.getValue() + ": " + tf.getText()+"\n");
+	}
+	public HostRightData getText() {
+		return new HostRightData(this.tf.getText());
 	}
 }
