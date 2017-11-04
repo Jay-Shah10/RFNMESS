@@ -2,7 +2,6 @@ package views;
 
 import java.io.IOException;
 
-import Homework4.PointSourceWidgetEvent;
 import dataCollection.HostRightData;
 import events.HostEvent;
 import gui.HostCenterGrid;
