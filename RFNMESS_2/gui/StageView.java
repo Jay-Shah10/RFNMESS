@@ -10,5 +10,6 @@ package gui;
 public enum StageView {
 	Login,
 	Host,
-	Order
+	Order, 
+	Kitchen
 }
