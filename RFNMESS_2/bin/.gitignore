@@ -1,5 +1,17 @@
 *.class
+<<<<<<< HEAD
 /.gitignore
 /events/
 /gui/
+=======
+/.classpath
+/.gitignore
+/.project
+/RFNMESS_presentation_pic.png
+/controllers/
+/events/
+/gui/
+/models/
+/src/
+>>>>>>> 5c0276ab902c42058634707d284078e54b0e9079
 /views/

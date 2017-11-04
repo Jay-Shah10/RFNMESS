@@ -63,6 +63,8 @@ public class OrderView implements View {
 		
 		SearchBox searchBox = new SearchBox();
 		left.getChildren().add(searchBox);
+		
+		
 	}
 
 }
