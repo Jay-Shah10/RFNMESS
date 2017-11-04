@@ -1,5 +1,11 @@
 *.class
+/.classpath
 /.gitignore
+/.project
+/RFNMESS_presentation_pic.png
+/controllers/
 /events/
 /gui/
+/models/
+/src/
 /views/

@@ -28,18 +28,15 @@ import javafx.scene.layout.*;
 
 public class HostView implements views.View {
 
-	private Node left, right, center, bottom;
+	private Node left, right, bottom;
 	private String selectTable;
 	public TableImageButtons t;
 	public HostCenterGrid gp;
 	public HostRight vb;
-	public NewCenter nc;
+	public NewCenter center;
 
 	public HostView() {
-
-		//gp = new HostCenterGrid();
-		nc = new NewCenter();
-		this.center = nc;
+		center = new NewCenter();
 
 		/*
 		 * this is for the right side of the border pane
