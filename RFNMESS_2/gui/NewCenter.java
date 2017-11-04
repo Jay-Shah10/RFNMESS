@@ -56,6 +56,12 @@ public class NewCenter extends StackPane {
 			
 		});
 		
+		table1.setOnMouseClicked(
+			(event) -> {
+				
+			}
+		);
+		
 		
 		table2 = new TableImageButtons(200, 100);
 		table2.setTranslateX(-600);

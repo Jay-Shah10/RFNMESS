@@ -17,7 +17,7 @@ public class TableImageButtons extends Rectangle {
 		 * 
 		 * For future, add border and make it look more 3-d. try to get rounded corners.
 		 */
-
+		
 		this.setWidth(width);
 		this.setHeight(height);
 		this.setStyle("-fx-fill: rgba(242,242,242,1);");
