@@ -4,7 +4,6 @@ import javafx.scene.control.Button;
 
 import java.util.*;
 
-import Homework4.TextSourceEvent;
 import dataCollection.HostRightData;
 import events.HostEvent;
 import javafx.geometry.Insets;
@@ -22,6 +21,8 @@ public class HostRight extends VBox {
 	private Label party_name, table_reservation_label, up_next;
 	private TextField tf;
 	private TextArea ta;
+	private ArrayList textAreaList = new ArrayList();
+	private ListView lv;
 
 	public HostRight() {
 
@@ -63,6 +64,8 @@ public class HostRight extends VBox {
 		up_next.setStyle("-fx-text-fill: #fff");
 		ta = new TextArea();
 
+		lv = new ListView();
+
 		finishedTable = new ComboBox<Integer>();
 		finishedTable.getItems().add(null);
 		for (int j = 1; j < 10; j++) {
@@ -73,7 +76,7 @@ public class HostRight extends VBox {
 		VBox.setVgrow(r, Priority.ALWAYS);
 		to_go = new Button("To-Go!");
 		in_house = new Button("In-House");
-		
+
 		hb = new HBox();
 		HBox.setHgrow(hr, Priority.ALWAYS);
 		hb.getChildren().addAll(to_go, hr, in_house);
@@ -86,16 +89,20 @@ public class HostRight extends VBox {
 		 */
 
 		// adds all items to the vbox to display.
-		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, ta, finishedTable, finished,
-				r, hb);
-		
-		this.reserve.setOnAction((event)->
-		{
+		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, ta, lv, finishedTable,
+				finished, r, hb);
+
+		this.reserve.setOnAction((event) -> {
 			this.fireEvent(new HostEvent(reserve, this, HostEvent.reserveClicked));
+		});
+		
+		int deleteItem = this.lv.getSelectionModel().getSelectedIndex();
+		this.finished.setOnAction((event) -> {
+			
+			
 		});
 
 	}
-	
 
 	public String getPartyText() {
 		return this.tf.getText();
@@ -125,10 +132,15 @@ public class HostRight extends VBox {
 		return this.to_go;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setTextArea() {
-		this.ta.appendText(cb.getValue() + ": " + tf.getText()+"\n");
+		String waitList = this.cb.getValue() + ": " + tf.getText() + "\n";
+
+		this.lv.getItems().add(waitList);
 	}
+
 	public HostRightData getText() {
 		return new HostRightData(this.tf.getText());
 	}
+
 }
