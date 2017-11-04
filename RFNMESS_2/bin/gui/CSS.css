@@ -1,0 +1,24 @@
+#hb{
+   -fx-opacity: 0.7;
+}
+
+.pane {
+	-fx-border-width: 3px 3px 3px 3px;
+	-fx-border-color: #2b2b2b;
+	-fx-border-style: solid;
+	-fx-padding: 25px 25px 25px 25px;
+	-fx-background-color: rgba(43,43,43,0.75);
+}
+
+.searchBox {
+	-fx-border-width: 3px 3px 3px 3px;
+	-fx-border-color: #2b2b2b;
+	-fx-border-style: solid;
+	-fx-padding: 25px 25px 25px 25px;
+	-fx-background-color: rgba(43,43,43,0.75);
+}
+
+.tBox {
+	-fx-text-fill: #f00;
+	-fx-fill: #000;
+}
