@@ -4,14 +4,14 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class TableImageButtons extends Rectangle {
+public class TableImageButton extends Rectangle {
 
 	public Rectangle rec;
 	public double height, length;
 	public double YPosition, XPosition;
 	public Color c;
 
-	public TableImageButtons(double width, double height) {
+	public TableImageButton(double width, double height) {
 		/*
 		 * This class creates tables and gives them properties. This class.
 		 * 
@@ -34,7 +34,7 @@ public class TableImageButtons extends Rectangle {
 
 	}
 
-	public TableImageButtons getReserved() {
+	public TableImageButton getReserved() {
 		
 		DropShadow shadow = new DropShadow();
 		shadow.setColor(Color.color(0, 0, 0));
@@ -51,7 +51,7 @@ public class TableImageButtons extends Rectangle {
 		return this;
 	}
 
-	public TableImageButtons getBusy() {
+	public TableImageButton getBusy() {
 		
 		DropShadow shadow = new DropShadow();
 		shadow.setColor(Color.color(0, 0, 0));

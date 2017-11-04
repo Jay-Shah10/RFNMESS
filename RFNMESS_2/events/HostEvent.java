@@ -2,7 +2,7 @@ package events;
 
 
 import gui.HostCenterGrid;
-import gui.TableImageButtons;
+import gui.TableImageButton;
 import javafx.event.Event;
 import javafx.event.EventTarget;
 import javafx.event.EventType;
@@ -12,11 +12,12 @@ public class HostEvent extends Event {
 	/**
 	 * 
 	 */
-	public TableImageButtons tib;
+	public TableImageButton tib;
 	
-	public TableImageButtons getRectangle() {
+	public TableImageButton getRectangle() {
 		return tib;
 	}
+	private String partyField;
 	
 	
 	private static final long serialVersionUID = 6470164552995153411L;
@@ -26,7 +27,7 @@ public class HostEvent extends Event {
 	public HostEvent(Object arg0, EventTarget arg1, EventType<? extends Event> arg2) {
 		super(arg0, arg1, arg2);
 		
-		this.tib = ((TableImageButtons)target).getReserved();
+		this.tib = ((TableImageButton)target).getReserved();
 	}
 
 }

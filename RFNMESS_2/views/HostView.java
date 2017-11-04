@@ -5,7 +5,7 @@ import java.io.IOException;
 import gui.HostCenterGrid;
 import gui.HostRight;
 import gui.NewCenter;
-import gui.TableImageButtons;
+import gui.TableImageButton;
 import javafx.application.*;
 import javafx.collections.*;
 import javafx.css.*;
@@ -30,7 +30,7 @@ public class HostView implements views.View {
 
 	private Node left, right, center, bottom;
 	private String selectTable;
-	public TableImageButtons t;
+	public TableImageButton t;
 	public HostCenterGrid gp;
 	public HostRight vb;
 	public NewCenter nc;

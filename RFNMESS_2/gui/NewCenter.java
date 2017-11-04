@@ -2,13 +2,15 @@ package gui;
 
 import events.HostEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class NewCenter extends StackPane {
+public class NewCenter extends TilePane {
 
 	private Rectangle table1;
 	private Rectangle table2;
@@ -20,9 +22,9 @@ public class NewCenter extends StackPane {
 	private Rectangle table8;
 	private Rectangle table9;
 	
-	public TableImageButtons tib;
+	public TableImageButton tib;
 	
-	public TableImageButtons getTabel() {
+	public TableImageButton getTabel() {
 		return tib;
 	}
 
@@ -39,57 +41,39 @@ public class NewCenter extends StackPane {
 
 		this.setStyle("-fx-background-color: rgba(52, 52, 49, 0.83);");
 		
+		this.setHgap(300);
+		this.setVgap(50);
+		this.setPadding(new Insets(100,100,100,100));
 		
 		
-		//first top row.
-		table1 = new TableImageButtons(200, 100);
-		table1.setTranslateX(-300);
-		table1.setTranslateY(-300);
-		
-		table1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				((TableImageButtons) table1).getReserved();
-				
-			}
-			
-		});
+		this.setPrefColumns(3);
+		this.setPrefRows(3);
 		
 		
-		table2 = new TableImageButtons(200, 100);
-		table2.setTranslateX(-600);
-		table2.setTranslateY(-300);
-		
-		table3 = new TableImageButtons(200,100);
-		table3.setTranslateY(-300);
-		
-		//middle row. 
-		table4 = new TableImageButtons(200,100);
-		table4.setTranslateX(-600);
-		
-		table5 = new TableImageButtons(200,100);
-		table5.setTranslateX(-300);
-		
-		table6 = new TableImageButtons(200,100);
-		
-		//bottom row.
-		table7 = new TableImageButtons(200,100);
-		table7.setTranslateY(300);
-		table7.setTranslateX(-600);
-		
-		table8 = new TableImageButtons(200,100);
-		table8.setTranslateY(300);
-		table8.setTranslateX(-300);
-		
-		table9 = new TableImageButtons(200,100);
-		table9.setTranslateY(300);
-		
-		//table9.setTranslateX(600);
-		//table9.setOnMouseClicked(new EventHandler<moustClicked>);
+		table1 = new TableImageButton(200,100);
+		table2 = new TableImageButton(200,100);
+		table3 = new TableImageButton(200,100);
+		table4 = new TableImageButton(200,100);
+		table5 = new TableImageButton(200,100);
+		table6 = new TableImageButton(200,100);
+		table7 = new TableImageButton(200,100);
+		table8 = new TableImageButton(200,100);
+		table9 = new TableImageButton(200,100);
 		
 		
-		this.getChildren().addAll(table1, table2, table3, table4, table5, table6, table7, table8, table9);
+		this.getChildren().add(table1);
+		this.getChildren().add(table2);
+		this.getChildren().add(table3);
+		this.getChildren().add(table4);
+		this.getChildren().add(table5);
+		this.getChildren().add(table6);
+		this.getChildren().add(table7);
+		this.getChildren().add(table8);
+		this.getChildren().add(table9);
+		
+		
+		
+		
 
 	}
 
