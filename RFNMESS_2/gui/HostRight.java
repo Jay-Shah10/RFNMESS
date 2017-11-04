@@ -15,7 +15,9 @@ public class HostRight extends VBox {
 	private ArrayList tables = new ArrayList();
 	private HBox hb;
 	private Button to_go, in_house, reserve, finished;
-
+	private ComboBox<Integer> cb;
+	private ComboBox finishedTable;
+	private TextArea ta;
 	public HostRight() {
 
 		// adds CSS to the Pane and properties to the pane.
@@ -23,13 +25,14 @@ public class HostRight extends VBox {
 		this.setSpacing(10);
 		this.setPadding(new Insets(5, 5, 5, 5));
 		this.setMaxWidth(300);
+		
 
 		// adds all the items to the Pane.
 		TextField tf = new TextField();
 		Region r = new Region();
 		
-		ComboBox<Integer> cb = new ComboBox();
-		TextArea ta = new TextArea();
+		cb = new ComboBox();
+		ta = new TextArea();
 		
 		reserve = new Button("Reserve");
 	
@@ -45,7 +48,7 @@ public class HostRight extends VBox {
 		up_next.setStyle("-fx-text-fill: #fff");
 		
 		finished = new Button("Delete");
-		ComboBox finished_table = new ComboBox();
+		finishedTable = new ComboBox();
 
 		// adds items to the combo box.
 		for (int i = 0; i < 13; i++) {
@@ -55,7 +58,7 @@ public class HostRight extends VBox {
 		this.setVgrow(r, Priority.ALWAYS);
 		
 		for (int j=0; j<13; j++){
-			finished_table.getItems().add(j);
+			finishedTable.getItems().add(j);
 		}
 		
 		
@@ -74,7 +77,7 @@ public class HostRight extends VBox {
 		 */
 
 		// adds all items to the vbox to display.
-		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, ta,finished_table, finished, r, hb);
+		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, ta, finishedTable, finished, r, hb);
 
 	}
 }

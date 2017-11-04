@@ -1,6 +1,9 @@
 package gui;
 
+import events.HostEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -16,6 +19,12 @@ public class NewCenter extends StackPane {
 	private Rectangle table7;
 	private Rectangle table8;
 	private Rectangle table9;
+	
+	public TableImageButtons tib;
+	
+	public TableImageButtons getTabel() {
+		return tib;
+	}
 
 	public NewCenter() {
 		/*
@@ -36,6 +45,16 @@ public class NewCenter extends StackPane {
 		table1 = new TableImageButtons(200, 100);
 		table1.setTranslateX(-300);
 		table1.setTranslateY(-300);
+		
+		table1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				((TableImageButtons) table1).getReserved();
+				
+			}
+			
+		});
 		
 		
 		table2 = new TableImageButtons(200, 100);

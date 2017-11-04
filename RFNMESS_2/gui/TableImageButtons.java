@@ -34,18 +34,38 @@ public class TableImageButtons extends Rectangle {
 
 	}
 
-	public Rectangle getReserved(Rectangle r) {
-		r.setArcHeight(15);
-		r.setArcWidth(15);
-		r.setStyle("-fx-fill: rgba(255, 0, 0, 1)");
-		return r;
+	public TableImageButtons getReserved() {
+		
+		DropShadow shadow = new DropShadow();
+		shadow.setColor(Color.color(0, 0, 0));
+		shadow.setRadius(7.0);
+		shadow.setOffsetX(5.0);
+		shadow.setOffsetY(5.0);
+		
+		this.setArcHeight(15);
+		this.setArcWidth(15);
+		this.setStyle("-fx-fill: rgba(255, 0, 0, 1)");
+		this.setEffect(shadow);
+		
+		
+		return this;
 	}
 
-	public Rectangle getBusy(Rectangle r) {
-		r.setArcHeight(15);
-		r.setArcWidth(15);
-		r.setStyle("-fx-fill: rgba(255, 255, 0, 1)");
-		return r;
+	public TableImageButtons getBusy() {
+		
+		DropShadow shadow = new DropShadow();
+		shadow.setColor(Color.color(0, 0, 0));
+		shadow.setRadius(7.0);
+		shadow.setOffsetX(5.0);
+		shadow.setOffsetY(5.0);
+		
+		this.setArcHeight(15);
+		this.setArcWidth(15);
+		this.setStyle("-fx-fill: rgba(255, 255, 0, 1)");
+		this.setEffect(shadow);
+		
+		
+		return this;
 	}
 
 	public double getHeight(double height) {
