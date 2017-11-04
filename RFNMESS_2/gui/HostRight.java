@@ -11,73 +11,121 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 public class HostRight extends VBox {
-	
-	private ArrayList tables = new ArrayList();
+
+	private ArrayList<?> tables = new ArrayList<Object>();
 	private HBox hb;
 	private Button to_go, in_house, reserve, finished;
-	private ComboBox<Integer> cb;
-	private ComboBox finishedTable;
+	private ComboBox<Integer> cb, finishedTable;
+	private Label party_name, table_reservation_label, up_next;
+	private TextField tf;
 	private TextArea ta;
+
 	public HostRight() {
 
 		// adds CSS to the Pane and properties to the pane.
 		setStyle("-fx-background-color: rgba(52, 52, 49, 0.83)");
 		this.setSpacing(10);
-		this.setPadding(new Insets(5, 5, 5, 5));
+		this.setPadding(new Insets(10, 10, 10, 10));
 		this.setMaxWidth(300);
-		
-
-		// adds all the items to the Pane.
-		TextField tf = new TextField();
 		Region r = new Region();
-		
-		cb = new ComboBox();
-		ta = new TextArea();
-		
-		reserve = new Button("Reserve");
-	
-		
-		
-		Label party_name = new Label("Enter Party Name:");
+		Region hr = new Region();
+
+		// From top to bottom:
+		// pary name label
+		// textfield
+		// combo box
+		// reserve button
+		// text area
+		// combo box
+		// delet button
+		// to go button
+		// and in house button
+
+		party_name = new Label("Enter Party Name:");
 		party_name.setStyle("-fx-text-fill: #fff");
-		
-		Label table_reservation_label = new Label("Pick a table form below: ");
+
+		tf = new TextField();
+
+		table_reservation_label = new Label("Pick a table form below: ");
 		table_reservation_label.setStyle("-fx-text-fill: #fff");
-		
-		Label up_next = new Label("Next Table:");
-		up_next.setStyle("-fx-text-fill: #fff");
-		
-		finished = new Button("Delete");
-		finishedTable = new ComboBox();
+
+		cb = new ComboBox<Integer>();
+		cb.getItems().add(null);
 
 		// adds items to the combo box.
-		for (int i = 0; i < 13; i++) {
+		for (int i = 1; i < 10; i++) {
 			cb.getItems().add(i);
 		}
-		// adds property to the region.
-		this.setVgrow(r, Priority.ALWAYS);
-		
-		for (int j=0; j<13; j++){
+
+		reserve = new Button("Reserve");
+
+		up_next = new Label("Next Table:");
+		up_next.setStyle("-fx-text-fill: #fff");
+
+		ta = new TextArea();
+
+		finishedTable = new ComboBox<Integer>();
+		finishedTable.getItems().add(null);
+		for (int j = 1; j < 10; j++) {
 			finishedTable.getItems().add(j);
 		}
-		
-		
+
+		finished = new Button("Delete");
+
+		// adds property to the region.
+		VBox.setVgrow(r, Priority.ALWAYS);
+
 		to_go = new Button("To-Go!");
 		in_house = new Button("In-House");
+
 		hb = new HBox();
-		Region hr = new Region();
-		hb.setHgrow(hr, Priority.ALWAYS);
+
+		HBox.setHgrow(hr, Priority.ALWAYS);
+
 		hb.getChildren().addAll(to_go, hr, in_house);
 		/*
-		 * First the cb box allows them to click which table they want to reserve. 
-		 * reserve button allows the user to store that and pops up in the text area. 
-		 * finished button allows user to delete any table in there. 
+		 * First the cb box allows them to click which table they want to reserve.
+		 * reserve button allows the user to store that and pops up in the text area.
+		 * finished button allows user to delete any table in there.
 		 * 
-		 * these table numbers need to stored in one place. 
+		 * these table numbers need to stored in one place.
 		 */
 
 		// adds all items to the vbox to display.
-		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, ta, finishedTable, finished, r, hb);
+		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, ta, finishedTable, finished,
+				r, hb);
 
+	}
+
+	public String getPartyText() {
+		return this.tf.getText();
+	}
+
+	public int getComboBox() {
+		return (int) this.cb.getValue();
+	}
+
+	public int getCancelComboBox() {
+		return (int) this.finishedTable.getValue();
+	}
+
+	public Button getReserve() {
+		return this.reserve;
+	}
+
+	public Button getDelet() {
+		return this.finished;
+	}
+
+	public Button getInHouse() {
+		return this.in_house;
+	}
+
+	public Button getToGo() {
+		return this.to_go;
+	}
+
+	public void setTextArea(String s) {
+		this.ta.appendText(s);
 	}
 }
