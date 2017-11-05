@@ -83,8 +83,16 @@ public class DisplayPage extends BorderPane {
 	/**
 	 * @param object
 	 */
-	public void setOnOrderClick(EventHandler<ActionEvent> eh) {
-		HostRight.setOnOrderClick(eh);
-		
+	public void hostClick(EventHandler<ActionEvent> eh) {
+		tmb.hostViewClick(eh);
+	}
+	public void serverClick(EventHandler<ActionEvent> eh) {
+		tmb.serverViewClick(eh);
+	}
+	public void kitchenClick(EventHandler<ActionEvent> eh) {
+		tmb.kitchenViewClick(eh);
+	}
+	public void managerClick(EventHandler<ActionEvent> eh) {
+		tmb.managerViewClick(eh);
 	}
 }
