@@ -16,11 +16,11 @@ public class HostRight extends VBox {
 
 	private ArrayList<?> tables = new ArrayList<Object>();
 	private HBox hb;
-	private Button to_go, in_house, reserve, finished;
+	private Button to_go, in_house, reserve, delete;
 	private ComboBox<Integer> cb, finishedTable;
 	private Label party_name, table_reservation_label, up_next;
 	private TextField tf;
-	private TextArea ta;
+	// private TextArea ta;
 	private ArrayList textAreaList = new ArrayList();
 	private ListView lv;
 
@@ -62,7 +62,6 @@ public class HostRight extends VBox {
 		reserve = new Button("Reserve");
 		up_next = new Label("Next Table:");
 		up_next.setStyle("-fx-text-fill: #fff");
-		ta = new TextArea();
 
 		lv = new ListView();
 
@@ -71,7 +70,7 @@ public class HostRight extends VBox {
 		for (int j = 1; j < 10; j++) {
 			finishedTable.getItems().add(j);
 		}
-		finished = new Button("Delete");
+		delete = new Button("Delete");
 		// adds property to the region.
 		VBox.setVgrow(r, Priority.ALWAYS);
 		to_go = new Button("To-Go!");
@@ -80,26 +79,21 @@ public class HostRight extends VBox {
 		hb = new HBox();
 		HBox.setHgrow(hr, Priority.ALWAYS);
 		hb.getChildren().addAll(to_go, hr, in_house);
-		/*
-		 * First the cb box allows them to click which table they want to reserve.
-		 * reserve button allows the user to store that and pops up in the text area.
-		 * finished button allows user to delete any table in there.
-		 * 
-		 * these table numbers need to stored in one place.
-		 */
 
 		// adds all items to the vbox to display.
-		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, ta, lv, finishedTable,
-				finished, r, hb);
+		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, lv, delete, r, hb);
 
+		// custom event to add party name to the list view of the tables that are next
+		// in line.
 		this.reserve.setOnAction((event) -> {
 			this.fireEvent(new HostEvent(reserve, this, HostEvent.reserveClicked));
 		});
-		
-		int deleteItem = this.lv.getSelectionModel().getSelectedIndex();
-		this.finished.setOnAction((event) -> {
-			
-			
+
+		// deletes the selected table from the list view.
+		this.delete.setOnAction((event) -> {
+			int deleteItem = this.lv.getSelectionModel().getSelectedIndex();
+			lv.getItems().remove(deleteItem);
+
 		});
 
 	}
@@ -121,7 +115,7 @@ public class HostRight extends VBox {
 	}
 
 	public Button getDelet() {
-		return this.finished;
+		return this.delete;
 	}
 
 	public Button getInHouse() {
@@ -135,7 +129,6 @@ public class HostRight extends VBox {
 	@SuppressWarnings("unchecked")
 	public void setTextArea() {
 		String waitList = this.cb.getValue() + ": " + tf.getText() + "\n";
-
 		this.lv.getItems().add(waitList);
 	}
 
