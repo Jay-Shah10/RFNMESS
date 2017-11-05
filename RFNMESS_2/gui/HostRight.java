@@ -134,7 +134,7 @@ public class HostRight extends VBox {
 		this.lv.getItems().add(waitList);
 		
 		//adding ability to change the table color. 
-		Rectangle r = nc.table1;
+		Rectangle r = nc.getTable1();
 		nc.tib.getReserved(r);
 		
 	}

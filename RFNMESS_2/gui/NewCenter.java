@@ -12,7 +12,7 @@ import javafx.scene.shape.Rectangle;
 
 public class NewCenter extends TilePane {
 
-	public Rectangle table1;
+	private Rectangle table1;
 	private Rectangle table2;
 	private Rectangle table3;
 	private Rectangle table4;
@@ -101,8 +101,6 @@ public class NewCenter extends TilePane {
 		return this.table9;
 	}
 	
-	public void setReserved(Rectangle r) {
-		tib.getReserved(r);
-	}
+	
 
 }
