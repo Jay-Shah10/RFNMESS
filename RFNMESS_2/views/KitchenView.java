@@ -44,7 +44,6 @@ public class KitchenView implements View {
 		
 		bottom = new HBox();
 		bottom.setAlignment(Pos.CENTER);
-		bottom.minHeight(200);
 		
 		Button btnMarkComplete = new Button("Order Complete");
 		bottom.getChildren().add(btnMarkComplete);

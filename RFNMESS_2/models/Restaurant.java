@@ -10,8 +10,16 @@ import java.util.ArrayList;
  *
  */
 public class Restaurant {
-	private ArrayList<Table> tables;	
-
+	private ArrayList<Table> tables;
+	private ArrayList<Employee> employees;
+	private ArrayList<MenuItem> menu;
+	private ArrayList<Ingredient> ingredients;
+	
+	public Restaurant() {
+		tables = new ArrayList<>();
+		employees = new ArrayList<>();
+		
+	}
 	/**
 	 * @return the tables
 	 */
@@ -40,6 +48,8 @@ public class Restaurant {
 			testList.add(t);
 		}
 		r.setTables(testList);
+		
+		
 		
 		return r;
 	}
