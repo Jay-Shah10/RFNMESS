@@ -26,6 +26,7 @@ public interface Employee {
 				emp.setAccessLevel(AccessLevel.Kitchen);
 				break;
 			case "order":
+			case "server":
 				emp.setAccessLevel(AccessLevel.Server);
 				break;
 			case "host":
