@@ -34,7 +34,7 @@ public class TableImageButton extends Rectangle {
 
 	}
 
-	public void getReserved(Rectangle r) {
+	public void setReserved(Rectangle r) {
 		
 		DropShadow shadow = new DropShadow();
 		shadow.setColor(Color.color(0, 0, 0));

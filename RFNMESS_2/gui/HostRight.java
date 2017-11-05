@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class HostRight extends VBox {
-	private NewCenter nc;
+	
 	
 	private HBox hb;
 	private Button to_go, in_house, reserve, delete;
@@ -23,9 +23,7 @@ public class HostRight extends VBox {
 	private TextField tf;
 	private ListView<String> lv;
 	
-	public NewCenter getTable() {
-		return new NewCenter();
-	}
+	NewCenter nc = new NewCenter();
 	public HostRight() {
 
 		// adds CSS to the Pane and properties to the pane.
@@ -132,11 +130,9 @@ public class HostRight extends VBox {
 	public void setTextArea() {
 		String waitList = this.cb.getValue() + ": " + tf.getText() + "\n";
 		this.lv.getItems().add(waitList);
-		
-		//adding ability to change the table color. 
+		//adding ability to change the table color.
 		Rectangle r = nc.getTable1();
-		nc.tib.getReserved(r);
-		
+		nc.setTable1(r);	
 	}
 
 	public HostRightData getText() {
