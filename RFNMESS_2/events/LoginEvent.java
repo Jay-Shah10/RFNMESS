@@ -109,6 +109,7 @@ public class LoginEvent extends Event {
 					break;
 				case Server:
 					this.setDefaultView(StageView.Order);
+					break;
 				case Kitchen:
 				case Manager:
 					this.setDefaultView(StageView.Kitchen);
