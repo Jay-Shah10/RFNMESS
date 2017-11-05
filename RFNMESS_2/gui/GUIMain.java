@@ -33,6 +33,8 @@ public class GUIMain extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		Rectangle2D visual = Screen.getPrimary().getVisualBounds();
 		applicationStage = primaryStage;
+		applicationStage.setMaximized(true);
+		applicationStage.setFullScreen(true);
 
 		loginController = new LoginController();
 		loginController.start();
@@ -43,7 +45,10 @@ public class GUIMain extends Application {
 		masterPane = new DisplayPage();
 		applicationStage.setScene(new Scene(masterPane,visual.getWidth(), visual.getHeight()));
 		applicationStage.setTitle("RFNMESS | Restaurant Franchise Network Managment Enterpise Software System");
+		
 		applicationStage.getScene().getStylesheets().add("gui/CSS.css");
+		//applicationStage.getScene().getStylesheets().add("gui/material-fx-v0_3.css");
+		//applicationStage.getScene().getStylesheets().add("gui/materialfx-toggleswitch.css");
 		
 		lg = new Login();
 		hostView = new HostView();

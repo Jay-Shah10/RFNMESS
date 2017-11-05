@@ -5,7 +5,9 @@ package views;
 
 import java.util.Queue;
 
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -23,7 +25,8 @@ public class KitchenView implements View {
 	private Queue<Order> 	listOrders;
 	private VBox 			currentOrder,
 							nextOrder;
-	private HBox 			center;
+	private HBox 			center,
+							bottom;
 	
 	/**
 	 * 
@@ -38,6 +41,14 @@ public class KitchenView implements View {
 		
 		center.getChildren().add(currentOrder);
 		center.getChildren().add(nextOrder);
+		
+		bottom = new HBox();
+		bottom.setAlignment(Pos.CENTER);
+		bottom.minHeight(200);
+		
+		Button btnMarkComplete = new Button("Order Complete");
+		bottom.getChildren().add(btnMarkComplete);
+		btnMarkComplete.setMinWidth(300);
 	}
 
 	/* (non-Javadoc)
@@ -73,7 +84,7 @@ public class KitchenView implements View {
 	@Override
 	public Node getBottom() {
 		// TODO Auto-generated method stub
-		return null;
+		return bottom;
 	}
 	
 	private static VBox createBox(String title) {
