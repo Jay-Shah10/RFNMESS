@@ -23,6 +23,8 @@ public class HostEvent extends Event {
 	public static final EventType<HostEvent> RESERVE_CLICKED = new EventType<>(Event.ANY, "RESERVE_CLICKED");
 	
 	public static final EventType<HostEvent> DELETE_CLICKED = new EventType<>(Event.ANY, "DELETE_CLICKED");
+	
+	public static final EventType<HostEvent> ORDER_CLICKED = new EventType<>(Event.ANY, "ORDER_CLICKED");
 
 	
 	public Table getTable() {
@@ -41,6 +43,14 @@ public class HostEvent extends Event {
 		this.t = source;
 	}
 	
+	/**
+	 * @param orderClicked
+	 */
+	public HostEvent(EventType<HostEvent> orderClicked) {
+		// TODO Auto-generated constructor stub
+		super(ORDER_CLICKED);
+	}
+
 	public void setPartyName(String n) {
 		this.partyName = n;
 	}

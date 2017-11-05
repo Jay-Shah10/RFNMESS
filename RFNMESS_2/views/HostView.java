@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import dataCollection.HostRightData;
 import events.HostEvent;
+import gui.DisplayPage;
 import gui.HostCenterGrid;
 import gui.HostRight;
 import gui.NewCenter;
@@ -42,6 +43,8 @@ public class HostView implements views.View {
 	public HostCenterGrid gp;
 	public HostRight vb;
 	public NewCenter center;
+	public DisplayPage displayPage;
+	public OrderView orderView;
 	
 
 	public HostView() {
@@ -86,6 +89,8 @@ public class HostView implements views.View {
 					vb.populateTables(tables);
 				}
 		);
+		
+		
 	}
 
 	/*

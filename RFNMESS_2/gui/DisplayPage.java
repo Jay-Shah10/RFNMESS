@@ -79,4 +79,12 @@ public class DisplayPage extends BorderPane {
 	public void setOnLogout(EventHandler<ActionEvent> eh) {
 		tmb.setOnLogout(eh);
 	}
+
+	/**
+	 * @param object
+	 */
+	public void setOnOrderClick(EventHandler<ActionEvent> eh) {
+		HostRight.setOnOrderClick(eh);
+		
+	}
 }

@@ -94,6 +94,11 @@ public class GUIMain extends Application {
 				setView(StageView.Login);
 			}
 		);
+		masterPane.setOnOrderClick(
+				(event)->{
+					
+					setView(StageView.Order);
+				});
 
 	}
 	

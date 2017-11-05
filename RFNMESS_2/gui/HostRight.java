@@ -21,7 +21,9 @@ public class HostRight extends VBox {
 	
 	
 	private HBox hb;
-	private Button order, reserve, delete;
+	private static Button order;
+	private Button reserve;
+	private Button delete;
 	private ComboBox<Table> cb, finishedTable;
 	private Label party_name, table_reservation_label, up_next;
 	private TextField tf;
@@ -87,6 +89,7 @@ public class HostRight extends VBox {
 		VBox.setVgrow(r, Priority.ALWAYS);
 		
 		order = new Button("Order");
+		
 
 		hb = new HBox();
 		HBox.setHgrow(hr, Priority.ALWAYS);
@@ -147,6 +150,14 @@ public class HostRight extends VBox {
 
 	public HostRightData getText() {
 		return new HostRightData(this.tf.getText());
+	}
+
+	/**
+	 * @param eh
+	 */
+	public static void setOnOrderClick(EventHandler<ActionEvent> eh) {
+		// TODO Auto-generated method stub
+		order.setOnAction(eh);
 	}
 
 }
