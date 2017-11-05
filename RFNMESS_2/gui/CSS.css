@@ -32,10 +32,10 @@
 	-fx-background-radius: 0px 15px 15px 0px;
 }
 
-.table {
-	-fx-background-color:#fff;
+.table.reserved {
+	-fx-fill: rgba(255, 0, 0, 1);
 }
 
-.table.selected {
-	-fx-background-color:#aaa;
+.table {
+	-fx-fill: rgba(242,242,242,1);
 }

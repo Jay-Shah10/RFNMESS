@@ -106,4 +106,9 @@ public class Table {
 	public int hashCode() {
 		return uid;
 	}
+	
+	@Override
+	public String toString() {
+		return this.name;
+	}
 }

@@ -1,6 +1,7 @@
 package views;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import dataCollection.HostRightData;
 import events.HostEvent;
@@ -26,19 +27,27 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import models.Restaurant;
+import models.Table;
 import javafx.scene.layout.*;
 
 public class HostView implements views.View {
 
 	private Node left, right, bottom;
 	private String selectTable;
-	public TableImageButton t;
+	private ArrayList<Table> tables;
+	
 	public HostCenterGrid gp;
 	public HostRight vb;
 	public NewCenter center;
+	
 
 	public HostView() {
+		tables = Restaurant.getRestaurant().getTables();
+		
+		
 		center = new NewCenter();
+		center.populateTables(tables);
 
 		/*
 		 * this is for the right side of the border pane
@@ -46,12 +55,17 @@ public class HostView implements views.View {
 
 		vb = new HostRight(); 
 		this.right = vb;
+		vb.setCenterReference(center);
+		vb.populateTables(tables);
 		
-		vb.addEventHandler(HostEvent.reserveClicked, event -> {
-			vb.setTextArea();
-		});
-
-
+		
+		
+		vb.addEventHandler(HostEvent.RESERVE_CLICKED,
+			(event) -> {
+				center.getButtonForTable(event.getTable()).setReserved();
+				vb.setTextArea();
+			}
+		);
 	}
 
 	/*

@@ -6,24 +6,28 @@ import java.util.*;
 
 import dataCollection.HostRightData;
 import events.HostEvent;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import models.Table;
 
 public class HostRight extends VBox {
 	
 	
 	private HBox hb;
 	private Button to_go, in_house, reserve, delete;
-	private ComboBox<Integer> cb, finishedTable;
+	private ComboBox<Table> cb, finishedTable;
 	private Label party_name, table_reservation_label, up_next;
 	private TextField tf;
 	private ListView<String> lv;
+	private NewCenter centerReference;
+
 	
-	NewCenter nc = new NewCenter();
 	public HostRight() {
 
 		// adds CSS to the Pane and properties to the pane.
@@ -52,24 +56,24 @@ public class HostRight extends VBox {
 		table_reservation_label = new Label("Pick a table form below: ");
 		table_reservation_label.setStyle("-fx-text-fill: #fff");
 
-		cb = new ComboBox<Integer>();
-		cb.getItems().add(null);
-		// adds items to the combo box.
-		for (int i = 1; i < 10; i++) {
-			cb.getItems().add(i);
-		}
+		cb = new ComboBox<Table>();
 
 		reserve = new Button("Reserve");
+		reserve.setOnAction(
+			(event) -> {
+				HostEvent h = new HostEvent(getComboBox(), event.getTarget(), HostEvent.RESERVE_CLICKED);
+				this.fireEvent(h);
+			}
+		);
 		up_next = new Label("Next Table:");
 		up_next.setStyle("-fx-text-fill: #fff");
 
 		lv = new ListView<String>();
 
-		finishedTable = new ComboBox<Integer>();
+		finishedTable = new ComboBox<Table>();
 		finishedTable.getItems().add(null);
-		for (int j = 1; j < 10; j++) {
-			finishedTable.getItems().add(j);
-		}
+		
+		
 		delete = new Button("Delete");
 		// adds property to the region.
 		VBox.setVgrow(r, Priority.ALWAYS);
@@ -83,12 +87,6 @@ public class HostRight extends VBox {
 		// adds all items to the vbox to display.
 		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, lv, delete, r, hb);
 
-		// custom event to add party name to the list view of the tables that are next
-		// in line.
-		this.reserve.setOnAction((event) -> {
-			this.fireEvent(new HostEvent(reserve, this, HostEvent.reserveClicked));
-		});
-
 		// deletes the selected table from the list view.
 		this.delete.setOnAction((event) -> {
 			int deleteItem = this.lv.getSelectionModel().getSelectedIndex();
@@ -97,24 +95,30 @@ public class HostRight extends VBox {
 		});
 
 	}
+	
+	public void populateTables(ArrayList<Table> tables) {
+		for (Table table : tables) {
+			cb.getItems().add(table);
+		}
+	}
 
 	public String getPartyText() {
 		return this.tf.getText();
 	}
 
-	public int getComboBox() {
-		return (int) this.cb.getValue();
+	public Table getComboBox() {
+		return this.cb.getValue();
 	}
 
-	public int getCancelComboBox() {
-		return (int) this.finishedTable.getValue();
+	public String getCancelComboBox() {
+		return this.finishedTable.getValue().toString();
 	}
 
 	public Button getReserve() {
 		return this.reserve;
 	}
 
-	public Button getDelet() {
+	public Button getDelete() {
 		return this.delete;
 	}
 
@@ -125,14 +129,18 @@ public class HostRight extends VBox {
 	public Button getToGo() {
 		return this.to_go;
 	}
+	
+	public void setCenterReference(NewCenter nc) {
+		this.centerReference = nc;
+	}
 
 	@SuppressWarnings("unchecked")
 	public void setTextArea() {
-		String waitList = this.cb.getValue() + ": " + tf.getText() + "\n";
+		String waitList = this.cb.getValue().toString() + 
+						": " + tf.getText() + "\n";
 		this.lv.getItems().add(waitList);
 		//adding ability to change the table color.
-		Rectangle r = nc.getTable1();
-		nc.setTable1(r);	
+		//centerReference.getTable1().setReserved();
 	}
 
 	public HostRightData getText() {

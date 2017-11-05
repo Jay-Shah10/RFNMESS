@@ -3,13 +3,12 @@ package gui;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import models.Table;
 
 public class TableImageButton extends Rectangle {
-
-	public Rectangle rec;
+	private Table table;
 	public double height, length;
 	public double YPosition, XPosition;
-	public Color c;
 
 	public TableImageButton(double width, double height) {
 		/*
@@ -20,7 +19,7 @@ public class TableImageButton extends Rectangle {
 		
 		this.setWidth(width);
 		this.setHeight(height);
-		this.setStyle("-fx-fill: rgba(242,242,242,1);");
+		this.addClass("table");
 		this.setArcHeight(15);
 		this.setArcWidth(15);
 		
@@ -33,20 +32,52 @@ public class TableImageButton extends Rectangle {
 		this.setEffect(shadow);
 
 	}
+	
+	public boolean isForTable(Table t) {
+		return this.table == t;
+	}
+	
+	public TableImageButton(Table t, double width, double height) {
+		this(width, height);
+		this.table = t;
+	}
+	
+	private void toggleClass(String c) {
+		if(this.getStyleClass().contains(c))
+			this.getStyleClass().remove(c);
+		else
+			this.getStyleClass().add(c);
+	}
+	
+	private void addClass(String c) {
+		if(!this.getStyleClass().contains(c))
+			this.getStyleClass().add(c);
+	}
+	
+	private void removeClass(String c) {
+		if(this.getStyleClass().contains(c))
+			this.getStyleClass().remove(c);
+	}
 
-	public void setReserved(Rectangle r) {
+	public void setReserved() {
 		
-		DropShadow shadow = new DropShadow();
-		shadow.setColor(Color.color(0, 0, 0));
-		shadow.setRadius(7.0);
-		shadow.setOffsetX(5.0);
-		shadow.setOffsetY(5.0);
+//		DropShadow shadow = new DropShadow();
+//		shadow.setColor(Color.color(0, 0, 0));
+//		shadow.setRadius(7.0);
+//		shadow.setOffsetX(5.0);
+//		shadow.setOffsetY(5.0);
+//		
+//		r.setArcHeight(15);
+//		r.setArcWidth(15);
+//		r.setStyle("-fx-fill: rgba(255, 0, 0, 1)");
+//		r.setEffect(shadow);
 		
-		r.setArcHeight(15);
-		r.setArcWidth(15);
-		r.setStyle("-fx-fill: rgba(255, 0, 0, 1)");
-		r.setEffect(shadow);
+		this.addClass("reserved");
 		
+	}
+	
+	public void toggleReserved() {
+		this.toggleClass("reserved");
 	}
 
 	public Rectangle getBusy() {
@@ -59,7 +90,6 @@ public class TableImageButton extends Rectangle {
 		
 		this.setArcHeight(15);
 		this.setArcWidth(15);
-		this.setStyle("-fx-fill: rgba(255, 255, 0, 1)");
 		this.setEffect(shadow);
 		
 		
@@ -70,7 +100,7 @@ public class TableImageButton extends Rectangle {
 		return this.height = height;
 	}
 
-	public double getLength(double lenght) {
+	public double getLength(double length) {
 		return this.length = length;
 	}
 
