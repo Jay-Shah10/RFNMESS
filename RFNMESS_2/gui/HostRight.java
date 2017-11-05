@@ -11,19 +11,21 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class HostRight extends VBox {
-
-	private ArrayList<?> tables = new ArrayList<Object>();
+	private NewCenter nc;
+	
 	private HBox hb;
 	private Button to_go, in_house, reserve, delete;
 	private ComboBox<Integer> cb, finishedTable;
 	private Label party_name, table_reservation_label, up_next;
 	private TextField tf;
-	// private TextArea ta;
-	private ArrayList textAreaList = new ArrayList();
-	private ListView lv;
-
+	private ListView<String> lv;
+	
+	public NewCenter getTable() {
+		return new NewCenter();
+	}
 	public HostRight() {
 
 		// adds CSS to the Pane and properties to the pane.
@@ -63,7 +65,7 @@ public class HostRight extends VBox {
 		up_next = new Label("Next Table:");
 		up_next.setStyle("-fx-text-fill: #fff");
 
-		lv = new ListView();
+		lv = new ListView<String>();
 
 		finishedTable = new ComboBox<Integer>();
 		finishedTable.getItems().add(null);
@@ -130,6 +132,11 @@ public class HostRight extends VBox {
 	public void setTextArea() {
 		String waitList = this.cb.getValue() + ": " + tf.getText() + "\n";
 		this.lv.getItems().add(waitList);
+		
+		//adding ability to change the table color. 
+		Rectangle r = nc.table1;
+		nc.tib.getReserved(r);
+		
 	}
 
 	public HostRightData getText() {

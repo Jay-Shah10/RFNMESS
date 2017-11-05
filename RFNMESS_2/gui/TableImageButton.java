@@ -34,7 +34,7 @@ public class TableImageButton extends Rectangle {
 
 	}
 
-	public TableImageButton getReserved() {
+	public void getReserved(Rectangle r) {
 		
 		DropShadow shadow = new DropShadow();
 		shadow.setColor(Color.color(0, 0, 0));
@@ -42,16 +42,14 @@ public class TableImageButton extends Rectangle {
 		shadow.setOffsetX(5.0);
 		shadow.setOffsetY(5.0);
 		
-		this.setArcHeight(15);
-		this.setArcWidth(15);
-		this.setStyle("-fx-fill: rgba(255, 0, 0, 1)");
-		this.setEffect(shadow);
+		r.setArcHeight(15);
+		r.setArcWidth(15);
+		r.setStyle("-fx-fill: rgba(255, 0, 0, 1)");
+		r.setEffect(shadow);
 		
-		
-		return this;
 	}
 
-	public TableImageButton getBusy() {
+	public Rectangle getBusy() {
 		
 		DropShadow shadow = new DropShadow();
 		shadow.setColor(Color.color(0, 0, 0));

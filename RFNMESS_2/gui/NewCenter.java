@@ -1,4 +1,4 @@
-package gui;
+ package gui;
 
 import events.HostEvent;
 import javafx.event.EventHandler;
@@ -12,7 +12,7 @@ import javafx.scene.shape.Rectangle;
 
 public class NewCenter extends TilePane {
 
-	private Rectangle table1;
+	public Rectangle table1;
 	private Rectangle table2;
 	private Rectangle table3;
 	private Rectangle table4;
@@ -70,11 +70,39 @@ public class NewCenter extends TilePane {
 		this.getChildren().add(table7);
 		this.getChildren().add(table8);
 		this.getChildren().add(table9);
-		
-		
-		
-		
-
+	}
+	
+	
+	public Rectangle getTable1() {
+		return this.table1;
+	}
+	public Rectangle getTable2() {
+		return this.table2;
+	}
+	public Rectangle getTable3() {
+		return this.table3;
+	}
+	public Rectangle getTable4() {
+		return this.table4;
+	}
+	public Rectangle getTable5() {
+		return this.table5;
+	}
+	public Rectangle getTable6() {
+		return this.table6;
+	}
+	public Rectangle getTable7() {
+		return this.table7;
+	}
+	public Rectangle getTable8() {
+		return this.table8;
+	}
+	public Rectangle getTable9() {
+		return this.table9;
+	}
+	
+	public void setReserved(Rectangle r) {
+		tib.getReserved(r);
 	}
 
 }
