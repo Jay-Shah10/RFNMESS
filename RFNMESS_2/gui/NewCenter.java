@@ -53,7 +53,7 @@ public class NewCenter extends TilePane {
 		table1 = new TableImageButton(200,100);
 		table1.setOnMouseClicked(
 				(event)->{
-					this.table1.setStyle("-fx-fill: rgba(255, 0 , 0, 1)");
+					this.table1.setStyle("-fx-fill: rgba(255, 0 , 0, 1);");
 				});
 		
 		table2 = new TableImageButton(200,100);
@@ -107,7 +107,7 @@ public class NewCenter extends TilePane {
 	}
 	
 	public void setTable1(Rectangle r) {
-		r.setStyle("-fx-fill: rgba(255, 0, 0)");
+		r.setStyle("-fx-fill: rgba(255, 0, 0);");
 	}
 	
 	
