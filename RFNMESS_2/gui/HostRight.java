@@ -9,6 +9,7 @@ import events.HostEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
@@ -20,7 +21,7 @@ public class HostRight extends VBox {
 	
 	
 	private HBox hb;
-	private Button to_go, in_house, reserve, delete;
+	private Button order, reserve, delete;
 	private ComboBox<Table> cb, finishedTable;
 	private Label party_name, table_reservation_label, up_next;
 	private TextField tf;
@@ -84,12 +85,13 @@ public class HostRight extends VBox {
 		);
 		// adds property to the region.
 		VBox.setVgrow(r, Priority.ALWAYS);
-		to_go = new Button("To-Go!");
-		in_house = new Button("In-House");
+		
+		order = new Button("Order");
 
 		hb = new HBox();
 		HBox.setHgrow(hr, Priority.ALWAYS);
-		hb.getChildren().addAll(to_go, hr, in_house);
+		hb.setAlignment(Pos.CENTER);
+		hb.getChildren().addAll(order);
 
 		// adds all items to the vbox to display.
 		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, lv, delete, r, hb);
@@ -125,13 +127,10 @@ public class HostRight extends VBox {
 		return this.delete;
 	}
 
-	public Button getInHouse() {
-		return this.in_house;
+	public Button getOrder() {
+		return this.order;
 	}
 
-	public Button getToGo() {
-		return this.to_go;
-	}
 	
 	public void setCenterReference(NewCenter nc) {
 		this.centerReference = nc;
