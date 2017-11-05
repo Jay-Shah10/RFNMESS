@@ -60,21 +60,13 @@ public class TableImageButton extends Rectangle {
 	}
 
 	public void setReserved() {
-		
-//		DropShadow shadow = new DropShadow();
-//		shadow.setColor(Color.color(0, 0, 0));
-//		shadow.setRadius(7.0);
-//		shadow.setOffsetX(5.0);
-//		shadow.setOffsetY(5.0);
-//		
-//		r.setArcHeight(15);
-//		r.setArcWidth(15);
-//		r.setStyle("-fx-fill: rgba(255, 0, 0, 1)");
-//		r.setEffect(shadow);
-		
 		this.addClass("reserved");
 		
 	}
+	public void removeReserved() {
+		this.removeClass("reserved");	
+	}
+	
 	
 	public void toggleReserved() {
 		this.toggleClass("reserved");

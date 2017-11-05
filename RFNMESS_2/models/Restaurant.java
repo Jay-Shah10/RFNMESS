@@ -41,7 +41,7 @@ public class Restaurant {
 		
 		// TEST CODE
 		ArrayList<Table> testList = new ArrayList<Table>();
-		for(int i = 1; i < 12; i++) {
+		for(int i = 1; i < 10; i++) {
 			Table t = new Table(i);
 			t.setName("Table " + String.valueOf(i));
 			t.setStatus(TableStatus.Open);

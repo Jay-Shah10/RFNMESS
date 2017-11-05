@@ -27,6 +27,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import models.GuestParty;
+import models.Party;
 import models.Restaurant;
 import models.Table;
 import javafx.scene.layout.*;
@@ -63,8 +65,26 @@ public class HostView implements views.View {
 		vb.addEventHandler(HostEvent.RESERVE_CLICKED,
 			(event) -> {
 				center.getButtonForTable(event.getTable()).setReserved();
-				vb.setTextArea();
+				vb.addToTextArea(event.getTable());
+				
+				//TODO: Move to controller
+				event.getTable().setAssignedParty(new GuestParty(event.getPartyName()));
+				
+				
+				vb.populateTables(tables);
 			}
+		);
+		
+		vb.addEventHandler(HostEvent.DELETE_CLICKED, 
+				(event) -> {
+					center.getButtonForTable(event.getTable()).removeReserved();
+					vb.removeFromTextArea(event.getTable());
+					
+					//TODO: Move to controller
+					event.getTable().setAssignedParty(null);
+					
+					vb.populateTables(tables);
+				}
 		);
 	}
 

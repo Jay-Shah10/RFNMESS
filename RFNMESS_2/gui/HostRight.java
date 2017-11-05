@@ -24,7 +24,7 @@ public class HostRight extends VBox {
 	private ComboBox<Table> cb, finishedTable;
 	private Label party_name, table_reservation_label, up_next;
 	private TextField tf;
-	private ListView<String> lv;
+	private ListView<Table> lv;
 	private NewCenter centerReference;
 
 	
@@ -62,19 +62,26 @@ public class HostRight extends VBox {
 		reserve.setOnAction(
 			(event) -> {
 				HostEvent h = new HostEvent(getComboBox(), event.getTarget(), HostEvent.RESERVE_CLICKED);
+				h.setPartyName(tf.getText());
 				this.fireEvent(h);
 			}
 		);
+		
 		up_next = new Label("Next Table:");
 		up_next.setStyle("-fx-text-fill: #fff");
 
-		lv = new ListView<String>();
+		lv = new ListView<>();
 
 		finishedTable = new ComboBox<Table>();
-		finishedTable.getItems().add(null);
 		
 		
 		delete = new Button("Delete");
+		delete.setOnAction(
+			(event) -> {
+				HostEvent h = new HostEvent(lv.getSelectionModel().getSelectedItem(), event.getTarget(), HostEvent.DELETE_CLICKED);
+				this.fireEvent(h);
+			}
+		);
 		// adds property to the region.
 		VBox.setVgrow(r, Priority.ALWAYS);
 		to_go = new Button("To-Go!");
@@ -87,18 +94,14 @@ public class HostRight extends VBox {
 		// adds all items to the vbox to display.
 		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, lv, delete, r, hb);
 
-		// deletes the selected table from the list view.
-		this.delete.setOnAction((event) -> {
-			int deleteItem = this.lv.getSelectionModel().getSelectedIndex();
-			lv.getItems().remove(deleteItem);
-
-		});
-
 	}
 	
 	public void populateTables(ArrayList<Table> tables) {
+		cb.getItems().clear();
+		finishedTable.getItems().clear();
 		for (Table table : tables) {
 			cb.getItems().add(table);
+			finishedTable.getItems().add(table);
 		}
 	}
 
@@ -135,12 +138,12 @@ public class HostRight extends VBox {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void setTextArea() {
-		String waitList = this.cb.getValue().toString() + 
-						": " + tf.getText() + "\n";
-		this.lv.getItems().add(waitList);
-		//adding ability to change the table color.
-		//centerReference.getTable1().setReserved();
+	public void addToTextArea(Table t) {
+		this.lv.getItems().add(t);
+	}
+	
+	public void removeFromTextArea(Table t) {
+		lv.getItems().remove(t);
 	}
 
 	public HostRightData getText() {

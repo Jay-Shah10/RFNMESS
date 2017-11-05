@@ -109,6 +109,8 @@ public class Table {
 	
 	@Override
 	public String toString() {
-		return this.name;
+		if(this.currentParty==null)
+			return this.name;
+		return this.name + ": " + this.currentParty.getName();
 	}
 }
