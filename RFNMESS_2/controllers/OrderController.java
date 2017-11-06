@@ -39,6 +39,7 @@ public class OrderController implements Controller {
 		if(o!= null && i !=null) {
 			o.getMenuItems().add(i.createCopy());
 			o.setBilled(false);
+			o.setFulfilled(false);
 		}
 	}
 	
@@ -51,6 +52,15 @@ public class OrderController implements Controller {
 	public void billOrder(Order o) {
 		if(o != null) {
 			o.setBilled(true);			
+		}
+	}
+
+	/**
+	 * @param order
+	 */
+	public void fulfillOrder(Order order) {
+		if(order != null) {
+			order.setFulfilled(true);
 		}
 	}
 

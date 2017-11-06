@@ -19,5 +19,8 @@ public interface Order {
 	boolean					getBilled();
 	void					setBilled(boolean b);
 	
+	boolean					isFulfilled();
+	void					setFulfilled(boolean b);
+	
 	ArrayList<MenuItem>		getMenuItems();
 }

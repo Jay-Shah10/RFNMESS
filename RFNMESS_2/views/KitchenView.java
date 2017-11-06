@@ -3,8 +3,10 @@
  */
 package views;
 
-import java.util.Queue;
+import java.util.LinkedList;
 
+import events.OrderEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -22,11 +24,13 @@ import models.Order;
  */
 public class KitchenView implements View {
 
-	private Queue<Order> 	listOrders;
-	private VBox 			currentOrder,
-							nextOrder;
-	private HBox 			center,
-							bottom;
+	private LinkedList<Order> 	listOrders;
+	private VBox 				currentOrder,
+								nextOrder;
+	private HBox 				center,
+								bottom;
+	
+	private Button 				btnMarkComplete;
 	
 	/**
 	 * 
@@ -45,9 +49,22 @@ public class KitchenView implements View {
 		bottom = new HBox();
 		bottom.setAlignment(Pos.CENTER);
 		
-		Button btnMarkComplete = new Button("Order Complete");
+		btnMarkComplete = new Button("Order Complete");
 		bottom.getChildren().add(btnMarkComplete);
 		btnMarkComplete.setMinWidth(300);
+		btnMarkComplete.setDisable(true);
+		btnMarkComplete.setOnAction(
+			(event) -> {
+				OrderEvent evt = new OrderEvent(null, btnMarkComplete, OrderEvent.ORDER_FULFILLED);
+				evt.setOrder(listOrders.poll());
+				this.bottom.fireEvent(evt);
+				refresh();
+				if(listOrders.isEmpty())
+					btnMarkComplete.setDisable(true);
+			}
+		);
+		
+		listOrders = new LinkedList<>();				
 	}
 
 	/* (non-Javadoc)
@@ -56,6 +73,7 @@ public class KitchenView implements View {
 	@Override
 	public Node getCenter() {
 		// TODO Auto-generated method stub
+		refresh();
 		return center;
 	}
 
@@ -86,6 +104,54 @@ public class KitchenView implements View {
 		return bottom;
 	}
 	
+	/**
+	 * @param order
+	 */
+	public void addNewOrder(Order order) {
+		if(!listOrders.contains(order)) {
+			listOrders.add(order);	
+			btnMarkComplete.setDisable(false);
+		}
+	}
+
+	/**
+	 * @param order
+	 */
+	public void removeOrder(Order order) {
+		listOrders.remove(order);
+		if(listOrders.isEmpty())
+			btnMarkComplete.setDisable(true);
+	}
+	
+	public void setOnOrderFulfilled(EventHandler<OrderEvent> e) {
+		this.bottom.addEventHandler(OrderEvent.ORDER_FULFILLED, e);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static void refreshOrderBox(VBox vb, Order o) {
+		ListView<MenuItem> lv = (ListView<MenuItem>) vb.getChildren().get(1);
+		lv.getItems().clear();
+		if(o != null) {
+			for (MenuItem i : o.getMenuItems()) {
+				lv.getItems().add(i);
+			}
+		}
+	}
+	
+	public void refresh() {
+		if(listOrders.size()>0) {
+			refreshOrderBox(currentOrder, listOrders.get(0));			
+		} else {
+			refreshOrderBox(currentOrder, null);
+		}
+		
+		if(listOrders.size()>1) {
+			refreshOrderBox(nextOrder, listOrders.get(1));			
+		} else {
+			refreshOrderBox(nextOrder, null);
+		}
+	}
+	
 	private static VBox createBox(String title) {
 		VBox box = new VBox();
 		box.getStyleClass().add("pane");
@@ -102,5 +168,6 @@ public class KitchenView implements View {
 		
 		return box;
 	}
+
 
 }

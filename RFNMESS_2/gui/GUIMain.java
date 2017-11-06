@@ -137,6 +137,7 @@ public class GUIMain extends Application {
 				orderView.refreshOrderMenuOrderList();
 				if(o!=null) {
 					orderView.setSelectedOrder(o);
+					kitchenView.addNewOrder(o);
 				}
 			}
 		);
@@ -146,6 +147,9 @@ public class GUIMain extends Application {
 				orderController.addItemToOrder(event.getOrder(), event.getItem());
 				orderView.populateOrderItemsList();
 				orderView.setSelectedOrder(event.getOrder());
+				if(!event.getOrder().isFulfilled()) {
+					kitchenView.addNewOrder(event.getOrder());
+				}
 			}
 		);
 
@@ -153,6 +157,9 @@ public class GUIMain extends Application {
 			(event) -> {
 				orderController.removeItemFromOrder(event.getOrder(), event.getItem());
 				orderView.setSelectedOrder(event.getOrder());
+				if(event.getOrder().isFulfilled()) {
+					kitchenView.removeOrder(event.getOrder());
+				}
 			}
 		);
 		
@@ -163,6 +170,12 @@ public class GUIMain extends Application {
 				orderView.setSelectedOrder(event.getOrder());
 				
 				//TODO: Print Dialog
+			}
+		);
+		
+		kitchenView.setOnOrderFulfilled(
+			(event) -> {
+				orderController.fulfillOrder(event.getOrder());
 			}
 		);
 	}
@@ -189,4 +202,7 @@ public class GUIMain extends Application {
 		}
 	}
 
+	public static void main(String[] args) {
+		GUIMain.launch(args);
+	}
 }

@@ -29,6 +29,7 @@ public class OrderEvent extends Event {
 	public static final EventType<OrderEvent> ITEM_ADDED = new EventType<>(Event.ANY, "ITEM_ADDED");
 	public static final EventType<OrderEvent> ITEM_REMOVED = new EventType<>(Event.ANY, "ITEM_REMOVED");
 	public static final EventType<OrderEvent> ORDER_BILLED = new EventType<>(Event.ANY, "ORDER_BILLED");
+	public static final EventType<OrderEvent> ORDER_FULFILLED = new EventType<>(Event.ANY, "ORDER_FULFILLED");
 	
 	/**
 	 * @param source

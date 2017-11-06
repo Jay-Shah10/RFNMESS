@@ -13,7 +13,8 @@ public class PartyOrder implements Order {
 	private String					name;
 	private int						uid;
 	private ArrayList<MenuItem>		items;
-	private boolean					isBilled;
+	private boolean					isBilled,
+									isFulfilled;
 	
 	/**
 	 * 
@@ -21,6 +22,7 @@ public class PartyOrder implements Order {
 	public PartyOrder() {
 		items = new ArrayList<>();
 		isBilled = false;
+		setFulfilled(false);
 	}
 	
 	/* (non-Javadoc)
@@ -73,6 +75,9 @@ public class PartyOrder implements Order {
 		if(this.getBilled()) {
 			return this.getName() + " - Billed";
 		}
+		if(this.isFulfilled()) {
+			return this.getName() + " - Fulfilled";
+		}
 		return this.getName();
 	}
 
@@ -91,6 +96,20 @@ public class PartyOrder implements Order {
 	@Override
 	public void setBilled(boolean b) {
 		isBilled = b;
+	}
+
+	/**
+	 * @return the isFulfilled
+	 */
+	public boolean isFulfilled() {
+		return isFulfilled;
+	}
+
+	/**
+	 * @param isFulfilled the isFulfilled to set
+	 */
+	public void setFulfilled(boolean isFulfilled) {
+		this.isFulfilled = isFulfilled;
 	}
 
 }
