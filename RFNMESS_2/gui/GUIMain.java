@@ -20,12 +20,8 @@ public class GUIMain extends Application {
 	 */
 	private LoginController loginController;
 	private SeatingController seatingController;
-<<<<<<< HEAD
 	private OrderController orderController;
 	
-=======
-
->>>>>>> a48fa30f399c9a18bc2dfec2a5ed42f94fba7dc8
 	/**
 	 * List of views
 	 */
@@ -45,16 +41,13 @@ public class GUIMain extends Application {
 		loginController.start();
 
 		seatingController = new SeatingController();
-<<<<<<< HEAD
 		seatingController.start();
 		
 		orderController = new OrderController();
 		orderController.start();
 		
-=======
 		seatingController.start(/* TODO: Insert Restaurant model */);
 
->>>>>>> a48fa30f399c9a18bc2dfec2a5ed42f94fba7dc8
 		masterPane = new DisplayPage();
 		applicationStage.setScene(new Scene(masterPane, visual.getWidth(), visual.getHeight()));
 		applicationStage.setTitle("RFNMESS | Restaurant Franchise Network Managment Enterpise Software System");
@@ -70,7 +63,6 @@ public class GUIMain extends Application {
 
 		setView(StageView.Login);
 		applicationStage.show();
-<<<<<<< HEAD
 		
 		lg.setOnLoggingIn( 
 			(event) -> {
@@ -102,52 +94,11 @@ public class GUIMain extends Application {
 			}
 		);
 		
-		masterPane.setOnLogout(
-			(event) -> {
-=======
-
-		lg.setOnLoggingIn((event) -> {
-			try {
-				Employee user = loginController.AuthenticateUser(event.getUsername(), event.getPassword());
-				if (user == null) {
-					// Stay on Login Page
-					lg.postErrorMessage("Username and password do not match.");
-				} else {
-					// User logged in proceed to other view.
-					LoginEvent authenticatedEvent = new LoginEvent(user, lg.getCenter(), LoginEvent.AUTHENTICATED);
-					lg.clear();
-					((Node) event.getTarget()).fireEvent(authenticatedEvent);
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
->>>>>>> a48fa30f399c9a18bc2dfec2a5ed42f94fba7dc8
-				loginController.logout();
-				lg.postErrorMessage(
-						"Could not login, previous session in progress. Previous session has been terminated, please try again.");
-				setView(StageView.Login);
-			}
-<<<<<<< HEAD
-		);
-		
-		masterPane.setOnOrderClick(
-			(event)->{
-				
+		masterPane.serverClick(
+			(event)-> {
 				setView(StageView.Order);
 			}
 		);
-
-		orderView.setOnNewOrder(
-			(event) -> {
-				Order o = orderController.createNewOrder(event.getTable());
-				orderView.refreshOrderMenuOrderList();
-				if(o!=null) {
-					orderView.setSelectedOrder(o);
-				}
-			}
-		);
-=======
-		});
 
 		lg.setOnLoggedIn((event) -> {
 			// TODO: make view based on current user
@@ -161,18 +112,15 @@ public class GUIMain extends Application {
 		});
 		// changes to host view.
 		masterPane.hostClick((event) -> {
-
 			setView(StageView.Host);
 		});
 		// changes to order page aka server view.
 		masterPane.serverClick((event) -> {
-
 			setView(StageView.Order);
 		});
 
 		// changes to kitchen view.
 		masterPane.kitchenClick((event) -> {
-
 			setView(StageView.Kitchen);
 		});
 
@@ -182,8 +130,17 @@ public class GUIMain extends Application {
 		//
 		// setView(StageView.Manager);
 		// });
->>>>>>> a48fa30f399c9a18bc2dfec2a5ed42f94fba7dc8
 
+		orderView.setOnNewOrder(
+			(event) -> {
+				Order o = orderController.createNewOrder(event.getTable());
+				orderView.refreshOrderMenuOrderList();
+				if(o!=null) {
+					orderView.setSelectedOrder(o);
+				}
+			}
+		);
+		
 		orderView.setOnItemAdded(
 			(event) -> {
 				orderController.addItemToOrder(event.getOrder(), event.getItem());
