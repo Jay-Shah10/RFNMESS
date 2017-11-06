@@ -20,6 +20,7 @@ public class GUIMain extends Application {
 	 */
 	private LoginController loginController;
 	private SeatingController seatingController;
+	private OrderController orderController;
 	
 	/**
 	 * List of views
@@ -40,7 +41,10 @@ public class GUIMain extends Application {
 		loginController.start();
 		
 		seatingController = new SeatingController();
-		seatingController.start(/* TODO: Insert Restaurant model*/);
+		seatingController.start();
+		
+		orderController = new OrderController();
+		orderController.start();
 		
 		masterPane = new DisplayPage();
 		applicationStage.setScene(new Scene(masterPane,visual.getWidth(), visual.getHeight()));
@@ -87,19 +91,55 @@ public class GUIMain extends Application {
 				setView(event.getDefaultView());
 			}
 		);
-
+		
 		masterPane.setOnLogout(
 			(event) -> {
 				loginController.logout();
 				setView(StageView.Login);
 			}
 		);
+		
 		masterPane.setOnOrderClick(
-				(event)->{
-					
-					setView(StageView.Order);
-				});
+			(event)->{
+				
+				setView(StageView.Order);
+			}
+		);
 
+		orderView.setOnNewOrder(
+			(event) -> {
+				Order o = orderController.createNewOrder(event.getTable());
+				orderView.refreshOrderMenuOrderList();
+				if(o!=null) {
+					orderView.setSelectedOrder(o);
+				}
+			}
+		);
+
+		orderView.setOnItemAdded(
+			(event) -> {
+				orderController.addItemToOrder(event.getOrder(), event.getItem());
+				orderView.populateOrderItemsList();
+				orderView.setSelectedOrder(event.getOrder());
+			}
+		);
+
+		orderView.setOnItemRemoved(
+			(event) -> {
+				orderController.removeItemFromOrder(event.getOrder(), event.getItem());
+				orderView.setSelectedOrder(event.getOrder());
+			}
+		);
+		
+		orderView.setOnOrderBilled(
+			(event) -> {
+				orderController.billOrder(event.getOrder());
+				orderView.populateOrderList();
+				orderView.setSelectedOrder(event.getOrder());
+				
+				//TODO: Print Dialog
+			}
+		);
 	}
 	
 	public void setView(StageView view) {

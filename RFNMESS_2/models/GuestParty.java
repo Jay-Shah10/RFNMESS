@@ -11,9 +11,15 @@ import java.util.ArrayList;
  */
 public class GuestParty implements Party {
 
-	private String name;
+	private String 					name;
+	private ArrayList<Order> 		orders;
+	
+	public GuestParty() {
+		orders = new ArrayList<>();
+	}
 	
 	public GuestParty(String name) {
+		this();
 		this.setName(name);
 	}
 	/* (non-Javadoc)
@@ -58,7 +64,7 @@ public class GuestParty implements Party {
 	@Override
 	public ArrayList<Order> getOrders() {
 		// TODO Auto-generated method stub
-		return null;
+		return orders;
 	}
 
 }

@@ -18,7 +18,7 @@ public class SeatingController implements Controller {
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
-		model = Restaurant.getRestaurant();
+		start(Restaurant.getRestaurant());
 	}
 	
 	public void start(Restaurant r) {
