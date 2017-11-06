@@ -97,7 +97,7 @@ public class HostRight extends VBox {
 		hb.getChildren().addAll(order);
 
 		// adds all items to the vbox to display.
-		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, lv, delete, r, hb);
+		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, lv, delete, r);
 
 	}
 	
@@ -155,9 +155,6 @@ public class HostRight extends VBox {
 	/**
 	 * @param eh
 	 */
-	public static void setOnOrderClick(EventHandler<ActionEvent> eh) {
-		// TODO Auto-generated method stub
-		order.setOnAction(eh);
-	}
+	
 
 }

@@ -27,7 +27,7 @@ public class TopMenubar extends HBox {
 	
 	MenuButton menubutton = new MenuButton("...");
 	Label namelabel = new Label("Name");
-	private MenuItem logoutButton;
+	private MenuItem logoutButton, hostButton, serverButton, kitchenButton, managerButton;
 	private Login lg;
 
 	public TopMenubar() {
@@ -74,7 +74,11 @@ public class TopMenubar extends HBox {
 		 * Method to add all menu items to the menubutton.
 		 */
 		logoutButton = new MenuItem("Log out");
-		mb.getItems().add(logoutButton);
+		hostButton = new MenuItem("Host");
+		serverButton = new MenuItem("Server" );
+		kitchenButton = new MenuItem("Kitchen");
+		managerButton = new MenuItem("Manger");
+		mb.getItems().addAll(hostButton, serverButton, kitchenButton, managerButton, logoutButton);
 			
 	}
 
@@ -95,5 +99,19 @@ public class TopMenubar extends HBox {
 		
 		
 	}
+	public void hostViewClick(EventHandler<ActionEvent> eh) {
+		hostButton.setOnAction(eh);
+	}
+	public void serverViewClick(EventHandler<ActionEvent> eh) {
+		serverButton.setOnAction(eh);
+	}
+	public void kitchenViewClick(EventHandler<ActionEvent> eh) {
+		kitchenButton.setOnAction(eh);
+	}
+	public void managerViewClick(EventHandler<ActionEvent> eh) {
+		managerButton.setOnAction(eh);
+	}
+
+	
 
 }
