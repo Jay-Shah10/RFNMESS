@@ -77,7 +77,7 @@ public class TopMenubar extends HBox {
 		hostButton = new MenuItem("Host");
 		serverButton = new MenuItem("Server" );
 		kitchenButton = new MenuItem("Kitchen");
-		managerButton = new MenuItem("Manger");
+		managerButton = new MenuItem("Manager");
 		mb.getItems().addAll(hostButton, serverButton, kitchenButton, managerButton, logoutButton);
 			
 	}
