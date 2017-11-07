@@ -108,6 +108,10 @@
 	-fx-background-radius: 0.0;
 }
 
+.button:hover {
+	-fx-background-color: -swatch-500;
+}
+
 .button:armed {
 	-fx-background-color: -button-color;
 	-fx-text-fill: -swatch-400;

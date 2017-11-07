@@ -6,8 +6,8 @@ package views;
 import java.util.ArrayList;
 
 import events.OrderEvent;
+import gui.NodeList;
 import gui.SearchBox;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -30,7 +30,7 @@ public class OrderView implements View {
 	private ComboBox<Order> 			orderList;
 	private ComboBox<Table> 			tableList;
 	private ListView<MenuItem> 			itemList;
-	private ListView<MenuItem> 			drinksList,
+	private NodeList<MenuItem> 			drinksList,
 										appetizersList,
 										entreesList,
 										dessertsList;
@@ -112,10 +112,10 @@ public class OrderView implements View {
 		tabs.getTabs().add(tabEntrees);
 		tabs.getTabs().add(tabDesserts);
 		
-		drinksList = new ListView<>();
-		appetizersList = new ListView<>();
-		entreesList = new ListView<>();
-		dessertsList = new ListView<>();
+		drinksList = new NodeList<>();
+		appetizersList = new NodeList<>();
+		entreesList = new NodeList<>();
+		dessertsList = new NodeList<>();
 		
 		populateDrinks(Restaurant.getRestaurant().getDrinks());
 		populateAppetizers(Restaurant.getRestaurant().getAppetizers());
@@ -138,7 +138,7 @@ public class OrderView implements View {
 				(event) -> {
 					OrderEvent evt = new OrderEvent(null, btnAdd, OrderEvent.ITEM_ADDED);
 					
-					evt.setItem(((ListView<MenuItem>)tabs.getSelectionModel().getSelectedItem().getContent()).getSelectionModel().getSelectedItem());
+					evt.setItem(((NodeList<MenuItem>)tabs.getSelectionModel().getSelectedItem().getContent()).getSelectedItem());
 					evt.setTable(this.tableList.getSelectionModel().getSelectedItem());
 					evt.setOrder(this.orderList.getSelectionModel().getSelectedItem());
 					this.orderMenu.fireEvent(evt);
@@ -297,30 +297,30 @@ public class OrderView implements View {
 	}
 	
 	public void populateDrinks(ArrayList<MenuItem> items ) {
-		drinksList.getItems().clear();
+		drinksList.clear();
 		for (MenuItem menuItem : items) {
-			drinksList.getItems().add(menuItem);
+			drinksList.add(menuItem, true, false, false, null);
 		}
 	}
 	
 	public void populateAppetizers(ArrayList<MenuItem> items ) {
-		appetizersList.getItems().clear();
+		appetizersList.clear();
 		for (MenuItem menuItem : items) {
-			appetizersList.getItems().add(menuItem);
+			appetizersList.add(menuItem, true, false, false, null);
 		}
 	}
 	
 	public void populateEntrees(ArrayList<MenuItem> items ) {
-		entreesList.getItems().clear();
+		entreesList.clear();
 		for (MenuItem menuItem : items) {
-			entreesList.getItems().add(menuItem);
+			entreesList.add(menuItem, true, false, false, null);
 		}
 	}
 	
 	public void populateDesserts(ArrayList<MenuItem> items ) {
-		dessertsList.getItems().clear();
+		dessertsList.clear();
 		for (MenuItem menuItem : items) {
-			dessertsList.getItems().add(menuItem);
+			dessertsList.add(menuItem, true, false, false, null);
 		}
 	}
 	
