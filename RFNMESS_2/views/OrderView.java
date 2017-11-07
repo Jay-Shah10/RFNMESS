@@ -159,6 +159,7 @@ public class OrderView implements View {
 		topControls.setAlignment(Pos.CENTER);
 		{
 			tableList = new ComboBox<>();
+			tableList.setPromptText("Select Table");
 			topControls.getChildren().add(tableList);
 			tableList.setOnAction(
 				(event) -> {
@@ -169,6 +170,7 @@ public class OrderView implements View {
 			);
 			
 			orderList = new ComboBox<>();
+			orderList.setPromptText("Select Order");
 			topControls.getChildren().add(orderList);
 			orderList.setOnAction(
 				(event) -> {
