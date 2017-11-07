@@ -6,6 +6,7 @@
 	-button-color: #ffffff;
 	
 	-default-text: #eeeeee;
+	-dark-text: rgb(52, 52, 49);
 	
 	/* Swatch Colors - Blue*/
 	-swatch-100: #BBDEFB;
@@ -109,4 +110,31 @@
 .button:armed {
 	-fx-background-color: -button-color;
 	-fx-text-fill: -swatch-400;
+}
+
+/****************************************************************
+*                                                               *
+*    Drop-Downs                                                 *
+*                                                               *
+****************************************************************/
+
+.combo-box-base, .choice-box {
+	-fx-background-color: -field-background-color;
+	-fx-border-color: -field-border-color;
+	-fx-border-width: 0 0 2 0;
+	-fx-background-radius: 0;
+	-fx-border-radius: 0;
+	-fx-text-fill: -default-text;
+}
+
+.combo-box:focused, .choice-box:focused {
+	-fx-border-color: -swatch-400;
+}
+
+.combo-box-base .list-view .list-cell {
+	-fx-text-fill: -dark-text;
+}
+
+.combo-box-base .list-cell {
+	-fx-text-fill: -default-text;
 }
