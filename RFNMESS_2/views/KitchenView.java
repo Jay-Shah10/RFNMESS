@@ -153,7 +153,7 @@ public class KitchenView implements View {
 	}
 	
 	private static VBox createBox(String title) {
-		VBox box = new VBox();
+		VBox box = new VBox(15);
 		box.getStyleClass().add("pane");
 		
 		box.getStyleClass().add("kitchen-order");

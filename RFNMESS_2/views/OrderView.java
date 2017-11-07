@@ -93,7 +93,7 @@ public class OrderView implements View {
 	
 	@SuppressWarnings("unchecked")
 	private void initItemToOrderMenu() {
-		itemToOrderMenu = new VBox();
+		itemToOrderMenu = new VBox(15);
 		itemToOrderMenu.getStyleClass().add("pane");
 		HBox.setHgrow(itemToOrderMenu, Priority.ALWAYS);
 		
@@ -151,7 +151,7 @@ public class OrderView implements View {
 	}
 	
 	private void initOrderMenu() {
-		orderMenu = new VBox();
+		orderMenu = new VBox(15);
 		orderMenu.getStyleClass().add("pane");
 		HBox.setHgrow(orderMenu, Priority.ALWAYS);
 		
