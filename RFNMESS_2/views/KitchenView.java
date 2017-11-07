@@ -160,10 +160,11 @@ public class KitchenView implements View {
 		HBox.setHgrow(box, Priority.ALWAYS);
 		
 		Text txtTitle = new Text(title);
-		txtTitle.getStyleClass().add("header");
+		txtTitle.getStyleClass().add("pane-title");
 		box.getChildren().add(txtTitle);
 		
 		ListView<MenuItem> itemList = new ListView<MenuItem>();
+		itemList.getStyleClass().add("list-view");
 		box.getChildren().add(itemList);
 		VBox.setVgrow(itemList, Priority.ALWAYS);
 		

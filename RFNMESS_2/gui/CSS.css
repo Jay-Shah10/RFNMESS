@@ -1,6 +1,23 @@
-#hb{
-   -fx-opacity: 0.7;
+.root {
+	-field-border-color: #aaaaaa;
+	-field-background-color: transparent;
+	-field-background-text: #999999;
+	
+	-default-text: #eeeeee;
+	
+	/* Swatch Colors - Blue*/
+	-swatch-100: #BBDEFB;
+	-swatch-200: #90CAF9;
+	-swatch-300: #64BEF6;
+	-swatch-400: #42A5F5;
+	-swatch-500: #2196F3;
+	
+	-fx-font-family: Verdana;
+	-fx-font-size: 14.0px;
+	-fx-disabled-opacity: 0.6;
+	-fx-text-fill: -default-text;
 }
+
 
 .pane {
 	-fx-border-width: 3px 3px 3px 3px;
@@ -31,7 +48,7 @@
 	-fx-border-color: #2b2b2b;
 	-fx-background-radius: 0px 15px 15px 0px;
 }
-
+*/
 .table.reserved {
 	-fx-fill: rgba(255, 0, 0, 1);
 }
@@ -40,8 +57,31 @@
 	-fx-fill: rgba(242,242,242,1);
 }
 
-.header {
+.pane .pane-title {
 	-fx-text-fill: #ffffff;
 	-fx-fill: #ffffff;
 	-fx-font-size: 18.0px;
+}
+
+.text {
+
+}
+
+.text-field {
+	-fx-background-color: -field-background-color;
+	-fx-background-radius: 0.0;
+	-fx-padding: 0.5em 0.5em 0.5em 0.1em;
+	-fx-border-color: -field-border-color;
+	
+	-fx-border-width: 0 0 2 0;
+	-fx-prompt-text-fill: -field-background-text;
+	-fx-text-fill: -default-text;
+}
+
+.text-field>*>.text {
+	-fx-effect:null;
+}
+
+.text-area:focused, .text-field:focused {
+	-fx-border-color: -swatch-500;
 }

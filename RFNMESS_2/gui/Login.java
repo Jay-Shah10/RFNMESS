@@ -5,6 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import views.View;
 
@@ -51,7 +53,8 @@ public class Login implements View {
 		btnLogin = new Button("Login");
 		
 		Label title = new Label("Please Enter Username and Password");
-		title.setStyle("-fx-text-fill: #FFFFFF;"+"-fx-font-weight: bold;");
+		//title.setStyle("-fx-text-fill: #FFFFFF;"+"-fx-font-weight: bold;");
+		title.getStyleClass().add("pane-title");
 		error_label = new Label();
 		error_label.setVisible(false);
 		error_label.setTextFill(Color.RED);
@@ -60,15 +63,26 @@ public class Login implements View {
 		//holds the text field for user name, and password
 		//holds a button to login. 
 		grid = new GridPane();
+		VBox holder = new VBox(15);
+		holder.getStyleClass().add("pane");
 		grid.setVgap(5);
 		grid.setAlignment(Pos.CENTER);
-		grid.add(title, 0, 0);
-		grid.add(username, 0, 1);
 		username.setPromptText("Username");
 		password.setPromptText("Password");
-		grid.add(password, 0, 2);
-		grid.add(btnLogin, 0, 3);
-		grid.add(error_label, 0, 4);
+		grid.add(holder, 0, 0);
+		holder.getChildren().add(title);
+		holder.getChildren().add(username);
+		holder.getChildren().add(password);
+		HBox h = new HBox();
+		holder.getChildren().add(h);
+		h.getChildren().add(btnLogin);
+		h.setAlignment(Pos.BOTTOM_RIGHT);
+		holder.getChildren().add(error_label);
+		btnLogin.setAlignment(Pos.BASELINE_RIGHT);
+//		grid.add(username, 0, 1);
+//		grid.add(password, 0, 2);
+//		grid.add(btnLogin, 0, 3);
+//		grid.add(error_label, 0, 4);
 		
 		
 		//login button's options on click. 

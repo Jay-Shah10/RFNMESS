@@ -53,8 +53,8 @@ public class GUIMain extends Application {
 		applicationStage.setTitle("RFNMESS | Restaurant Franchise Network Managment Enterpise Software System");
 
 		applicationStage.getScene().getStylesheets().add("gui/CSS.css");
-		// applicationStage.getScene().getStylesheets().add("gui/material-fx-v0_3.css");
-		// applicationStage.getScene().getStylesheets().add("gui/materialfx-toggleswitch.css");
+//		applicationStage.getScene().getStylesheets().add("gui/material-fx-v0_3.css");
+		//applicationStage.getScene().getStylesheets().add("gui/materialfx-toggleswitch.css");
 
 		lg = new Login();
 		hostView = new HostView();

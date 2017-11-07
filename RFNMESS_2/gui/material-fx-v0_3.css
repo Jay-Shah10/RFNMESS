@@ -33,39 +33,42 @@
  *                                                                             *
  ******************************************************************************/
 .root {
+
 	/* Swatch Colors - Blue*/
 	-swatch-100: #BBDEFB;
 	-swatch-200: #90CAF9;
 	-swatch-300: #64BEF6;
 	-swatch-400: #42A5F5;
 	-swatch-500: #2196F3;
-	/*default text */
-	-fx-text-base-color: rgb(100.0, 100.0, 100.0);
-	-fx-text-button-normal: -swatch-500;
-	-fx-text-button-colored: rgb(255.0, 255.0, 255.0);
-	-fx-text-button-text: rgb(100.0, 100.0, 100.0);
-	-fx-text-title-color: rgb(45.0, 45.0, 45.0);
-	-fx-text-subtitle-color: rgb(65.0, 65.0, 65.0);
-	-fx-text-control-title-color: rgb(130.0, 130.0, 130.0);
-	-fx-text-fill: -fx-text-base-color;
-	-dark: rgb(47.0, 52.0, 57.0);
-	/*default font */
-	-fx-font-family: 'Roboto Medium';
-	-fx-font-size: 14.0px;
-	-fx-disabled-opacity: 0.6;
+	
+	
+	
 	/*default colors */
 	-swatch-grey: rgb(200.0, 200.0, 200.0);
 	-swatch-dark-grey: rgb(150.0, 150.0, 150.0);
 	-swatch-light-grey: rgb(230.0, 230.0, 230.0);
 	-swatch-toolbar: rgb(245.0, 245.0, 245.0);
 	-swatch-toolbar-selected: rgb(215.0, 215.0, 215.0);
+	-dark: rgb(52, 52, 49);
+	-dark-transparent: rgba(52, 52, 49, 0.83);
+	
+	/*default text */
+	-fx-text-base-color: rgb(255,255,255,0.8);
+	-fx-text-button-normal: -swatch-500;
+	-fx-text-button-colored: rgb(255.0, 255.0, 255.0);
+	-fx-text-button-text: rgb(100.0, 100.0, 100.0);
+	-fx-text-title-color: rgb(255,255,255);
+	-fx-text-subtitle-color: rgb(65.0, 65.0, 65.0);
+	-fx-text-control-title-color: rgb(130.0, 130.0, 130.0);
+	-fx-text-fill: -fx-text-base-color;
+
 	/* 
      Modena colors
      */
 	-fx-dark-text-color: white; /* Text color when selected*/
 	-fx-mid-text-color: -fx-text-base-color;
 	-fx-light-text-color: -swatch-light-grey;
-	-fx-body-color: white;
+	-fx-body-color: -swatch-light-grey;
 	/* A bright blue for the focus indicator of objects. Typically used as the
      * first color in -fx-background-color for the "focused" pseudo-class. Also
      * typically used with insets of -1.4 to provide a glowing effect.
@@ -75,7 +78,11 @@
 	/* A bright blue for highlighting/accenting objects.  For example: selected
      * text; selected items in menus, lists, trees, and tables; progress bars */
 	-fx-accent: -swatch-400;
-	-fx-dark-text-color: white;
+	
+	/*default font */
+	-fx-font-family: Verdana;
+	-fx-font-size: 14.0px;
+	-fx-disabled-opacity: 0.6;
 }
 
 /*******************************************************************************
@@ -84,7 +91,7 @@
  *                                                                             *
  ******************************************************************************/
 .pane {
-	-fx-background-color: -dark;
+	-fx-background-color: -dark-transparent;
 	-fx-background-radius: 4.0;
 	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,
 		1.5);
@@ -438,6 +445,12 @@
  * List, Tree, Table COMMON                                                    *
  *                                                                             *
  ******************************************************************************/
+.list-view {
+	-fx-background-color:-dark;
+	-fx-border-color: -swatch-500;
+	-fx-border-width: 2px 2px 2px 2px;
+}
+
 .list-view:focused .list-cell:filled:focused:selected {
 	-fx-background-color: -swatch-light-grey;
 	-fx-text-fill: -swatch-500;
@@ -446,10 +459,6 @@
 .list-view:hover .list-cell:hover {
 	-fx-background-color: -swatch-light-grey;
 	-fx-text-fill: -fx-text-base-color;
-}
-
-.list-cell {
-	-fx-cell-size: 40;
 }
 
 /*******************************************************************************
