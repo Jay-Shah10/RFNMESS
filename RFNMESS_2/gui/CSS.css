@@ -39,3 +39,9 @@
 .table {
 	-fx-fill: rgba(242,242,242,1);
 }
+
+.header {
+	-fx-text-fill: #ffffff;
+	-fx-fill: #ffffff;
+	-fx-font-size: 18.0px;
+}
