@@ -17,7 +17,8 @@
 	-swatch-500: #2196F3;
 	
 	-fx-font-family: Verdana;
-	-fx-font-size: 14.0px;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
 	-fx-disabled-opacity: 0.6;
 	-fx-text-fill: -default-text;
 }
@@ -108,10 +109,6 @@
 	-fx-background-radius: 0.0;
 }
 
-.button:hover {
-	-fx-background-color: -swatch-500;
-}
-
 .button:armed {
 	-fx-background-color: -button-color;
 	-fx-text-fill: -swatch-400;
@@ -182,4 +179,16 @@
 .list-view .list-cell:selected {
 	-fx-background-color: -swatch-400;
 	-fx-text-fill: -dark-text;
+}
+
+/****************************************************************
+*                                                               *
+*    Node-List                                                  *
+*                                                               *
+****************************************************************/
+
+
+.node-list-main .text {
+	-fx-padding: 1.4em, 0.7em 1.4em, 0.7em;
+	-fx-font-size: 18px;
 }

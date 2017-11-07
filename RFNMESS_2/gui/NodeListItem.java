@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -19,10 +20,11 @@ import javafx.scene.text.Text;
  * @author nryle
  *
  */
-public class NodeListItem<T> extends Group {
+public class NodeListItem<T> extends VBox {
 
 	private T 				model;
-	private HBox 			main;
+	private HBox 			main,
+							textHolder;
 	private Node			expand;
 	private Button 			addButton,
 							removeButton,
@@ -36,6 +38,7 @@ public class NodeListItem<T> extends Group {
 							isExpandable;
 	
 	public NodeListItem(T model, boolean add, boolean remove, boolean edit, boolean expandable) {
+		this.getStyleClass().add("node-list-item");
 		this.model = model;
 		this.showAdd = add;
 		this.showRemove = remove;
@@ -47,7 +50,11 @@ public class NodeListItem<T> extends Group {
 		this.editButton = new Button("E");
 		
 		this.txtMain = new Text(model.toString());
-		HBox.setHgrow(txtMain, Priority.ALWAYS);
+		
+		textHolder = new HBox();
+		textHolder.getChildren().add(txtMain);
+		textHolder.getStyleClass().add("node-list-main");
+		HBox.setHgrow(textHolder, Priority.ALWAYS);
 		
 		updateLayout();
 	}
@@ -83,8 +90,9 @@ public class NodeListItem<T> extends Group {
 	private void updateLayout() {
 		this.getChildren().clear();
 		main = new HBox();
-		main.setAlignment(Pos.BASELINE_RIGHT);
-		main.getChildren().add(txtMain);
+		main.setAlignment(Pos.CENTER_LEFT);
+		main.getChildren().add(textHolder);
+		
 		
 		if(this.showEdit) {
 			main.getChildren().add(editButton);

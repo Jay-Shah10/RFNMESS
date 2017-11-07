@@ -4,13 +4,15 @@ import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 public class NodeList<T> extends VBox {
 	private NodeListItem<T> selected = null;
 	
 	public NodeList() {
-		
+		this.getStyleClass().add("node-list");
 	}
 	
 	public void clear() {
