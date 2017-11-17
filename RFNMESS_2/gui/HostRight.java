@@ -4,68 +4,157 @@ import javafx.scene.control.Button;
 
 import java.util.*;
 
+import dataCollection.HostRightData;
+import events.HostEvent;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import models.Table;
 
 public class HostRight extends VBox {
 	
-	private ArrayList tables = new ArrayList();
+	
+	private HBox hb;
+	private static Button order;
+	private Button reserve;
+	private Button delete;
+	private ComboBox<Table> cb, finishedTable;
+	private Label party_name, table_reservation_label, up_next;
+	private TextField tf;
+	private ListView<Table> lv;
+	private NewCenter centerReference;
 
+	
 	public HostRight() {
 
 		// adds CSS to the Pane and properties to the pane.
 		setStyle("-fx-background-color: rgba(52, 52, 49, 0.83)");
 		this.setSpacing(10);
-		this.setPadding(new Insets(5, 5, 5, 5));
+		this.setPadding(new Insets(10, 10, 10, 10));
 		this.setMaxWidth(300);
-
-		// adds all the items to the Pane.
-		TextField tf = new TextField();
 		Region r = new Region();
-		
-		ComboBox<Integer> cb = new ComboBox();
-		TextArea ta = new TextArea();
-		
-		Button reserve = new Button("Reserve");
-	
-		Button to_go = new Button("To-Go!");
-		Button in_house = new Button("In-House");
-		
-		Label party_name = new Label("Enter Party Name:");
-		party_name.setStyle("-fx-text-fill: #fff");
-		
-		Label table_reservation_label = new Label("Pick a table form below: ");
-		table_reservation_label.setStyle("-fx-text-fill: #fff");
-		
-		Label up_next = new Label("Next Table:");
-		up_next.setStyle("-fx-text-fill: #fff");
-		
-		Button finished = new Button("Delete");
-		ComboBox finished_table = new ComboBox();
+		Region hr = new Region();
 
-		// adds items to the combo box.
-		for (int i = 0; i < 13; i++) {
-			cb.getItems().add(i);
-		}
-		// addes property to the region.
-		this.setVgrow(r, Priority.ALWAYS);
+		// From top to bottom:
+		// party name label
+		// text field
+		// combo box
+		// reserve button
+		// text area
+		// combo box
+		// delete button
+		// to go button
+		// and in house button
+
+		party_name = new Label("Enter Party Name:");
+		party_name.setStyle("-fx-text-fill: #fff");
+		tf = new TextField();
+
+		table_reservation_label = new Label("Pick a table form below: ");
+		table_reservation_label.setStyle("-fx-text-fill: #fff");
+
+		cb = new ComboBox<Table>();
+
+		reserve = new Button("Reserve");
+		reserve.setOnAction(
+			(event) -> {
+				HostEvent h = new HostEvent(getComboBox(), event.getTarget(), HostEvent.RESERVE_CLICKED);
+				h.setPartyName(tf.getText());
+				this.fireEvent(h);
+			}
+		);
 		
-		for (int j=0; j<13; j++){
-			finished_table.getItems().add(j);
-		}
-		/*
-		 * First the cb box allows them to click which table they want to reserve. 
-		 * reserve button allows the user to store that and pops up in the text area. 
-		 * finished button allows user to delete any table in there. 
-		 * 
-		 * these table numbers need to stored in one place. 
-		 */
+		up_next = new Label("Next Table:");
+		up_next.setStyle("-fx-text-fill: #fff");
+
+		lv = new ListView<>();
+
+		finishedTable = new ComboBox<Table>();
+		
+		
+		delete = new Button("Delete");
+		delete.setOnAction(
+			(event) -> {
+				HostEvent h = new HostEvent(lv.getSelectionModel().getSelectedItem(), event.getTarget(), HostEvent.DELETE_CLICKED);
+				this.fireEvent(h);
+			}
+		);
+		// adds property to the region.
+		VBox.setVgrow(r, Priority.ALWAYS);
+		
+		order = new Button("Order");
+		
+
+		hb = new HBox();
+		HBox.setHgrow(hr, Priority.ALWAYS);
+		hb.setAlignment(Pos.CENTER);
+		hb.getChildren().addAll(order);
 
 		// adds all items to the vbox to display.
-		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, ta,finished_table, finished, r, to_go, in_house);
+		getChildren().addAll(party_name, tf, table_reservation_label, cb, reserve, up_next, lv, delete, r);
 
 	}
+	
+	public void populateTables(ArrayList<Table> tables) {
+		cb.getItems().clear();
+		finishedTable.getItems().clear();
+		for (Table table : tables) {
+			cb.getItems().add(table);
+			finishedTable.getItems().add(table);
+		}
+	}
+
+	public String getPartyText() {
+		return this.tf.getText();
+	}
+
+	public Table getComboBox() {
+		return this.cb.getValue();
+	}
+
+	public String getCancelComboBox() {
+		return this.finishedTable.getValue().toString();
+	}
+
+	public Button getReserve() {
+		return this.reserve;
+	}
+
+	public Button getDelete() {
+		return this.delete;
+	}
+
+	public Button getOrder() {
+		return this.order;
+	}
+
+	
+	public void setCenterReference(NewCenter nc) {
+		this.centerReference = nc;
+	}
+
+	@SuppressWarnings("unchecked")
+	public void addToTextArea(Table t) {
+		this.lv.getItems().add(t);
+	}
+	
+	public void removeFromTextArea(Table t) {
+		lv.getItems().remove(t);
+	}
+
+	public HostRightData getText() {
+		return new HostRightData(this.tf.getText());
+	}
+
+	/**
+	 * @param eh
+	 */
+	
+
 }

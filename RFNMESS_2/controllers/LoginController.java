@@ -31,7 +31,7 @@ public class LoginController implements Controller {
 		return currentUser;
 	}
 	
-	public void Logout() {
+	public void logout() {
 		currentUser = null;
 	}
 	

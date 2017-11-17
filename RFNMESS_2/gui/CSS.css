@@ -1,3 +1,181 @@
-#hb{
-   -fx-opacity: 0.7;
+.root {
+	-field-border-color: #aaaaaa;
+	-field-background-color: transparent;
+	-field-background-text: #999999;
+	
+	-button-color: #ffffff;
+	
+	-default-text: #eeeeee;
+	-light-text: #cccccc;
+	-dark-text: rgb(52, 52, 49);
+	
+	/* Swatch Colors - Blue*/
+	-swatch-100: #BBDEFB;
+	-swatch-200: #90CAF9;
+	-swatch-300: #64BEF6;
+	-swatch-400: #42A5F5;
+	-swatch-500: #2196F3;
+	
+	-fx-font-family: Verdana;
+	-fx-font-size: 14.0px;
+	-fx-disabled-opacity: 0.6;
+	-fx-text-fill: -default-text;
+}
+
+
+.pane {
+	-fx-border-width: 3px 3px 3px 3px;
+	-fx-border-color: #2b2b2b;
+	-fx-border-style: solid;
+	-fx-padding: 25px 25px 25px 25px;
+	-fx-background-color: rgba(52, 52, 49, 0.83);
+}
+
+/*.searchBox > .tBox {
+	-fx-background-color: #fff;
+	-fx-backgorund-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+	-fx-border-radius: 13px 0px 0px 13px;
+	-fx-border-width: 1px;
+	-fx-border-color: #2b2b2b;
+	-fx-background-radius: 15px 0px 0px 15px;
+}
+
+.searchBox > .btn.selected {
+	-fx-background-color: #f00;
+}
+
+.searchBox > .btn {
+	-fx-background-color: #fff;
+	-fx-backgorund-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+	-fx-border-radius: 0px 13px 13px 0px;
+	-fx-border-width: 1px;
+	-fx-border-color: #2b2b2b;
+	-fx-background-radius: 0px 15px 15px 0px;
+}*/
+
+.table.reserved {
+	-fx-fill: rgba(255, 0, 0, 1);
+}
+
+.table {
+	-fx-fill: rgba(242,242,242,1);
+}
+
+.pane .pane-title {
+	-fx-text-fill: #ffffff;
+	-fx-fill: #ffffff;
+	-fx-font-size: 18.0px;
+}
+
+/****************************************************************
+*                                                               *
+*    Text Fields                                                *
+*                                                               *
+****************************************************************/
+
+.text-field {
+	-fx-background-color: -field-background-color;
+	-fx-background-radius: 0.0;
+	-fx-padding: 0.5em 0.5em 0.5em 0.1em;
+	-fx-border-color: -field-border-color;
+	
+	-fx-border-width: 0 0 2 0;
+	-fx-prompt-text-fill: -field-background-text;
+	-fx-text-fill: -default-text;
+}
+
+.text-field>*>.text {
+	-fx-effect:null;
+}
+
+.text-field:focused {
+	-fx-border-color: -swatch-400;
+}
+
+/****************************************************************
+*                                                               *
+*    Buttons                                                    *
+*                                                               *
+****************************************************************/
+
+.button {
+	-fx-background-color: -swatch-400;
+	-fx-text-fill: -button-color;
+	-fx-font-weight: bold;
+	-fx-padding: 0.3em 0.8em 0.3em 0.8em;
+	
+	-fx-background-insets: 0.0;
+	-fx-background-radius: 0.0;
+}
+
+.button:armed {
+	-fx-background-color: -button-color;
+	-fx-text-fill: -swatch-400;
+}
+
+/****************************************************************
+*                                                               *
+*    Drop-Downs                                                 *
+*                                                               *
+****************************************************************/
+
+.combo-box-base, .choice-box {
+	-fx-background-color: -field-background-color;
+	-fx-border-color: -field-border-color;
+	-fx-border-width: 1 1 2 1;
+	-fx-background-radius: 0;
+	-fx-border-radius: 0;
+	-fx-text-fill: -default-text;
+}
+
+.combo-box:focused, .choice-box:focused {
+	-fx-border-color: -swatch-400;
+}
+
+.combo-box-base .list-view .list-cell, 
+.combo-box-base .list-view .list-cell:odd {
+	-fx-text-fill: -dark-text;
+	-fx-background-color: rgba(255,255,255,0.83);
+}
+
+.combo-box-base .list-view .list-cell:hover,
+.combo-box-base .list-view .list-cell:odd:hover  {
+	-fx-background-color: -swatch-400;
+}
+
+.combo-box-base .list-cell {
+	-fx-text-fill: -default-text;
+}
+
+.combo-box-base .list-view {
+	-fx-border-width:0 0 0 0;
+}
+
+/****************************************************************
+*                                                               *
+*    List-View                                                  *
+*                                                               *
+****************************************************************/
+
+.list-view {
+	-fx-background-color: -field-background-color;
+	-fx-border-width: 1 1 1 1;
+	-fx-border-color: -field-border-color;
+}
+
+.list-view .list-cell {
+	-fx-background-color: transparent;
+	-fx-text-fill: -light-text;
+}
+
+.list-view .list-cell:odd {
+	-fx-background-color: #2b2b2b;
+}
+
+.list-view .list-cell:hover,
+.list-view .list-cell:odd:hover,
+.list-view .list-cell:focused,
+.list-view .list-cell:selected {
+	-fx-background-color: -swatch-400;
+	-fx-text-fill: -dark-text;
 }

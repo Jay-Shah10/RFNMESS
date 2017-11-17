@@ -3,6 +3,8 @@
 import javafx.application.*;
 import javafx.collections.*;
 import javafx.css.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -27,8 +29,12 @@ public class DisplayPage extends BorderPane {
 	 * 
 	 */
 	
+	private TopMenubar tmb;
+	
 	public void setView(View v) {
 		this.setLeft(v.getLeft());
+		if(v.getLeft() != null)	
+			setMargin(v.getLeft(), new Insets(20,20,20,20));
 		
 		this.setRight(v.getRight());
 		if(v.getRight() != null)	
@@ -54,7 +60,7 @@ public class DisplayPage extends BorderPane {
 		
 		
 		//sets the top of the border pane to be menu
-		TopMenubar tmb = new TopMenubar();
+		tmb = new TopMenubar();
 		tmb.setUserName("Name");
 		this.setTop(tmb);		
 	}
@@ -69,5 +75,24 @@ public class DisplayPage extends BorderPane {
 		mb.getItems().add(logout);
 		
 	}
+	
+	public void setOnLogout(EventHandler<ActionEvent> eh) {
+		tmb.setOnLogout(eh);
+	}
 
+	/**
+	 * @param object
+	 */
+	public void hostClick(EventHandler<ActionEvent> eh) {
+		tmb.hostViewClick(eh);
+	}
+	public void serverClick(EventHandler<ActionEvent> eh) {
+		tmb.serverViewClick(eh);
+	}
+	public void kitchenClick(EventHandler<ActionEvent> eh) {
+		tmb.kitchenViewClick(eh);
+	}
+	public void managerClick(EventHandler<ActionEvent> eh) {
+		tmb.managerViewClick(eh);
+	}
 }
