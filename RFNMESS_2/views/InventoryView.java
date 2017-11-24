@@ -3,7 +3,19 @@
  */
 package views;
 
+import events.OrderEvent;
+import gui.SearchBox;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import models.MenuItem;
+import models.Restaurant;
 
 /**
  * @author Zaheer Tajani
@@ -11,7 +23,13 @@ import javafx.scene.Node;
  */
 public class InventoryView implements View {
 	
-	private VBox 
+	private VBox itemToOrderInventoryMenu;
+	
+	private HBox center;
+	
+	private ListView<InventoryPage>  employeeList,
+									 menuList,
+									 ingredientList;
 
 	/* (non-Javadoc)
 	 * @see views.View#getCenter()
@@ -50,7 +68,64 @@ public class InventoryView implements View {
 	}
 	
 	public InventoryView() {
+		initItemToInventoryMenu();
 		
+		center = new HBox();
+		center.setSpacing(20);
+		
+		setCenterToInventory();
+	}
+	
+	private void setCenterToInventory() {
+		center.getChildren().clear();
+		center.getChildren().add(itemToOrderInventoryMenu);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void initItemToInventoryMenu() {
+		itemToOrderInventoryMenu = new VBox(15);
+		itemToOrderInventoryMenu.getStyleClass().add("pane");
+		HBox.setHgrow(itemToOrderInventoryMenu, Priority.ALWAYS);
+		
+		SearchBox searchBox = new SearchBox();
+		itemToOrderInventoryMenu.getChildren().add(searchBox);
+		
+		TabPane tabs = new TabPane();
+		tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+		
+		Tab		tabEmployee = new Tab("Employee"),
+				tabMenu = new Tab("Menu"),
+				tabIngredient = new Tab("Ingredient");
+		
+		tabs.getTabs().add(tabEmployee);
+		tabs.getTabs().add(tabMenu);
+		tabs.getTabs().add(tabIngredient);
+		
+		employeeList = new ListView<>();
+		menuList = new ListView<>();
+		ingredientList = new ListView<>();
+		
+		populateEmployee(Restaurant.getRestaurant().getEmployee());
+		populateMenu(Restaurant.getRestaurant().getMenu());
+		populateIngredient(Restaurant.getRestaurant().getIngredient());
+		
+		tabEmployee.setContent(employeeList);
+		tabMenu.setContent(menuList);
+		tabIngredient.setContent(ingredientList);
+		
+		itemToOrderInventoryMenu.getChildren().add(tabs);
+		
+		HBox button = new HBox();
+		button.setAlignment(Pos.CENTER);
+		{
+			Button btnAdd = new Button("Add Inventory Item");
+			button.getChildren().add(btnAdd);
+		}
+		
+		itemToOrderInventoryMenu.getChildren().add(button);
+		
+		VBox.setVgrow(tabs, Priority.ALWAYS);
+				
 	}
 
 }
