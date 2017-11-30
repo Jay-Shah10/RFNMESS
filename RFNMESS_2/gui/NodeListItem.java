@@ -20,9 +20,10 @@ import javafx.scene.text.Text;
  * @author nryle
  *
  */
-public class NodeListItem<T> extends VBox {
+public class NodeListItem<T> extends HBox {
 
 	private T 				model;
+	private VBox			mainVertical;
 	private HBox 			main,
 							textHolder;
 	private Node			expand;
@@ -46,15 +47,26 @@ public class NodeListItem<T> extends VBox {
 		this.isExpandable = expandable;
 		
 		this.addButton = new Button("+");
+		VBox.setVgrow(addButton, Priority.ALWAYS);
+		this.addButton.getStyleClass().add("node-list-btn");
 		this.removeButton = new Button("-");
+		VBox.setVgrow(removeButton, Priority.ALWAYS);
+		this.removeButton.getStyleClass().add("node-list-btn");
 		this.editButton = new Button("E");
+		VBox.setVgrow(editButton, Priority.ALWAYS);
+		this.editButton.getStyleClass().add("node-list-btn");
 		
 		this.txtMain = new Text(model.toString());
+		this.txtMain.getStyleClass().add("node-list-txt");
 		
 		textHolder = new HBox();
 		textHolder.getChildren().add(txtMain);
 		textHolder.getStyleClass().add("node-list-main");
 		HBox.setHgrow(textHolder, Priority.ALWAYS);
+		
+		mainVertical = new VBox();
+		this.getChildren().add(mainVertical);
+		HBox.setHgrow(mainVertical, Priority.ALWAYS);
 		
 		updateLayout();
 	}
@@ -88,7 +100,6 @@ public class NodeListItem<T> extends VBox {
 	}
 	
 	private void updateLayout() {
-		this.getChildren().clear();
 		main = new HBox();
 		main.setAlignment(Pos.CENTER_LEFT);
 		main.getChildren().add(textHolder);
@@ -106,7 +117,9 @@ public class NodeListItem<T> extends VBox {
 			main.getChildren().add(addButton);
 		}
 		
-		this.getChildren().add(main);
+		mainVertical.getChildren().clear();
+		mainVertical.getChildren().add(main);
+		//this.getChildren().add(main);
 		
 		if(this.isExpandable) {
 			this.getChildren().add(expand);
@@ -120,5 +133,23 @@ public class NodeListItem<T> extends VBox {
 	private EventHandler<MouseEvent> expandHandler = (event) -> {
 		expand.setVisible(!expand.isVisible());
 	};
+	
+	public void setOnAdd(EventHandler<ActionEvent> hndlr) {
+		if(this.addButton != null) {
+			this.addButton.setOnAction(hndlr);
+		}
+	}
+	
+	public void setOnDelete(EventHandler<ActionEvent> hndlr) {
+		if(this.addButton != null) {
+			this.addButton.setOnAction(hndlr);
+		}
+	}
+	
+	public void setOnEdit(EventHandler<ActionEvent> hndlr) {
+		if(this.addButton != null) {
+			this.addButton.setOnAction(hndlr);
+		}
+	}
 
 }
