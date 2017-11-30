@@ -29,6 +29,7 @@ public class GUIMain extends Application {
 	private HostView hostView;
 	private OrderView orderView;
 	private KitchenView kitchenView;
+	private InventoryView inventoryView;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -60,6 +61,7 @@ public class GUIMain extends Application {
 		hostView = new HostView();
 		orderView = new OrderView();
 		kitchenView = new KitchenView();
+		inventoryView = new InventoryView();
 
 		setView(StageView.Login);
 		applicationStage.show();
@@ -125,11 +127,9 @@ public class GUIMain extends Application {
 		});
 
 		// changes to manger view.
-		// masterPane.managerClick(
-		// (event)->{
-		//
-		// setView(StageView.Manager);
-		// });
+		masterPane.managerClick((event)->{
+			 setView(StageView.Inventory);
+		});
 
 		orderView.setOnNewOrder(
 			(event) -> {
@@ -194,6 +194,9 @@ public class GUIMain extends Application {
 				break;
 			case Kitchen:
 				masterPane.setView(kitchenView);
+				break;
+			case Inventory:
+				masterPane.setView(inventoryView);
 				break;
 			default:
 				break;

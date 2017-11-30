@@ -15,7 +15,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import models.MenuItem;
-import models.Restaurant;
+import models.Ingredient;
+import models.Employee;
+import models.MenuItem;
 
 /**
  * @author Zaheer Tajani
@@ -27,9 +29,9 @@ public class InventoryView implements View {
 	
 	private HBox center;
 	
-	private ListView<InventoryPage>  employeeList,
-									 menuList,
-									 ingredientList;
+	private ListView<Employee>  employeeList;
+	private ListView<MenuItem>		menuList;
+	private ListView<Ingredient> ingredientList;
 
 	/* (non-Javadoc)
 	 * @see views.View#getCenter()
@@ -104,10 +106,6 @@ public class InventoryView implements View {
 		employeeList = new ListView<>();
 		menuList = new ListView<>();
 		ingredientList = new ListView<>();
-		
-		populateEmployee(Restaurant.getRestaurant().getEmployee());
-		populateMenu(Restaurant.getRestaurant().getMenu());
-		populateIngredient(Restaurant.getRestaurant().getIngredient());
 		
 		tabEmployee.setContent(employeeList);
 		tabMenu.setContent(menuList);

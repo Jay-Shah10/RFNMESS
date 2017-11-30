@@ -1,7 +1,3 @@
 *.class
-/.classpath
-/.gitignore
-/.project
-/.settings/
-/RFNMESS_presentation_pic.png
 /views/
+/gui/
