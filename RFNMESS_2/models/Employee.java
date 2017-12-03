@@ -20,7 +20,22 @@ public interface Employee {
 		// TODO: Fetch Proper user
 		Employee emp = new EmployeeUser();
 		emp.setUsername("TestUser");
-		emp.setAccessLevel(AccessLevel.MasterAdmin);	
+		
+		switch(username.toLowerCase()) {
+			case "kitchen":
+				emp.setAccessLevel(AccessLevel.Kitchen);
+				break;
+			case "order":
+			case "server":
+				emp.setAccessLevel(AccessLevel.Server);
+				break;
+			case "host":
+				emp.setAccessLevel(AccessLevel.Host);
+				break;
+			default: 
+				emp.setAccessLevel(AccessLevel.MasterAdmin);
+				break;
+		}
 		
 		return emp;
 	}

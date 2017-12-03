@@ -1,9 +1,15 @@
 package views;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import dataCollection.HostRightData;
+import events.HostEvent;
+import gui.DisplayPage;
 import gui.HostCenterGrid;
 import gui.HostRight;
+import gui.NewCenter;
+import gui.TableImageButton;
 import javafx.application.*;
 import javafx.collections.*;
 import javafx.css.*;
@@ -20,39 +26,87 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import models.GuestParty;
+import models.Party;
+import models.Restaurant;
+import models.Table;
 import javafx.scene.layout.*;
 
 public class HostView implements views.View {
+
+	private Node left, right, bottom;
+	private String selectTable;
+	private ArrayList<Table> tables;
 	
-	private Node left,right,center,bottom;
+	public HostCenterGrid gp;
+	public HostRight vb;
+	public NewCenter center;
+	public DisplayPage displayPage;
+	public OrderView orderView;
 	
-	public HostView(){
+
+	public HostView() {
+		tables = Restaurant.getRestaurant().getTables();
 		
-	
-		HostCenterGrid gp = new HostCenterGrid();
-		this.center = gp;
 		
+		center = new NewCenter();
+		center.populateTables(tables);
+
 		/*
 		 * this is for the right side of the border pane
 		 */
-		
-		HostRight vb = new HostRight();
+
+		vb = new HostRight(); 
 		this.right = vb;
+		vb.setCenterReference(center);
+		vb.populateTables(tables);
+		
+		
+		
+		vb.addEventHandler(HostEvent.RESERVE_CLICKED,
+			(event) -> {
+				center.getButtonForTable(event.getTable()).setReserved();
+				vb.addToTextArea(event.getTable());
+				
+				//TODO: Move to controller
+				event.getTable().setAssignedParty(new GuestParty(event.getPartyName()));
+				
+				
+				vb.populateTables(tables);
+			}
+		);
+		
+		vb.addEventHandler(HostEvent.DELETE_CLICKED, 
+				(event) -> {
+					center.getButtonForTable(event.getTable()).removeReserved();
+					vb.removeFromTextArea(event.getTable());
+					
+					//TODO: Move to controller
+					event.getTable().setAssignedParty(null);
+					
+					vb.populateTables(tables);
+				}
+		);
 		
 		
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see views.View#getLeft()
 	 */
 	public Node getLeft() {
 		// TODO Auto-generated method stub
-		
+
 		return this.left;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see views.View#getRight()
 	 */
 	public Node getRight() {
@@ -60,7 +114,9 @@ public class HostView implements views.View {
 		return this.right;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see views.View#getCenter()
 	 */
 	public Node getCenter() {
@@ -68,7 +124,9 @@ public class HostView implements views.View {
 		return this.center;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see views.View#getBottom()
 	 */
 	public Node getBottom() {
@@ -76,8 +134,19 @@ public class HostView implements views.View {
 		return this.bottom;
 	}
 
-	@Override
-	public <T extends Event> void addEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler) {
-		this.center.addEventHandler(eventType, eventHandler);
+	public void setOnReserve() {
+		/*
+		 * This method will set the table image to reserve. 
+		 */
+		
 	}
+
+	public void refreshRight() {
+		/*
+		 * display the new updated info to the right side of the gridPane. this new
+		 * updated info is from the table(number) clicked, party name, and may time.
+		 */
+
+	}
+
 }

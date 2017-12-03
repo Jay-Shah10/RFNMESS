@@ -1,3 +1,5 @@
+package models.serialization;
+
 /*Class to read and write serialized Objects to flat file.
  * Can create a ModelFileStream object in whichever class
  * you want to send or receive data from. For example:

@@ -106,4 +106,11 @@ public class Table {
 	public int hashCode() {
 		return uid;
 	}
+	
+	@Override
+	public String toString() {
+		if(this.currentParty==null)
+			return this.name;
+		return this.name + ": " + this.currentParty.getName();
+	}
 }

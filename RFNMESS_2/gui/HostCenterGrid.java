@@ -6,33 +6,38 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.*;
 
 public class HostCenterGrid extends GridPane {
+	private MenuItem reserved;
+	private MenuItem busy; 
+	private MenuItem available;
+	private MenuItem un_reserve;
+	private MenuButton mb1, mb2, mb3, mb4, mb5, mb6, mb7, mb8, mb9, mb10, mb11, mb12;
 
 	public HostCenterGrid() {
 		this.setPadding(new Insets(15, 5, 5, 5));
 
-		MenuButton mb1 = new MenuButton("1");
+		mb1 = new MenuButton("1");
 		this.addMenuItem(mb1);
-		MenuButton mb2 = new MenuButton("2");
+		mb2 = new MenuButton("2");
 		this.addMenuItem(mb2);
-		MenuButton mb3 = new MenuButton("3");
+		mb3 = new MenuButton("3");
 		this.addMenuItem(mb3);
-		MenuButton mb4 = new MenuButton("4");
+		mb4 = new MenuButton("4");
 		this.addMenuItem(mb4);
-		MenuButton mb5 = new MenuButton("5");
+		mb5 = new MenuButton("5");
 		this.addMenuItem(mb5);
-		MenuButton mb6 = new MenuButton("6");
+		mb6 = new MenuButton("6");
 		this.addMenuItem(mb6);
-		MenuButton mb7 = new MenuButton("7");
+		mb7 = new MenuButton("7");
 		this.addMenuItem(mb7);
-		MenuButton mb8 = new MenuButton("8");
+		mb8 = new MenuButton("8");
 		this.addMenuItem(mb8);
-		MenuButton mb9 = new MenuButton("9");
+		mb9 = new MenuButton("9");
 		this.addMenuItem(mb9);
-		MenuButton mb10 = new MenuButton("10");
+		mb10 = new MenuButton("10");
 		this.addMenuItem(mb10);
-		MenuButton mb11 = new MenuButton("11");
+		mb11 = new MenuButton("11");
 		this.addMenuItem(mb11);
-		MenuButton mb12 = new MenuButton("12");
+		mb12 = new MenuButton("12");
 		this.addMenuItem(mb12);
 
 		Region r_1 = new Region();
@@ -113,12 +118,16 @@ public class HostCenterGrid extends GridPane {
 	}
 
 	public void addMenuItem(MenuButton mb) {
-		MenuItem reserved = new MenuItem("Reserve");
-		MenuItem busy = new MenuItem("Busy");
-		MenuItem available = new MenuItem("Available");
-		MenuItem un_reserve = new MenuItem("Cancel Reservation");
+		reserved = new MenuItem("Reserve");
+		busy = new MenuItem("Busy");
+		available = new MenuItem("Available");
+		un_reserve = new MenuItem("Cancel Reservation");
 		mb.getItems().addAll(reserved, busy, available, un_reserve);
 
+	}
+	
+	public void setTableReserved() {
+		
 	}
 
 }

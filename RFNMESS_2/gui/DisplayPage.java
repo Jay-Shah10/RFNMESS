@@ -33,6 +33,8 @@ public class DisplayPage extends BorderPane {
 	
 	public void setView(View v) {
 		this.setLeft(v.getLeft());
+		if(v.getLeft() != null)	
+			setMargin(v.getLeft(), new Insets(20,20,20,20));
 		
 		this.setRight(v.getRight());
 		if(v.getRight() != null)	
@@ -76,5 +78,21 @@ public class DisplayPage extends BorderPane {
 	
 	public void setOnLogout(EventHandler<ActionEvent> eh) {
 		tmb.setOnLogout(eh);
+	}
+
+	/**
+	 * @param object
+	 */
+	public void hostClick(EventHandler<ActionEvent> eh) {
+		tmb.hostViewClick(eh);
+	}
+	public void serverClick(EventHandler<ActionEvent> eh) {
+		tmb.serverViewClick(eh);
+	}
+	public void kitchenClick(EventHandler<ActionEvent> eh) {
+		tmb.kitchenViewClick(eh);
+	}
+	public void managerClick(EventHandler<ActionEvent> eh) {
+		tmb.managerViewClick(eh);
 	}
 }
