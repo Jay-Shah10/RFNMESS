@@ -3,6 +3,7 @@
  */
 package gui;
 
+import events.OrderEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -49,9 +50,11 @@ public class NodeListItem<T> extends HBox {
 		this.addButton = new Button("+");
 		VBox.setVgrow(addButton, Priority.ALWAYS);
 		this.addButton.getStyleClass().add("node-list-btn");
+		
 		this.removeButton = new Button("-");
 		VBox.setVgrow(removeButton, Priority.ALWAYS);
 		this.removeButton.getStyleClass().add("node-list-btn");
+		
 		this.editButton = new Button("E");
 		VBox.setVgrow(editButton, Priority.ALWAYS);
 		this.editButton.getStyleClass().add("node-list-btn");
@@ -140,15 +143,15 @@ public class NodeListItem<T> extends HBox {
 		}
 	}
 	
-	public void setOnDelete(EventHandler<ActionEvent> hndlr) {
-		if(this.addButton != null) {
-			this.addButton.setOnAction(hndlr);
+	public void setOnRemove(EventHandler<ActionEvent> hndlr) {
+		if(this.removeButton != null) {
+			this.removeButton.setOnAction(hndlr);
 		}
 	}
 	
 	public void setOnEdit(EventHandler<ActionEvent> hndlr) {
-		if(this.addButton != null) {
-			this.addButton.setOnAction(hndlr);
+		if(this.editButton != null) {
+			this.editButton.setOnAction(hndlr);
 		}
 	}
 

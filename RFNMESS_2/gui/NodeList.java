@@ -26,17 +26,18 @@ public class NodeList<T> extends VBox {
 		}
 	}
 	
-	public void add(T model, boolean add, boolean remove, boolean edit, Node expand) {
+	public NodeListItem<T> add(T model, boolean add, boolean remove, boolean edit, Node expand) {
 		NodeListItem<T> item = new NodeListItem<T>(model, add, remove, edit, expand!=null);
 		if(expand!=null) {
 			item.setExpandableNode(expand);
 		}
 		
 		this.add(item);
+		return item;
 	}
 	
-	public void add(T model) {
-		this.add(model, false, false, false, null);
+	public NodeListItem<T> add(T model) {
+		return this.add(model, false, false, false, null);
 	}
 	
 	public NodeListItem<T> getSelectedNode() {

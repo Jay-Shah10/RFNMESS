@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import events.OrderEvent;
 import gui.NodeList;
+import gui.NodeListItem;
 import gui.SearchBox;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -29,7 +30,7 @@ public class OrderView implements View {
 	
 	private ComboBox<Order> 			orderList;
 	private ComboBox<Table> 			tableList;
-	private ListView<MenuItem> 			itemList;
+	private NodeList<MenuItem> 			itemList;
 	private NodeList<MenuItem> 			drinksList,
 										appetizersList,
 										entreesList,
@@ -129,23 +130,23 @@ public class OrderView implements View {
 		
 		itemToOrderMenu.getChildren().add(tabs);
 		
-		HBox buttons = new HBox();
-		buttons.setAlignment(Pos.CENTER);
-		{
-			Button btnAdd = new Button("Add Item");
-			buttons.getChildren().add(btnAdd);
-			btnAdd.setOnAction(
-				(event) -> {
-					OrderEvent evt = new OrderEvent(null, btnAdd, OrderEvent.ITEM_ADDED);
-					
-					evt.setItem(((NodeList<MenuItem>)tabs.getSelectionModel().getSelectedItem().getContent()).getSelectedItem());
-					evt.setTable(this.tableList.getSelectionModel().getSelectedItem());
-					evt.setOrder(this.orderList.getSelectionModel().getSelectedItem());
-					this.orderMenu.fireEvent(evt);
-				}
-			);
-		}
-		itemToOrderMenu.getChildren().add(buttons);
+//		HBox buttons = new HBox();
+//		buttons.setAlignment(Pos.CENTER);
+//		{
+//			Button btnAdd = new Button("Add Item");
+//			buttons.getChildren().add(btnAdd);
+//			btnAdd.setOnAction(
+//				(event) -> {
+//					OrderEvent evt = new OrderEvent(null, btnAdd, OrderEvent.ITEM_ADDED);
+//					
+//					evt.setItem(((NodeList<MenuItem>)tabs.getSelectionModel().getSelectedItem().getContent()).getSelectedItem());
+//					evt.setTable(this.tableList.getSelectionModel().getSelectedItem());
+//					evt.setOrder(this.orderList.getSelectionModel().getSelectedItem());
+//					this.orderMenu.fireEvent(evt);
+//				}
+//			);
+//		}
+//		itemToOrderMenu.getChildren().add(buttons);
 		
 		VBox.setVgrow(tabs, Priority.ALWAYS);
 	}
@@ -183,13 +184,13 @@ public class OrderView implements View {
 		}
 		orderMenu.getChildren().add(topControls);
 		
-		itemList = new ListView<>();
+		itemList = new NodeList<>();
 		orderMenu.getChildren().add(itemList);
 		VBox.setVgrow(itemList, Priority.ALWAYS);
 		
 		HBox bottomControls = new HBox();
 		{
-			Button btnRemoveItem = new Button("Remove");
+			/*Button btnRemoveItem = new Button("Remove");
 			bottomControls.getChildren().add(btnRemoveItem);
 			btnRemoveItem.setOnAction(
 				(event) -> {
@@ -199,7 +200,7 @@ public class OrderView implements View {
 					evt.setOrder(this.orderList.getSelectionModel().getSelectedItem());
 					this.orderMenu.fireEvent(evt);
 				}
-			);
+			);*/
 			
 			Button btnGenerateBill = new Button("Generate Bill");
 			bottomControls.getChildren().add(btnGenerateBill);
@@ -235,6 +236,7 @@ public class OrderView implements View {
 				}
 			);
 		}
+		bottomControls.setAlignment(Pos.CENTER);
 		orderMenu.getChildren().add(bottomControls);
 		
 	}
@@ -299,36 +301,71 @@ public class OrderView implements View {
 	public void populateDrinks(ArrayList<MenuItem> items ) {
 		drinksList.clear();
 		for (MenuItem menuItem : items) {
-			drinksList.add(menuItem, true, false, false, null);
+			NodeListItem<MenuItem> a = drinksList.add(menuItem, true, false, false, null);
+			a.setOnAdd((event) -> {
+				OrderEvent evt = new OrderEvent(menuItem, this.orderMenu, OrderEvent.ITEM_ADDED);
+				evt.setItem(menuItem);
+				evt.setTable(this.tableList.getSelectionModel().getSelectedItem());
+				evt.setOrder(this.orderList.getSelectionModel().getSelectedItem());
+				this.orderMenu.fireEvent(evt);
+			});
 		}
 	}
 	
 	public void populateAppetizers(ArrayList<MenuItem> items ) {
 		appetizersList.clear();
 		for (MenuItem menuItem : items) {
-			appetizersList.add(menuItem, true, false, false, null);
+			NodeListItem<MenuItem> a = appetizersList.add(menuItem, true, false, false, null);
+			a.setOnAdd((event) -> {
+				OrderEvent evt = new OrderEvent(menuItem, this.orderMenu, OrderEvent.ITEM_ADDED);
+				evt.setItem(menuItem);
+				evt.setTable(this.tableList.getSelectionModel().getSelectedItem());
+				evt.setOrder(this.orderList.getSelectionModel().getSelectedItem());
+				this.orderMenu.fireEvent(evt);
+			});
 		}
 	}
 	
 	public void populateEntrees(ArrayList<MenuItem> items ) {
 		entreesList.clear();
 		for (MenuItem menuItem : items) {
-			entreesList.add(menuItem, true, false, false, null);
+			NodeListItem<MenuItem> a = entreesList.add(menuItem, true, false, false, null);
+			a.setOnAdd((event) -> {
+				OrderEvent evt = new OrderEvent(menuItem, this.orderMenu, OrderEvent.ITEM_ADDED);
+				evt.setItem(menuItem);
+				evt.setTable(this.tableList.getSelectionModel().getSelectedItem());
+				evt.setOrder(this.orderList.getSelectionModel().getSelectedItem());
+				this.orderMenu.fireEvent(evt);
+			});
 		}
 	}
 	
 	public void populateDesserts(ArrayList<MenuItem> items ) {
 		dessertsList.clear();
 		for (MenuItem menuItem : items) {
-			dessertsList.add(menuItem, true, false, false, null);
+			NodeListItem<MenuItem> a = dessertsList.add(menuItem, true, false, false, null);
+			a.setOnAdd((event) -> {
+				OrderEvent evt = new OrderEvent(menuItem, this.orderMenu, OrderEvent.ITEM_ADDED);
+				evt.setItem(menuItem);
+				evt.setTable(this.tableList.getSelectionModel().getSelectedItem());
+				evt.setOrder(this.orderList.getSelectionModel().getSelectedItem());
+				this.orderMenu.fireEvent(evt);
+			});
 		}
 	}
 	
 	public void populateOrderItemsList(ArrayList<MenuItem> items) {
-		itemList.getItems().clear();
+		itemList.clear();
 		if(items != null) {
 			for (MenuItem menuItem : items) {
-				itemList.getItems().add(menuItem);
+				NodeListItem<MenuItem> a = itemList.add(menuItem, false, true, false, null);
+				a.setOnRemove((event) -> {
+					OrderEvent evt = new OrderEvent(menuItem, this.orderMenu, OrderEvent.ITEM_REMOVED);
+					evt.setItem(menuItem);
+					evt.setTable(this.tableList.getSelectionModel().getSelectedItem());
+					evt.setOrder(this.orderList.getSelectionModel().getSelectedItem());
+					this.orderMenu.fireEvent(evt);
+				});
 			}			
 		}
 	}

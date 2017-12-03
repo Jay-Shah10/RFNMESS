@@ -1,10 +1,15 @@
 package gui;
 
+import java.util.Optional;
+
 import controllers.*;
 import events.*;
 import javafx.application.*;
 import javafx.geometry.*;
 import javafx.scene.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.stage.*;
 import models.*;
 import views.*;
@@ -36,6 +41,31 @@ public class GUIMain extends Application {
 		applicationStage = primaryStage;
 		applicationStage.setMaximized(true);
 		applicationStage.setFullScreen(true);
+		
+		applicationStage.setOnCloseRequest(
+			(event) ->{
+				try {
+					// DO THINGS BEFORE WINDOW CLOSES
+					throw new Exception("Replace this with code");
+				}
+				catch (Exception ex) {
+					Alert a = new Alert(
+							AlertType.CONFIRMATION, 
+							"An error has occured while attempting to save any changes from the current session.\n" + 
+							"If you would like to proceed without saving, press OK, otherwise press Cancel and try closing again."
+							, ButtonType.OK, ButtonType.CANCEL);
+					a.setTitle("Error!");
+					a.setHeaderText(null);
+					Optional<ButtonType> result = a.showAndWait();
+					if(result.get() == ButtonType.OK) {
+						
+					}
+					else {
+						event.consume();
+					}
+				}
+			}
+		);
 
 		loginController = new LoginController();
 		loginController.start();
