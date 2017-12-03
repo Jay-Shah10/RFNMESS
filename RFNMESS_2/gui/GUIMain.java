@@ -57,10 +57,7 @@ public class GUIMain extends Application {
 					a.setTitle("Error!");
 					a.setHeaderText(null);
 					Optional<ButtonType> result = a.showAndWait();
-					if(result.get() == ButtonType.OK) {
-						
-					}
-					else {
+					if(result.get() == ButtonType.CANCEL) {
 						event.consume();
 					}
 				}
