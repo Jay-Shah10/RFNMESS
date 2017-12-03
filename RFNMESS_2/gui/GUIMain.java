@@ -50,7 +50,7 @@ public class GUIMain extends Application {
 				}
 				catch (Exception ex) {
 					Alert a = new Alert(
-							AlertType.CONFIRMATION, 
+							AlertType.ERROR, 
 							"An error has occured while attempting to save any changes from the current session.\n" + 
 							"If you would like to proceed without saving, press OK, otherwise press Cancel and try closing again."
 							, ButtonType.OK, ButtonType.CANCEL);
