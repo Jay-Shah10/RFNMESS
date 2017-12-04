@@ -108,10 +108,15 @@
 	-fx-border-insets: 0 0 10 0;
 }
 
-.light-text {
+.light-text,
+.pane .form-control.text,
+.pane .form-control,
+.form-control,
+.form-control .text {
 	-fx-text-fill: #ffffff;
 	-fx-fill: #ffffff;
 }
+
 
 /****************************************************************
 *                                                               *

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import events.EmployeeEvent;
+import events.IngredientEvent;
 import events.MenuItemEvent;
 import events.OrderEvent;
 import javafx.beans.value.ChangeListener;
@@ -76,6 +77,20 @@ public class ManagerView implements View {
 	private Button					menuItemSave,
 									menuItemUpdate,
 									menuItemDelete;
+
+	private ListView<Ingredient> ingredientList;
+
+	private TextField ingredientName;
+
+	private TextField ingredientPrice;
+
+	private TextField ingredientDescription;
+
+	private Button ingredientSave;
+
+	private Button ingredientUpdate;
+
+	private Button ingredientDelete;
 
 
 	
@@ -418,59 +433,39 @@ public class ManagerView implements View {
 		);
 		
 		menuItemDelete.setOnAction(
-				(event) -> {
-					MenuItem e = menuItemList.getSelectionModel().getSelectedItem();
-					if (e == null) {
-						Alert a = new Alert(AlertType.ERROR, "You have not selected a menu item.", ButtonType.CLOSE);
-						a.setHeaderText(null);
-						a.show();
-					}
-					else {
-						Alert a = new Alert(AlertType.CONFIRMATION, "Are you sure you wish to delete this menu item?", ButtonType.YES, ButtonType.NO);
-						a.setHeaderText(null);
-						Optional<ButtonType> result = a.showAndWait();
-						if (result.get() == ButtonType.YES) {
-							MenuItemEvent evt = new MenuItemEvent(e, menuItemList, MenuItemEvent.DELETE_MENUITEM);
-							menuItemList.fireEvent(evt);
-						}
+			(event) -> {
+				MenuItem e = menuItemList.getSelectionModel().getSelectedItem();
+				if (e == null) {
+					Alert a = new Alert(AlertType.ERROR, "You have not selected a menu item.", ButtonType.CLOSE);
+					a.setHeaderText(null);
+					a.show();
+				}
+				else {
+					Alert a = new Alert(AlertType.CONFIRMATION, "Are you sure you wish to delete this menu item?", ButtonType.YES, ButtonType.NO);
+					a.setHeaderText(null);
+					Optional<ButtonType> result = a.showAndWait();
+					if (result.get() == ButtonType.YES) {
+						MenuItemEvent evt = new MenuItemEvent(e, menuItemList, MenuItemEvent.DELETE_MENUITEM);
+						menuItemList.fireEvent(evt);
 					}
 				}
-			);
-			
-			menuItemUpdate.setOnAction(
-				(event) -> {
-					MenuItem e = menuItemList.getSelectionModel().getSelectedItem();
-					if (e == null) {
-						Alert a = new Alert(AlertType.ERROR, "You have not selected a menu item.", ButtonType.CLOSE);
-						a.setHeaderText(null);
-						a.show();
-					}
-					else {
-						Alert a = new Alert(AlertType.CONFIRMATION, "You are about to overwrite this menu item's information.\nDo you wish to proceed?", ButtonType.YES, ButtonType.NO);
-						a.setHeaderText(null);
-						Optional<ButtonType> result = a.showAndWait();
-						if (result.get() == ButtonType.YES) {
-							MenuItemEvent evt = new MenuItemEvent(e, menuItemList, MenuItemEvent.UPDATE_MENUITEM);
-							evt.setType(menuItemMenuType.getValue());
-							evt.setName(menuItemName.getText());
-							evt.setDescription(menuItemDescription.getText());
-							evt.setIngredientList(menuItemIngredientsList.getList());
-							evt.setPrice(Double.parseDouble(menuItemPrice.getText()));
-							menuItemList.fireEvent(evt);
-						}
-					}
+			}
+		);
+		
+		menuItemUpdate.setOnAction(
+			(event) -> {
+				MenuItem e = menuItemList.getSelectionModel().getSelectedItem();
+				if (e == null) {
+					Alert a = new Alert(AlertType.ERROR, "You have not selected a menu item.", ButtonType.CLOSE);
+					a.setHeaderText(null);
+					a.show();
 				}
-			);
-			
-			menuItemSave.setOnAction(
-				(event) -> {
-					if (menuItemName.getText() == null || menuItemName.getText().trim().isEmpty()) {
-						Alert a = new Alert(AlertType.ERROR, "Username is required.", ButtonType.CLOSE);
-						a.setHeaderText(null);
-						a.show();
-					}
-					else {
-						MenuItemEvent evt = new MenuItemEvent(null, menuItemList, MenuItemEvent.CREATE_MENUITEM);
+				else {
+					Alert a = new Alert(AlertType.CONFIRMATION, "You are about to overwrite this menu item's information.\nDo you wish to proceed?", ButtonType.YES, ButtonType.NO);
+					a.setHeaderText(null);
+					Optional<ButtonType> result = a.showAndWait();
+					if (result.get() == ButtonType.YES) {
+						MenuItemEvent evt = new MenuItemEvent(e, menuItemList, MenuItemEvent.UPDATE_MENUITEM);
 						evt.setType(menuItemMenuType.getValue());
 						evt.setName(menuItemName.getText());
 						evt.setDescription(menuItemDescription.getText());
@@ -479,12 +474,174 @@ public class ManagerView implements View {
 						menuItemList.fireEvent(evt);
 					}
 				}
-			);
+			}
+		);
+		
+		menuItemSave.setOnAction(
+			(event) -> {
+				if (menuItemName.getText() == null || menuItemName.getText().trim().isEmpty()) {
+					Alert a = new Alert(AlertType.ERROR, "Username is required.", ButtonType.CLOSE);
+					a.setHeaderText(null);
+					a.show();
+				}
+				else {
+					MenuItemEvent evt = new MenuItemEvent(null, menuItemList, MenuItemEvent.CREATE_MENUITEM);
+					evt.setType(menuItemMenuType.getValue());
+					evt.setName(menuItemName.getText());
+					evt.setDescription(menuItemDescription.getText());
+					evt.setIngredientList(menuItemIngredientsList.getList());
+					evt.setPrice(Double.parseDouble(menuItemPrice.getText()));
+					menuItemList.fireEvent(evt);
+				}
+			}
+		);
 	}
 	private void initIngredientTab() {
 		ingredientTab = new Tab("Ingredients");
 		ingredientPane = new HBox();
 		initTab(ingredientTab, ingredientPane);
+		
+		VBox left = new VBox();
+		ingredientPane.getChildren().add(left);
+		HBox.setHgrow(left, Priority.ALWAYS);
+		ingredientList = new ListView<>();
+		left.getChildren().add(ingredientList);
+		VBox.setVgrow(ingredientList, Priority.ALWAYS);
+		
+		VBox right = new VBox();
+		ingredientPane.getChildren().add(right);
+		HBox.setHgrow(right, Priority.ALWAYS);
+		
+		Text ingredientNameLabel = new Text("Ingredient Name");
+		right.getChildren().add(ingredientNameLabel);
+		ingredientName = new TextField();
+		ingredientName.getStyleClass().add("form-control");
+		right.getChildren().add(ingredientName);
+		
+		Text ingredientPriceLabel = new Text("Price");
+		right.getChildren().add(ingredientPriceLabel);
+		ingredientPrice = new TextField();
+		ingredientPrice.getStyleClass().add("form-control");
+		ingredientPrice.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*\\.?\\d?\\d?")) {
+		        	ingredientPrice.setText(oldValue);
+		        }
+		    }
+		});
+		right.getChildren().add(ingredientPrice);
+		
+		Text ingredientDescriptionLabel = new Text("Description");
+		right.getChildren().add(ingredientDescriptionLabel);
+		ingredientDescription = new TextField();
+		ingredientDescription.getStyleClass().add("form-control");
+		right.getChildren().add(ingredientDescription);
+		
+		HBox buttons = new HBox();
+		right.getChildren().add(buttons);
+		
+		ingredientSave = new Button("Create New Ingredient");
+		ingredientSave.setAlignment(Pos.CENTER_RIGHT);
+		ingredientSave.getStyleClass().add("form-control");
+		buttons.getChildren().add(ingredientSave);
+		
+		Region spacer1 = new Region();
+		spacer1.setPrefWidth(15);
+		buttons.getChildren().add(spacer1);
+		
+		ingredientUpdate = new Button("Update");
+		ingredientUpdate.setAlignment(Pos.CENTER_RIGHT);
+		ingredientUpdate.getStyleClass().add("form-control");
+		ingredientUpdate.setVisible(false);
+		buttons.getChildren().add(ingredientUpdate);
+		
+		Region spacer2 = new Region();
+		spacer2.setPrefWidth(15);
+		buttons.getChildren().add(spacer2);
+		
+		ingredientDelete = new Button("Delete");
+		ingredientDelete.setAlignment(Pos.CENTER_RIGHT);
+		ingredientDelete.getStyleClass().add("form-control");
+		ingredientDelete.setVisible(false);
+		buttons.getChildren().add(ingredientDelete);
+		
+		ingredientList.setOnMousePressed(
+			(event) -> {
+				Ingredient i = ingredientList.getSelectionModel().getSelectedItem();
+				if (i == null) {
+					ingredientUpdate.setVisible(false);
+					ingredientDelete.setVisible(false);
+				} else {
+					ingredientUpdate.setVisible(true);
+					ingredientDelete.setVisible(true);
+					ingredientName.setText(i.getName());
+					ingredientPrice.setText(String.valueOf(i.getPrice()));
+					ingredientDescription.setText(i.getDescription());
+				}
+			}
+		);
+		
+		ingredientDelete.setOnAction(
+			(event) -> {
+				Ingredient i = ingredientList.getSelectionModel().getSelectedItem();
+				if (i == null) {
+					Alert a = new Alert(AlertType.ERROR, "You have not selected an ingredient.", ButtonType.CLOSE);
+					a.setHeaderText(null);
+					a.show();
+				}
+				else {
+					Alert a = new Alert(AlertType.CONFIRMATION, "Are you sure you wish to delete this ingredient?", ButtonType.YES, ButtonType.NO);
+					a.setHeaderText(null);
+					Optional<ButtonType> result = a.showAndWait();
+					if (result.get() == ButtonType.YES) {
+						IngredientEvent evt = new IngredientEvent(i, ingredientList, IngredientEvent.DELETE_INGREDIENT);
+						ingredientList.fireEvent(evt);
+					}
+				}
+			}
+		);
+		
+		ingredientUpdate.setOnAction(
+			(event) -> {
+				Ingredient i = ingredientList.getSelectionModel().getSelectedItem();
+				if (i == null) {
+					Alert a = new Alert(AlertType.ERROR, "You have not selected an ingredient.", ButtonType.CLOSE);
+					a.setHeaderText(null);
+					a.show();
+				}
+				else {
+					Alert a = new Alert(AlertType.CONFIRMATION, "You are about to overwrite this ingredient's information.\nDo you wish to proceed?", ButtonType.YES, ButtonType.NO);
+					a.setHeaderText(null);
+					Optional<ButtonType> result = a.showAndWait();
+					if (result.get() == ButtonType.YES) {
+						IngredientEvent evt = new IngredientEvent(i, ingredientList, IngredientEvent.UPDATE_INGREDIENT);
+						evt.setName(ingredientName.getText());
+						evt.setDescription(ingredientDescription.getText());
+						evt.setPrice(Double.parseDouble(ingredientPrice.getText()));
+						ingredientList.fireEvent(evt);
+					}
+				}
+			}
+		);
+		
+		ingredientSave.setOnAction(
+			(event) -> {
+				if (ingredientName.getText() == null || ingredientName.getText().trim().isEmpty()) {
+					Alert a = new Alert(AlertType.ERROR, "Name is required.", ButtonType.CLOSE);
+					a.setHeaderText(null);
+					a.show();
+				}
+				else {
+					IngredientEvent evt = new IngredientEvent(null, ingredientList, IngredientEvent.CREATE_INGREDIENT);
+					evt.setName(ingredientName.getText());
+					evt.setDescription(ingredientDescription.getText());
+					evt.setPrice(Double.parseDouble(ingredientPrice.getText()));
+					ingredientList.fireEvent(evt);
+				}
+			}
+		);
 	}
 	
 	private void initTab(Tab t, HBox h) {
@@ -521,6 +678,7 @@ public class ManagerView implements View {
 	
 	public void populateIngredients(List<Ingredient> list) {
 		populateMenuItemAllIngredientsList(list);
+		populateIngredientsList(list);
 	}
 
 	/**
@@ -540,6 +698,13 @@ public class ManagerView implements View {
 					);
 				}
 			);
+		}
+	}
+	
+	private void populateIngredientsList(List<Ingredient> list) {
+		ingredientList.getItems().clear();
+		for (Ingredient ingredient : list) {
+			ingredientList.getItems().add(ingredient);
 		}
 	}
 
@@ -565,6 +730,18 @@ public class ManagerView implements View {
 	
 	public void setOnMenuItemDeleted(EventHandler<MenuItemEvent> e) {
 		this.menuItemList.addEventHandler(MenuItemEvent.DELETE_MENUITEM, e);
+	}
+	
+	public void setOnIngredientCreated(EventHandler<IngredientEvent> e) {
+		this.ingredientList.addEventHandler(IngredientEvent.CREATE_INGREDIENT, e);
+	}
+	
+	public void setOnIngredientUpdated(EventHandler<IngredientEvent> e) {
+		this.ingredientList.addEventHandler(IngredientEvent.UPDATE_INGREDIENT, e);
+	}
+	
+	public void setOnIngredientDeleted(EventHandler<IngredientEvent> e) {
+		this.ingredientList.addEventHandler(IngredientEvent.DELETE_INGREDIENT, e);
 	}
 
 }

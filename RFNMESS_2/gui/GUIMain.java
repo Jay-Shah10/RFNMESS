@@ -286,6 +286,10 @@ public class GUIMain extends Application {
 						event.getMenuItem()
 				);
 				managerView.populateMenu(orderController.getMenuItems(MenuItemType.ALL));
+				orderView.populateDrinks(orderController.getMenuItems(MenuItemType.DRINK));
+				orderView.populateAppetizers(orderController.getMenuItems(MenuItemType.APPETIZER));
+				orderView.populateEntrees(orderController.getMenuItems(MenuItemType.ENTREE));
+				orderView.populateDesserts(orderController.getMenuItems(MenuItemType.DESSERT));
 				Alert a = new Alert(AlertType.NONE, "Menu Item " + n + " successfully deleted.", ButtonType.OK);
 				a.setHeaderText(null);
 				a.setTitle("Success!");
@@ -307,6 +311,10 @@ public class GUIMain extends Application {
 					event.getDescription()
 				);
 				managerView.populateMenu(orderController.getMenuItems(MenuItemType.ALL));
+				orderView.populateDrinks(orderController.getMenuItems(MenuItemType.DRINK));
+				orderView.populateAppetizers(orderController.getMenuItems(MenuItemType.APPETIZER));
+				orderView.populateEntrees(orderController.getMenuItems(MenuItemType.ENTREE));
+				orderView.populateDesserts(orderController.getMenuItems(MenuItemType.DESSERT));
 				Alert a = new Alert(AlertType.NONE, "Menu Item " + event.getMenuItem().getName() + " successfully updated.", ButtonType.OK);
 				a.setHeaderText(null);
 				a.setTitle("Success!");
@@ -327,8 +335,61 @@ public class GUIMain extends Application {
 						event.getDescription()
 				);
 				managerView.populateMenu(orderController.getMenuItems(MenuItemType.ALL));
+				orderView.populateDrinks(orderController.getMenuItems(MenuItemType.DRINK));
+				orderView.populateAppetizers(orderController.getMenuItems(MenuItemType.APPETIZER));
+				orderView.populateEntrees(orderController.getMenuItems(MenuItemType.ENTREE));
+				orderView.populateDesserts(orderController.getMenuItems(MenuItemType.DESSERT));
 			}
 		);
+		
+		
+		managerView.setOnIngredientDeleted(
+			(event) -> {
+				String n = event.getIngredient().getName();
+				orderController.deleteIngredient(
+						event.getIngredient()
+				);
+				managerView.populateIngredients(orderController.getIngredients());
+				Alert a = new Alert(AlertType.NONE, "Ingredient " + n + " successfully deleted.", ButtonType.OK);
+				a.setHeaderText(null);
+				a.setTitle("Success!");
+				Optional<ButtonType> result = a.showAndWait();
+				if(result.get()==ButtonType.OK || result.get()==ButtonType.CLOSE) {
+					a.close();
+				}
+			}
+		);
+		
+		managerView.setOnIngredientUpdated(
+			(event) -> {
+				orderController.updateIngredient(
+					event.getIngredient(),
+					event.getName(), 
+					event.getDescription(),
+					event.getPrice()
+				);
+				managerView.populateIngredients(orderController.getIngredients());
+				Alert a = new Alert(AlertType.NONE, "Ingredient " + event.getIngredient().getName() + " successfully updated.", ButtonType.OK);
+				a.setHeaderText(null);
+				a.setTitle("Success!");
+				Optional<ButtonType> result = a.showAndWait();
+				if(result.get()==ButtonType.OK || result.get()==ButtonType.CLOSE) {
+					a.close();
+				}
+			}
+		);
+		
+		managerView.setOnIngredientCreated(
+			(event) -> {
+				orderController.createIngredient(
+						event.getName(), 
+						event.getDescription(), 
+						event.getPrice()
+				);
+				managerView.populateIngredients(orderController.getIngredients());
+			}
+		);
+		
 	}
 
 	public void setView(StageView view) {

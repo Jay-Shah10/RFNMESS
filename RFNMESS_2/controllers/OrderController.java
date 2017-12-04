@@ -164,4 +164,20 @@ public class OrderController implements Controller {
 		}
 	}
 	
+	public Ingredient createIngredient(String name, String description, double price) {
+		Ingredient i = new BasicIngredient(name, price, description);
+		model.getIngredients().add(i);
+		return i;
+	}
+	
+	public void updateIngredient(Ingredient i, String name, String description, double price) {
+		i.setName(name);
+		i.setDescription(description);
+		i.setPrice(price);
+	}
+	
+	public boolean deleteIngredient(Ingredient i) {
+		return model.getIngredients().remove(i);
+	}
+	
 }
