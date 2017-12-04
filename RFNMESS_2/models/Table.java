@@ -3,14 +3,13 @@
  */
 package models;
 
-import java.io.Serializable;
 import java.util.Random;
 
 /**
  * @author nryle
  *
  */
-public class Table implements Serializable {
+public class Table {
 	private int uid;
 	private String				name;
 	private TableStatus			status;

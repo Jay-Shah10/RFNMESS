@@ -3,14 +3,13 @@
  */
 package models;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @author nryle
  *
  */
-public class PartyOrder implements Order, Serializable {
+public class PartyOrder implements Order {
 	private String					name;
 	private int						uid;
 	private ArrayList<MenuItem>		items;

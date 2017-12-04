@@ -3,14 +3,13 @@
  */
 package models;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @author nryle
  *
  */
-public class MenuItem implements Serializable{
+public class MenuItem {
 
 	private String 						name, 
 										description;
