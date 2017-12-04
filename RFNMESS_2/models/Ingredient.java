@@ -3,8 +3,6 @@
  */
 package models;
 
-import java.io.Serializable;
-
 /**
  * @author nryle
  *

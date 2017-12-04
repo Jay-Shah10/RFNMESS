@@ -1,12 +1,10 @@
 package gui;
 
-
 import java.util.Optional;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-
 import controllers.*;
 import events.*;
 import javafx.application.*;
@@ -31,6 +29,7 @@ public class GUIMain extends Application {
 	private LoginController loginController;
 	private SeatingController seatingController;
 	private OrderController orderController;
+	private EmployeeController employeeController;
 	
 	/**
 	 * List of views
@@ -39,6 +38,7 @@ public class GUIMain extends Application {
 	private HostView hostView;
 	private OrderView orderView;
 	private KitchenView kitchenView;
+	private ManagerView managerView;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -49,7 +49,7 @@ public class GUIMain extends Application {
 		Rectangle2D visual = Screen.getPrimary().getVisualBounds();
 		applicationStage = primaryStage;
 		applicationStage.setMaximized(true);
-		applicationStage.setFullScreen(true);
+		//applicationStage.setFullScreen(true);
 		
 		applicationStage.setOnCloseRequest(
 			(event) ->{
@@ -66,8 +66,6 @@ public class GUIMain extends Application {
 				      } catch (IOException i) {
 				         i.printStackTrace();
 				      }
-					// DO THINGS BEFORE WINDOW CLOSES
-					//throw new Exception("Replace this with code");
 				}
 				catch (Exception ex) {
 					Alert a = new Alert(
@@ -94,7 +92,8 @@ public class GUIMain extends Application {
 		orderController = new OrderController();
 		orderController.start();
 		
-		seatingController.start(/* TODO: Insert Restaurant model */);
+		employeeController = new EmployeeController();
+		employeeController.start();
 
 		masterPane = new DisplayPage();
 		applicationStage.setScene(new Scene(masterPane, visual.getWidth(), visual.getHeight()));
@@ -108,6 +107,10 @@ public class GUIMain extends Application {
 		hostView = new HostView();
 		orderView = new OrderView();
 		kitchenView = new KitchenView();
+		managerView = new ManagerView();
+		managerView.populateEmployees(employeeController.getEmployees());
+		managerView.populateMenu(orderController.getMenuItems(MenuItemType.ALL));
+		managerView.populateIngredients(orderController.getIngredients());
 
 		setView(StageView.Login);
 		applicationStage.show();
@@ -172,12 +175,10 @@ public class GUIMain extends Application {
 			setView(StageView.Kitchen);
 		});
 
-		// changes to manger view.
-		// masterPane.managerClick(
-		// (event)->{
-		//
-		// setView(StageView.Manager);
-		// });
+		// changes to manager view.
+		masterPane.managerClick((event) -> {
+			setView(StageView.Manager);
+		});
 
 		orderView.setOnNewOrder(
 			(event) -> {
@@ -226,6 +227,56 @@ public class GUIMain extends Application {
 				orderController.fulfillOrder(event.getOrder());
 			}
 		);
+		
+		managerView.setOnEmployeeCreated(
+			(event) -> {
+				employeeController.createEmployee(
+						event.getUsername(), 
+						event.getPassword(),
+						event.getAccess(),
+						event.getFirstname(),
+						event.getLastname()
+				);
+				managerView.populateEmployees(employeeController.getEmployees());
+			}
+		);
+		
+		managerView.setOnEmployeeUpdated(
+			(event) -> {
+				employeeController.updateEmployee(
+						event.getEmployee(),
+						event.getUsername(), 
+						event.getPassword(),
+						event.getAccess(),
+						event.getFirstname(),
+						event.getLastname()
+				);
+				Alert a = new Alert(AlertType.NONE, "Employee " + event.getEmployee().getUsername() + " successfully updated.", ButtonType.OK);
+				a.setHeaderText(null);
+				a.setTitle("Success!");
+				Optional<ButtonType> result = a.showAndWait();
+				if(result.get()==ButtonType.OK || result.get()==ButtonType.CLOSE) {
+					a.close();
+				}
+			}
+		);
+		
+		managerView.setOnEmployeeDeleted(
+			(event) -> {
+				String un = event.getEmployee().getUsername();
+				employeeController.deleteEmployee(
+						event.getEmployee()
+				);
+				managerView.populateEmployees(employeeController.getEmployees());
+				Alert a = new Alert(AlertType.NONE, "Employee " + un + " successfully deleted.", ButtonType.OK);
+				a.setHeaderText(null);
+				a.setTitle("Success!");
+				Optional<ButtonType> result = a.showAndWait();
+				if(result.get()==ButtonType.OK || result.get()==ButtonType.CLOSE) {
+					a.close();
+				}
+			}
+		);
 	}
 
 	public void setView(StageView view) {
@@ -242,6 +293,9 @@ public class GUIMain extends Application {
 				break;
 			case Kitchen:
 				masterPane.setView(kitchenView);
+				break;
+			case Manager:
+				masterPane.setView(managerView);
 				break;
 			default:
 				break;

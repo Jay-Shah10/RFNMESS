@@ -3,11 +3,18 @@
  */
 package models;
 
+import java.io.Serializable;
+
 /**
  * @author nryle
  *
  */
-public class BasicIngredient implements Ingredient {
+public class BasicIngredient implements Ingredient, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7326780363329134768L;
 
 	private String					name,
 									description;
