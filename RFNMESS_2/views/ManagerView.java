@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import events.EmployeeEvent;
+import events.MenuItemEvent;
 import events.OrderEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -298,6 +299,7 @@ public class ManagerView implements View {
 		right.getChildren().add(menuItemDescription);
 		
 		HBox ingredientLists = new HBox();
+		right.getChildren().add(ingredientLists);
 		VBox allIngredientsHolder = new VBox();
 		VBox currentIngredientsHolder = new VBox();
 		ingredientLists.getChildren().add(allIngredientsHolder);
@@ -416,6 +418,18 @@ public class ManagerView implements View {
 	
 	public void setOnEmployeeDeleted(EventHandler<EmployeeEvent> e) {
 		this.employeeList.addEventHandler(EmployeeEvent.DELETE_EMPLOYEE, e);
+	}
+	
+	public void setOnMenuItemCreated(EventHandler<MenuItemEvent> e) {
+		this.menuItemList.addEventHandler(MenuItemEvent.CREATE_MENUITEM, e);
+	}
+	
+	public void setOnMenuItemUpdated(EventHandler<MenuItemEvent> e) {
+		this.menuItemList.addEventHandler(MenuItemEvent.UPDATE_MENUITEM, e);
+	}
+	
+	public void setOnMenuItemDeleted(EventHandler<MenuItemEvent> e) {
+		this.menuItemList.addEventHandler(MenuItemEvent.DELETE_MENUITEM, e);
 	}
 
 }

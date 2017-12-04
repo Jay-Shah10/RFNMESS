@@ -4,6 +4,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import models.*;
 
@@ -90,4 +91,27 @@ public class OrderController implements Controller {
 	public ArrayList<Ingredient> getIngredients() {
 		return model.getIngredients();
 	}
+	
+	public MenuItem createMenuItem(MenuItemType type, String name, double price, ArrayList<Ingredient> ingredients, String description) {
+		MenuItem m = new MenuItem(name, price, description);
+		m.setIngredients(ingredients);
+		switch (type) {
+		case DRINK:
+			model.getDrinks().add(m);
+			break;
+		case APPETIZER:
+			model.getAppetizers().add(m);
+			break;
+		case ENTREE:
+			model.getEntrees().add(m);
+			break;
+		case DESSERT:
+			model.getDesserts().add(m);
+			break;
+		default:
+			break;
+		}
+		return m;
+	}
+	
 }

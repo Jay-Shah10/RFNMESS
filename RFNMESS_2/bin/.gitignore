@@ -1,24 +1,2 @@
 *.class
-<<<<<<< Updated upstream
-=======
-/.gitignore
-/.settings/
-/controllers/
-/dataCollection/
-/events/
->>>>>>> Stashed changes
-/gui/
-<<<<<<< Updated upstream
-/views/
-<<<<<<< Updated upstream
-/controllers/
 /models/
-/events/
-=======
-=======
-/flatFile.dat
-/models/
->>>>>>> Stashed changes
-/src/
-/flatFile.ser
->>>>>>> Stashed changes
