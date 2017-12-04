@@ -3,11 +3,13 @@
  */
 package models;
 
+import java.io.Serializable;
+
 /**
  * @author nryle
  *
  */
-public class EmployeeUser implements Employee {
+public class EmployeeUser implements Employee, Serializable {
 
 	private String 					username,
 									password,

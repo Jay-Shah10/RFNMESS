@@ -2,3 +2,9 @@
 *.class
 *.class
 *.jar
+
+RFNMESS_2/bin/models/Table.class
+
+*.class
+
+*.ser
