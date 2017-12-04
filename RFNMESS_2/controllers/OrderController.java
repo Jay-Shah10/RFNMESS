@@ -3,6 +3,8 @@
  */
 package controllers;
 
+import java.util.ArrayList;
+
 import models.*;
 
 /**
@@ -63,5 +65,29 @@ public class OrderController implements Controller {
 			order.setFulfilled(true);
 		}
 	}
+	
+	public ArrayList<MenuItem> getMenuItems(MenuItemType type) {
+		switch (type) {
+		case DRINK:
+			return model.getDrinks();
+		case APPETIZER:
+			return model.getAppetizers();
+		case ENTREE:
+			return model.getEntrees();
+		case DESSERT:
+			return model.getDesserts();
+		case ALL:
+		default:
+			ArrayList<MenuItem> items = new ArrayList<>();
+			items.addAll(model.getDrinks());
+			items.addAll(model.getAppetizers());
+			items.addAll(model.getEntrees());
+			items.addAll(model.getDesserts());			
+			return items;
+		}
+	}
 
+	public ArrayList<Ingredient> getIngredients() {
+		return model.getIngredients();
+	}
 }

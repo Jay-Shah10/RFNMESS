@@ -1,3 +1,6 @@
 *.class
 /gui/
 /views/
+/controllers/
+/models/
+/events/

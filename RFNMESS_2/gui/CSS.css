@@ -93,6 +93,15 @@
 	-fx-border-color: -swatch-400;
 }
 
+.form-control {
+	-fx-border-insets: 0 0 10 0;
+}
+
+.light-text {
+	-fx-text-fill: #ffffff;
+	-fx-fill: #ffffff;
+}
+
 /****************************************************************
 *                                                               *
 *    Buttons                                                    *

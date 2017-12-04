@@ -14,6 +14,15 @@ public interface Employee {
 	AccessLevel getAccessLevel();
 	void setAccessLevel(AccessLevel access);
 	
+	public String getPassword();
+	public void setPassword(String password);
+	
+	public String getFirstName();
+	public void setFirstName(String firstName);
+
+	public String getLastName();
+	public void setLastName(String lastName);
+	
 	public static Employee getUserByLogin(String username, String login) {
 		if(username.equals("baduser")) { return null; }
 		

@@ -9,13 +9,26 @@ package models;
  */
 public class EmployeeUser implements Employee {
 
-	private String username;
-	private AccessLevel access;
+	private String 					username,
+									password,
+									firstName,
+									lastName;
+	
+	private AccessLevel 			access;
 	
 	public EmployeeUser() {
 		username = null;
 	}
 	
+	/**
+	 * @param string
+	 */
+	public EmployeeUser(String username, AccessLevel access) {
+		// TODO Auto-generated constructor stub
+		this.username = username;
+		this.access = access;
+	}
+
 	/* (non-Javadoc)
 	 * @see models.Employee#getUsername()
 	 */
@@ -44,6 +57,53 @@ public class EmployeeUser implements Employee {
 	public void setAccessLevel(AccessLevel access) {
 		// TODO Auto-generated method stub
 		this.access = access;
+	}
+	
+	@Override
+	public String toString() {
+		return username;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @return the firstName
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
+
+	/**
+	 * @param firstName the firstName to set
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	/**
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+
+	/**
+	 * @param lastName the lastName to set
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 }

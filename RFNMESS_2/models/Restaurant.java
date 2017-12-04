@@ -28,6 +28,7 @@ public class Restaurant {
 		entreesMenu = new ArrayList<>();
 		dessertsMenu = new ArrayList<>();
 		
+		ingredients = new ArrayList<>();
 	}
 	
 	/**
@@ -60,6 +61,14 @@ public class Restaurant {
 		return this.dessertsMenu;
 	}
 	
+	public ArrayList<Employee> getEmployees() {
+		return this.employees;
+	}
+	
+	public ArrayList<Ingredient> getIngredients() {
+		return this.ingredients;
+	}
+	
 	public static Restaurant getRestaurant() {
 		// TODO: Load from file, remove test code
 		if(Restaurant.restaurant==null) {
@@ -87,6 +96,17 @@ public class Restaurant {
 			r.entreesMenu.add(new MenuItem("Entree1", 9.00, "An entree."));
 			r.entreesMenu.add(new MenuItem("Entree2", 10.00, "An entree."));
 			r.entreesMenu.add(new MenuItem("Entree3", 8.75, "An entree."));
+			
+			r.ingredients.add(new BasicIngredient("Bread", 0.10, "A loaf of bread."));
+			r.ingredients.add(new BasicIngredient("Lettuce", 0.02, "A leaf of lettuce."));
+			r.ingredients.add(new BasicIngredient("Burger patty", 0.75, "1/8 pound patty of beef"));
+			
+			r.employees.add(new EmployeeUser("Host1", AccessLevel.Host));
+			r.employees.add(new EmployeeUser("Server1", AccessLevel.Server));
+			r.employees.add(new EmployeeUser("Kitchen1", AccessLevel.Kitchen));
+			EmployeeUser m = new EmployeeUser("Manager1", AccessLevel.Manager);
+			m.setPassword("password");
+			r.employees.add(m);
 			
 			Restaurant.restaurant = r;
 		}

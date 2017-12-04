@@ -11,5 +11,6 @@ public enum StageView {
 	Login,
 	Host,
 	Order,
-	Kitchen
+	Kitchen, 
+	Manager
 }
