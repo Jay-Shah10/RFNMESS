@@ -1,10 +1,2 @@
 *.class
-<<<<<<< HEAD
 /models/
-=======
-/gui/
-/views/
-/controllers/
-/models/
-/events/
->>>>>>> parent of d192ed4... flat file stuff
