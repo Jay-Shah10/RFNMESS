@@ -344,16 +344,22 @@ public class ManagerView implements View {
 		
 		HBox ingredientLists = new HBox();
 		right.getChildren().add(ingredientLists);
+		VBox.setVgrow(ingredientLists, Priority.ALWAYS);
 		VBox allIngredientsHolder = new VBox();
 		VBox currentIngredientsHolder = new VBox();
 		ingredientLists.getChildren().add(allIngredientsHolder);
+		Region separator = new Region();
+		separator.setPrefWidth(10);
+		ingredientLists.getChildren().add(separator);
 		ingredientLists.getChildren().add(currentIngredientsHolder);
+		HBox.setHgrow(allIngredientsHolder, Priority.ALWAYS);
+		HBox.setHgrow(currentIngredientsHolder, Priority.ALWAYS);
 		Text allIng = new Text("Restaurant Inventory");
 		Text currIng = new Text("Item Ingredient List");
 		allIngredientsHolder.getChildren().add(allIng);
 		currentIngredientsHolder.getChildren().add(currIng);
 		menuItemIngredientsList = new NodeList<>();
-		menuItemAllIngredientsList = new NodeList<Ingredient>();
+		menuItemAllIngredientsList = new NodeList<>();
 		allIngredientsHolder.getChildren().add(menuItemAllIngredientsList);
 		currentIngredientsHolder.getChildren().add(menuItemIngredientsList);
 		
@@ -400,7 +406,12 @@ public class ManagerView implements View {
 					menuItemMenuType.setValue(i.getType());
 					menuItemIngredientsList.clear();
 					for (Ingredient ing : i.getIngredients()) {
-						menuItemIngredientsList.add(ing, false, true, false, null);
+						NodeListItem<Ingredient> item = menuItemIngredientsList.add(ing, false, true, false, null);
+						item.setOnRemove(
+							(evt)-> {
+								menuItemIngredientsList.remove(item);
+							}
+						);
 					}
 				}
 			}
@@ -518,7 +529,17 @@ public class ManagerView implements View {
 	private void populateMenuItemAllIngredientsList(List<Ingredient> list) {
 		menuItemAllIngredientsList.clear();
 		for(Ingredient i : list) {
-			menuItemAllIngredientsList.add(i, true, false, false, null);
+			NodeListItem<Ingredient> item = menuItemAllIngredientsList.add(i, true, false, false, null);
+			item.setOnAdd(
+				(event) -> {
+					NodeListItem<Ingredient> subItem = menuItemIngredientsList.add(i, false, true, false, null);
+					subItem.setOnRemove(
+						(evt)-> {
+							menuItemIngredientsList.remove(subItem);
+						}
+					);
+				}
+			);
 		}
 	}
 
