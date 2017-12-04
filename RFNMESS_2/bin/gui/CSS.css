@@ -109,10 +109,7 @@
 }
 
 .light-text,
-.pane .form-control.text,
-.pane .form-control,
-.form-control,
-.form-control .text {
+.form-label {
 	-fx-text-fill: #ffffff;
 	-fx-fill: #ffffff;
 }

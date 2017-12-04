@@ -92,8 +92,6 @@ public class ManagerView implements View {
 
 	private Button ingredientDelete;
 
-
-	
 								
 
 	/* (non-Javadoc)
@@ -159,6 +157,7 @@ public class ManagerView implements View {
 		
 		HBox accessContainer = new HBox();
 		Text accessLabel = new Text("Access Level");
+		accessLabel.getStyleClass().add("form-label");
 		accessContainer.getChildren().add(accessLabel);
 		employeeAccessLevel = new ChoiceBox<AccessLevel>();
 		employeeAccessLevel.getItems().addAll(AccessLevel.values());
@@ -166,24 +165,28 @@ public class ManagerView implements View {
 		right.getChildren().add(accessContainer);
 		
 		Text usernameLabel = new Text("Username");
+		usernameLabel.getStyleClass().add("form-label");
 		right.getChildren().add(usernameLabel);
 		employeeUsername = new TextField();
 		employeeUsername.getStyleClass().add("form-control");
 		right.getChildren().add(employeeUsername);
 		
 		Text firstNameLabel = new Text("First Name");
+		firstNameLabel.getStyleClass().add("form-label");
 		right.getChildren().add(firstNameLabel);
 		employeeFirstName = new TextField();
 		employeeFirstName.getStyleClass().add("form-control");
 		right.getChildren().add(employeeFirstName);
 		
 		Text lastNameLabel = new Text("Last Name");
+		lastNameLabel.getStyleClass().add("form-label");
 		right.getChildren().add(lastNameLabel);
 		employeeLastName = new TextField();
 		employeeLastName.getStyleClass().add("form-control");
 		right.getChildren().add(employeeLastName);
 		
 		Text passwordLabel = new Text("Password");
+		passwordLabel.getStyleClass().add("form-label");
 		right.getChildren().add(passwordLabel);
 		employeePassword = new TextField();
 		employeePassword.getStyleClass().add("form-control");
@@ -324,6 +327,7 @@ public class ManagerView implements View {
 		
 		HBox menuTypeContainer = new HBox();
 		Text menuTypeLabel = new Text("Menu Type");
+		menuTypeLabel.getStyleClass().add("form-label");
 		menuTypeContainer.getChildren().add(menuTypeLabel);
 		menuItemMenuType = new ChoiceBox<MenuItemType>();
 		menuItemMenuType.getItems().addAll(MenuItemType.values());
@@ -331,12 +335,14 @@ public class ManagerView implements View {
 		right.getChildren().add(menuTypeContainer);
 		
 		Text menuItemNameLabel = new Text("Item Name");
+		menuItemNameLabel.getStyleClass().add("form-label");
 		right.getChildren().add(menuItemNameLabel);
 		menuItemName = new TextField();
 		menuItemName.getStyleClass().add("form-control");
 		right.getChildren().add(menuItemName);
 		
 		Text menuItemPriceLabel = new Text("Price");
+		menuItemPriceLabel.getStyleClass().add("form-label");
 		right.getChildren().add(menuItemPriceLabel);
 		menuItemPrice = new TextField();
 		menuItemPrice.getStyleClass().add("form-control");
@@ -352,6 +358,7 @@ public class ManagerView implements View {
 		right.getChildren().add(menuItemPrice);
 		
 		Text menuItemDescriptionLabel = new Text("Description");
+		menuItemDescriptionLabel.getStyleClass().add("form-label");
 		right.getChildren().add(menuItemDescriptionLabel);
 		menuItemDescription = new TextField();
 		menuItemDescription.getStyleClass().add("form-control");
@@ -370,7 +377,9 @@ public class ManagerView implements View {
 		HBox.setHgrow(allIngredientsHolder, Priority.ALWAYS);
 		HBox.setHgrow(currentIngredientsHolder, Priority.ALWAYS);
 		Text allIng = new Text("Restaurant Inventory");
+		allIng.getStyleClass().add("form-label");
 		Text currIng = new Text("Item Ingredient List");
+		currIng.getStyleClass().add("form-label");
 		allIngredientsHolder.getChildren().add(allIng);
 		currentIngredientsHolder.getChildren().add(currIng);
 		menuItemIngredientsList = new NodeList<>();
@@ -470,7 +479,7 @@ public class ManagerView implements View {
 						evt.setName(menuItemName.getText());
 						evt.setDescription(menuItemDescription.getText());
 						evt.setIngredientList(menuItemIngredientsList.getList());
-						evt.setPrice(Double.parseDouble(menuItemPrice.getText()));
+						evt.setPrice((menuItemPrice.getText()==null||menuItemPrice.getText().isEmpty())?0.0:Double.parseDouble(menuItemPrice.getText()));
 						menuItemList.fireEvent(evt);
 					}
 				}
@@ -490,7 +499,7 @@ public class ManagerView implements View {
 					evt.setName(menuItemName.getText());
 					evt.setDescription(menuItemDescription.getText());
 					evt.setIngredientList(menuItemIngredientsList.getList());
-					evt.setPrice(Double.parseDouble(menuItemPrice.getText()));
+					evt.setPrice((menuItemPrice.getText()==null||menuItemPrice.getText().isEmpty())?0.0:Double.parseDouble(menuItemPrice.getText()));
 					menuItemList.fireEvent(evt);
 				}
 			}
@@ -513,12 +522,14 @@ public class ManagerView implements View {
 		HBox.setHgrow(right, Priority.ALWAYS);
 		
 		Text ingredientNameLabel = new Text("Ingredient Name");
+		ingredientNameLabel.getStyleClass().add("form-label");
 		right.getChildren().add(ingredientNameLabel);
 		ingredientName = new TextField();
 		ingredientName.getStyleClass().add("form-control");
 		right.getChildren().add(ingredientName);
 		
 		Text ingredientPriceLabel = new Text("Price");
+		ingredientPriceLabel.getStyleClass().add("form-label");
 		right.getChildren().add(ingredientPriceLabel);
 		ingredientPrice = new TextField();
 		ingredientPrice.getStyleClass().add("form-control");
@@ -534,6 +545,7 @@ public class ManagerView implements View {
 		right.getChildren().add(ingredientPrice);
 		
 		Text ingredientDescriptionLabel = new Text("Description");
+		ingredientDescriptionLabel.getStyleClass().add("form-label");
 		right.getChildren().add(ingredientDescriptionLabel);
 		ingredientDescription = new TextField();
 		ingredientDescription.getStyleClass().add("form-control");
@@ -619,7 +631,7 @@ public class ManagerView implements View {
 						IngredientEvent evt = new IngredientEvent(i, ingredientList, IngredientEvent.UPDATE_INGREDIENT);
 						evt.setName(ingredientName.getText());
 						evt.setDescription(ingredientDescription.getText());
-						evt.setPrice(Double.parseDouble(ingredientPrice.getText()));
+						evt.setPrice((ingredientPrice.getText()==null||ingredientPrice.getText().isEmpty())?0.0:Double.parseDouble(menuItemPrice.getText()));
 						ingredientList.fireEvent(evt);
 					}
 				}
@@ -637,7 +649,7 @@ public class ManagerView implements View {
 					IngredientEvent evt = new IngredientEvent(null, ingredientList, IngredientEvent.CREATE_INGREDIENT);
 					evt.setName(ingredientName.getText());
 					evt.setDescription(ingredientDescription.getText());
-					evt.setPrice(Double.parseDouble(ingredientPrice.getText()));
+					evt.setPrice((ingredientPrice.getText()==null||ingredientPrice.getText().isEmpty())?0.0:Double.parseDouble(menuItemPrice.getText()));
 					ingredientList.fireEvent(evt);
 				}
 			}
