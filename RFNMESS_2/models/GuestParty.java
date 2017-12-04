@@ -3,13 +3,14 @@
  */
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @author nryle
  *
  */
-public class GuestParty implements Party {
+public class GuestParty implements Party, Serializable {
 
 	private String 					name;
 	private ArrayList<Order> 		orders;

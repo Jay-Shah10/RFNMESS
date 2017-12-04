@@ -1,8 +1,14 @@
 *.class
-/.settings/
-/controllers/
-/dataCollection/
-/events/
-/gui/
+<<<<<<< HEAD
 /models/
+=======
+<<<<<<< HEAD
+/models/
+=======
+/gui/
 /views/
+/controllers/
+/models/
+/events/
+>>>>>>> parent of d192ed4... flat file stuff
+>>>>>>> parent of 59f936c... fixes

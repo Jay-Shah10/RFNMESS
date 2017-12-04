@@ -1,4 +1,12 @@
 *.class
-*.class
-*.class
 *.jar
+<<<<<<< HEAD
+*.ser
+=======
+<<<<<<< HEAD
+*.ser
+=======
+>>>>>>> parent of d192ed4... flat file stuff
+>>>>>>> parent of 59f936c... fixes
+*.class
+*.class

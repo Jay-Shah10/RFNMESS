@@ -5,6 +5,7 @@ package controllers;
 
 import models.AccessLevel;
 import models.Employee;
+import models.Restaurant;
 
 /**
  * @author nryle
@@ -12,6 +13,7 @@ import models.Employee;
  */
 public class LoginController implements Controller {
 	private Employee 					currentUser;
+	private Restaurant					model;
 	
 	/* (non-Javadoc)
 	 * @see controllers.Controller#start()
@@ -19,15 +21,23 @@ public class LoginController implements Controller {
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
+		start(Restaurant.getRestaurant());
 		currentUser = null;
+	}
+	public void start(Restaurant r) {
+		model = r;
 	}
 	
 	public Employee AuthenticateUser(String username, String password) throws Exception {
 		if(currentUser!=null)
 			throw new Exception("User already logged in.");
 		
-		currentUser = Employee.getUserByLogin(username, password);
-		
+		for (Employee e : model.getEmployees()) {
+			if(e.getUsername().equalsIgnoreCase(username) && e.getPassword().equals(password)) {
+				currentUser = e;
+				return currentUser;
+			}
+		}
 		return currentUser;
 	}
 	

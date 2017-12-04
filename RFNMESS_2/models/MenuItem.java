@@ -3,14 +3,20 @@
  */
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @author nryle
  *
  */
-public class MenuItem {
+public class MenuItem implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1254831722355218050L;
+	private MenuItemType				type;
 	private String 						name, 
 										description;
 	
@@ -28,12 +34,12 @@ public class MenuItem {
 	
 	public MenuItem(String name) {
 		this();
-		this.name = name;
+		this.setName(name);
 	}
 	
 	public MenuItem(String name, double price) {
 		this(name);
-		this.price = price;
+		this.setPrice(price);
 	}
 	
 	public MenuItem(String name, double price, String desc) {
@@ -41,6 +47,25 @@ public class MenuItem {
 		this.setDescription(desc);
 	}
 	
+	public MenuItem(String name, double price, String desc, MenuItemType type) {
+		this(name, price, desc);
+		this.setType(type);
+	}
+	
+	/**
+	 * @return the type
+	 */
+	public MenuItemType getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(MenuItemType type) {
+		this.type = type;
+	}
+
 	/**
 	 * @return the name
 	 */

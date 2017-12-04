@@ -68,6 +68,17 @@
 	-fx-font-size: 18.0px;
 }
 
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+   -fx-background: transparent;
+   -fx-border-color: transparent;
+}
+
+.scroll-pane {
+   -fx-background-color: transparent;
+   -fx-border-color: transparent;
+}
+
 /****************************************************************
 *                                                               *
 *    Text Fields                                                *
@@ -92,6 +103,20 @@
 .text-field:focused {
 	-fx-border-color: -swatch-400;
 }
+
+.form-control {
+	-fx-border-insets: 0 0 10 0;
+}
+
+.light-text,
+.pane .form-control.text,
+.pane .form-control,
+.form-control,
+.form-control .text {
+	-fx-text-fill: #ffffff;
+	-fx-fill: #ffffff;
+}
+
 
 /****************************************************************
 *                                                               *
@@ -129,6 +154,15 @@
 	-fx-text-fill: -default-text;
 }
 
+.choice-box .label {
+     -fx-text-fill: -default-text; 
+}
+.choice-box .context-menu {
+	-fx-background-color: -dark-text;
+	-fx-border-width:1 1 1 1;
+	-fx-border-color:-field-border-color;
+}
+
 .combo-box:focused, .choice-box:focused {
 	-fx-border-color: -swatch-400;
 }
@@ -140,15 +174,18 @@
 }
 
 .combo-box-base .list-view .list-cell:hover,
-.combo-box-base .list-view .list-cell:odd:hover  {
+.combo-box-base .list-view .list-cell:odd:hover,
+.choice-box .context-menu .menu-item:hover,
+.choice-box .context-menu .menu-item:odd:hover  {
 	-fx-background-color: -swatch-400;
 }
 
-.combo-box-base .list-cell {
+.combo-box-base .list-cell,
+.choice-box .menu-item {
 	-fx-text-fill: -default-text;
 }
 
-.combo-box-base .list-view {
+.combo-box-base .list-view{
 	-fx-border-width:0 0 0 0;
 }
 
@@ -188,7 +225,16 @@
 ****************************************************************/
 
 
-.node-list-main .text {
-	-fx-padding: 1.4em, 0.7em 1.4em, 0.7em;
-	-fx-font-size: 18px;
+.node-list-txt {
+	-fx-font-size: 14px;
+	-fx-fill: #ffffff;
+}
+
+.node-list-main {
+	-fx-background-color: #2b2b2b;
+	-fx-padding: 10 10 10 10;
+}
+
+.node-list-btn {
+	-fx-padding: 10 10 10 10;
 }
