@@ -3,6 +3,8 @@
  */
 package gui;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -27,6 +29,7 @@ public class SearchBox extends HBox {
 		this.getChildren().add(textBox);
 		textBox.setPrefHeight(getMaxHeight());
 		setHgrow(textBox, Priority.ALWAYS);
+		textBox.setPromptText("Enter Search Terms");
 		
 		searchButton = new Button("Search");
 		searchButton.getStyleClass().add("btn");
@@ -42,6 +45,14 @@ public class SearchBox extends HBox {
 			}
 			
 		);
+	}
+	
+	public void setOnSearch(EventHandler<ActionEvent> eh) {
+		this.searchButton.setOnAction(eh);
+	}
+	
+	public String getText() {
+		return this.textBox.getText();
 	}
 
 }

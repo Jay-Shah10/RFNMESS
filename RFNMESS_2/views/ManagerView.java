@@ -631,7 +631,7 @@ public class ManagerView implements View {
 						IngredientEvent evt = new IngredientEvent(i, ingredientList, IngredientEvent.UPDATE_INGREDIENT);
 						evt.setName(ingredientName.getText());
 						evt.setDescription(ingredientDescription.getText());
-						evt.setPrice((ingredientPrice.getText()==null||ingredientPrice.getText().isEmpty())?0.0:Double.parseDouble(menuItemPrice.getText()));
+						evt.setPrice((ingredientPrice.getText()==null||ingredientPrice.getText().isEmpty())?0.0:Double.parseDouble(ingredientPrice.getText()));
 						ingredientList.fireEvent(evt);
 					}
 				}
@@ -649,7 +649,7 @@ public class ManagerView implements View {
 					IngredientEvent evt = new IngredientEvent(null, ingredientList, IngredientEvent.CREATE_INGREDIENT);
 					evt.setName(ingredientName.getText());
 					evt.setDescription(ingredientDescription.getText());
-					evt.setPrice((ingredientPrice.getText()==null||ingredientPrice.getText().isEmpty())?0.0:Double.parseDouble(menuItemPrice.getText()));
+					evt.setPrice((ingredientPrice.getText()==null||ingredientPrice.getText().isEmpty())?0.0:Double.parseDouble(ingredientPrice.getText()));
 					ingredientList.fireEvent(evt);
 				}
 			}

@@ -87,6 +87,20 @@ public class OrderController implements Controller {
 			return items;
 		}
 	}
+	
+	public ArrayList<MenuItem> getMenuItems(MenuItemType type, String searchTerms) {
+		ArrayList<MenuItem> list = new ArrayList<>();
+		if(searchTerms != null && !searchTerms.trim().isEmpty()) {
+			for (MenuItem menuItem : this.getMenuItems(type)) {
+				if(menuItem.getName().toLowerCase().contains(searchTerms.toLowerCase()))
+					list.add(menuItem);
+			}
+		}
+		else {
+			list.addAll(this.getMenuItems(type));
+		}
+		return list;
+	}
 
 	public ArrayList<Ingredient> getIngredients() {
 		return model.getIngredients();

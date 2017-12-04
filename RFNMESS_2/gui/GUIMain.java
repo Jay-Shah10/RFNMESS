@@ -10,10 +10,17 @@ import controllers.*;
 import events.*;
 import javafx.application.*;
 import javafx.geometry.*;
+import javafx.print.PrinterJob;
 import javafx.scene.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.*;
 import models.*;
 import views.*;
@@ -257,6 +264,67 @@ public class GUIMain extends Application {
 				orderView.setSelectedOrder(event.getOrder());
 				
 				//TODO: Print Dialog
+				VBox printerNode = new VBox();
+				printerNode.setPrefWidth(500);
+				double total = 0.0;
+				
+//				HBox titleBox = new HBox();
+//				titleBox.setAlignment(Pos.CENTER);
+				Text txtTitle = new Text("Receipt Of Sale");
+				Text txtFor = new Text("for " + event.getTable().getAssignedParty().getName());
+				Text titleLine = new Text("-----");
+				txtTitle.setTextAlignment(TextAlignment.CENTER);
+				txtFor.setTextAlignment(TextAlignment.CENTER);
+				titleLine.setTextAlignment(TextAlignment.CENTER);
+				txtTitle.setStyle("-fx-font-family: 'Courier New';");
+				txtFor.setStyle("-fx-font-family: 'Courier New';");
+				titleLine.setStyle("-fx-font-family: 'Courier New';");
+				printerNode.getChildren().add(txtTitle);
+				printerNode.getChildren().add(txtFor);
+				printerNode.getChildren().add(titleLine);
+				
+				for (MenuItem item : event.getOrder().getMenuItems()) {
+					HBox h = new HBox();
+					Text txtItem = new Text(item.getName());
+					Text spacer = new Text(".");
+					for (int i = 0; i < (25-item.getName().length()); i++) {
+						spacer.setText(spacer.getText() + ".");
+					}
+					Text txtPrice = new Text(String.valueOf(item.getPrice()));
+					txtItem.setStyle("-fx-font-family: 'Courier New';");
+					spacer.setStyle("-fx-font-family: 'Courier New';");
+					txtPrice.setStyle("-fx-font-family: 'Courier New';");
+					h.getChildren().add(txtItem);
+					h.getChildren().add(spacer);
+					h.getChildren().add(txtPrice);
+					txtPrice.setTextAlignment(TextAlignment.RIGHT);
+					printerNode.getChildren().add(h);
+					total += item.getPrice();
+				}
+				
+				Text txtBar = new Text("_________");
+				Text txtTotal = new Text("Total: " + String.valueOf(total));
+				txtBar.setTextAlignment(TextAlignment.RIGHT);
+				txtTotal.setTextAlignment(TextAlignment.RIGHT);
+				txtBar.setStyle("-fx-font-family: 'Courier New';");
+				txtTotal.setStyle("-fx-font-family: 'Courier New';");
+				printerNode.getChildren().add(txtBar);
+				printerNode.getChildren().add(txtTotal);
+				
+				PrinterJob pjob = PrinterJob.createPrinterJob();
+				if (pjob!=null) {
+					boolean success = pjob.printPage(printerNode);
+					if(success) pjob.endJob();
+				}
+			}
+		);
+		
+		orderView.setOnSearch(
+			(event) -> {
+				orderView.populateDrinks(orderController.getMenuItems(MenuItemType.DRINK, orderView.getSearchText()));
+				orderView.populateAppetizers(orderController.getMenuItems(MenuItemType.APPETIZER, orderView.getSearchText()));
+				orderView.populateEntrees(orderController.getMenuItems(MenuItemType.ENTREE, orderView.getSearchText()));
+				orderView.populateDesserts(orderController.getMenuItems(MenuItemType.DESSERT, orderView.getSearchText()));
 			}
 		);
 		

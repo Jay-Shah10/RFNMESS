@@ -9,6 +9,7 @@ import events.OrderEvent;
 import gui.NodeList;
 import gui.NodeListItem;
 import gui.SearchBox;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -35,6 +36,8 @@ public class OrderView implements View {
 										appetizersList,
 										entreesList,
 										dessertsList;
+
+	private SearchBox 					searchBox;
 	
 	
 
@@ -98,7 +101,8 @@ public class OrderView implements View {
 		itemToOrderMenu.getStyleClass().add("pane");
 		HBox.setHgrow(itemToOrderMenu, Priority.ALWAYS);
 		
-		SearchBox searchBox = new SearchBox();
+		searchBox = new SearchBox();
+		// TODO: Make Search work
 		itemToOrderMenu.getChildren().add(searchBox);
 		
 		TabPane tabs = new TabPane();
@@ -209,7 +213,7 @@ public class OrderView implements View {
 					Order selectedOrder = this.orderList.getSelectionModel().getSelectedItem();
 					if(selectedOrder != null) {
 						OrderEvent evt = new OrderEvent(null, btnGenerateBill, OrderEvent.ORDER_BILLED);
-						//evt.setTable(this.tableList.getSelectionModel().getSelectedItem());
+						evt.setTable(this.tableList.getSelectionModel().getSelectedItem());
 						evt.setOrder(selectedOrder);
 						this.orderMenu.fireEvent(evt);						
 					} else {
@@ -393,6 +397,13 @@ public class OrderView implements View {
 	
 	public void setOnOrderBilled(EventHandler<OrderEvent> e) {
 		this.orderMenu.addEventHandler(OrderEvent.ORDER_BILLED, e);
+	}
+	
+	public void setOnSearch(EventHandler<ActionEvent> eh) {
+		searchBox.setOnSearch(eh);
+	}
+	public String getSearchText() {
+		return searchBox.getText();
 	}
 
 }
