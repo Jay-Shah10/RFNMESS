@@ -74,12 +74,34 @@ public class TopMenubar extends HBox {
 		 * Method to add all menu items to the menubutton.
 		 */
 		logoutButton = new MenuItem("Log out");
+		SeparatorMenuItem separatorItem = new SeparatorMenuItem();
 		hostButton = new MenuItem("Host");
+		setHostButtonVisibile(false);
 		serverButton = new MenuItem("Server" );
+		setServerButtonVisibile(false);
 		kitchenButton = new MenuItem("Kitchen");
+		setKitchenButtonVisibile(false);
 		managerButton = new MenuItem("Manager");
-		mb.getItems().addAll(hostButton, serverButton, kitchenButton, managerButton, logoutButton);
+		setManagerButtonVisibile(false);
+		
+		mb.getItems().addAll(hostButton, serverButton, kitchenButton, managerButton, separatorItem, logoutButton);
 			
+	}
+	
+	public void setHostButtonVisibile(boolean visible) {
+		hostButton.setVisible(visible);
+	}
+	
+	public void setServerButtonVisibile(boolean visible) {
+		serverButton.setVisible(visible);
+	}
+	
+	public void setKitchenButtonVisibile(boolean visible) {
+		kitchenButton.setVisible(visible);
+	}
+	
+	public void setManagerButtonVisibile(boolean visible) {
+		managerButton.setVisible(visible);
 	}
 
 ////////////////////////////////////////////////

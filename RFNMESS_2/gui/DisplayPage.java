@@ -76,6 +76,10 @@ public class DisplayPage extends BorderPane {
 		
 	}
 	
+	public void setUsername(String name) {
+		tmb.setUserName(name);
+	}
+	
 	public void setOnLogout(EventHandler<ActionEvent> eh) {
 		tmb.setOnLogout(eh);
 	}
@@ -94,5 +98,21 @@ public class DisplayPage extends BorderPane {
 	}
 	public void managerClick(EventHandler<ActionEvent> eh) {
 		tmb.managerViewClick(eh);
+	}
+	
+	public void setHostButtonVisibile(boolean visible) {
+		tmb.setHostButtonVisibile(visible);
+	}
+	
+	public void setServerButtonVisibile(boolean visible) {
+		tmb.setServerButtonVisibile(visible);
+	}
+	
+	public void setKitchenButtonVisibile(boolean visible) {
+		tmb.setKitchenButtonVisibile(visible);
+	}
+	
+	public void setManagerButtonVisibile(boolean visible) {
+		tmb.setManagerButtonVisibile(visible);
 	}
 }

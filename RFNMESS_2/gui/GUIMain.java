@@ -142,6 +142,38 @@ public class GUIMain extends Application {
 		lg.setOnLoggedIn(
 			(event) -> {
 				//TODO: make view based on current user
+				masterPane.setUsername(event.getUsername());
+				try {
+					switch(loginController.getCurrentAccessLevel()) {
+					case Host:
+						masterPane.setHostButtonVisibile(true);
+						break;
+					case Server:
+						masterPane.setServerButtonVisibile(true);
+						masterPane.setHostButtonVisibile(true);
+						break;
+					case Kitchen:
+						masterPane.setKitchenButtonVisibile(true);
+						break;
+					case Manager:
+					case MasterAdmin:
+						masterPane.setHostButtonVisibile(true);
+						masterPane.setServerButtonVisibile(true);
+						masterPane.setKitchenButtonVisibile(true);
+						masterPane.setManagerButtonVisibile(true);
+						break;
+					case Default:
+					default:
+						break;
+					
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					loginController.logout();
+					lg.postErrorMessage("Error reading access level. Previous session has been terminated, please try again.");
+					setView(StageView.Login);
+				}
 				setView(event.getDefaultView());
 			}
 		);
@@ -160,6 +192,11 @@ public class GUIMain extends Application {
 		// logs out.
 		masterPane.setOnLogout((event) -> {
 			loginController.logout();
+			masterPane.setUsername(null);
+			masterPane.setHostButtonVisibile(false);
+			masterPane.setServerButtonVisibile(false);
+			masterPane.setKitchenButtonVisibile(false);
+			masterPane.setManagerButtonVisibile(false);
 			setView(StageView.Login);
 		});
 		// changes to host view.

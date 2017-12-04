@@ -102,17 +102,21 @@ public class LoginEvent extends Event {
 			
 			switch(emp.getAccessLevel()) {
 				case Default:
-				case Host:
-				case MasterAdmin:
 				default:
+					this.setDefaultView(StageView.Login);
+					break;
+				case Host:
 					this.setDefaultView(StageView.Host);
 					break;
 				case Server:
 					this.setDefaultView(StageView.Order);
 					break;
 				case Kitchen:
-				case Manager:
 					this.setDefaultView(StageView.Kitchen);
+					break;
+				case MasterAdmin:
+				case Manager:
+					this.setDefaultView(StageView.Manager);
 					break;
 			}
 		}

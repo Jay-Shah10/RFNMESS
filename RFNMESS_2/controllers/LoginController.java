@@ -33,7 +33,7 @@ public class LoginController implements Controller {
 			throw new Exception("User already logged in.");
 		
 		for (Employee e : model.getEmployees()) {
-			if(e.getUsername().equalsIgnoreCase(username) && e.getPassword().equals(password)) {
+			if(e.getUsername().equalsIgnoreCase(username) && (e.getPassword()==null || e.getPassword().equals(password))) {
 				currentUser = e;
 				return currentUser;
 			}
@@ -42,7 +42,7 @@ public class LoginController implements Controller {
 	}
 	
 	public void logout() {
-		currentUser = null;
+		this.currentUser = null;
 	}
 	
 	public AccessLevel getCurrentAccessLevel() throws Exception {

