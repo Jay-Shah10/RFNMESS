@@ -32,6 +32,8 @@ public class MenuItemEvent extends Event {
 		
 	private MenuItemType 		type;
 	
+	private double				price;
+	
 	private List<Ingredient>	ingredientList;
 	
 	public static final EventType<MenuItemEvent> CREATE_MENUITEM = new EventType<>(Event.ANY, "CREATE_MENUITEM");
@@ -130,6 +132,20 @@ public class MenuItemEvent extends Event {
 	 */
 	public void setIngredientList(List<Ingredient> ingredientList) {
 		this.ingredientList = ingredientList;
+	}
+
+	/**
+	 * @return the price
+	 */
+	public double getPrice() {
+		return price;
+	}
+
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	

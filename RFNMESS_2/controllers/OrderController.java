@@ -93,7 +93,7 @@ public class OrderController implements Controller {
 	}
 	
 	public MenuItem createMenuItem(MenuItemType type, String name, double price, ArrayList<Ingredient> ingredients, String description) {
-		MenuItem m = new MenuItem(name, price, description);
+		MenuItem m = new MenuItem(name, price, description, type);
 		m.setIngredients(ingredients);
 		switch (type) {
 		case DRINK:
@@ -112,6 +112,56 @@ public class OrderController implements Controller {
 			break;
 		}
 		return m;
+	}
+	
+	public void updateMenuItem(MenuItem m, MenuItemType type, String name, double price, ArrayList<Ingredient> ingredients, String description) {
+		m.setName(name);
+		m.setPrice(price);
+		m.setDescription(description);
+		m.setIngredients(ingredients);
+		
+		if(m.getType() == null || !m.getType().equals(type)) {
+			model.getDrinks().remove(m);
+			model.getAppetizers().remove(m);
+			model.getEntrees().remove(m);
+			model.getDesserts().remove(m);
+			switch (type) {
+			case DRINK:
+				model.getDrinks().add(m);
+				break;
+			case APPETIZER:
+				model.getAppetizers().add(m);
+				break;
+			case ENTREE:
+				model.getEntrees().add(m);
+				break;
+			case DESSERT:
+				model.getDesserts().add(m);
+				break;
+			default:
+				break;
+			}
+			m.setType(type);
+		}
+	}
+	
+	public boolean deleteMenuItem(MenuItem m) {
+		switch(m.getType()) {
+		case DRINK:
+			return model.getDrinks().remove(m);
+		case APPETIZER:
+			return model.getAppetizers().remove(m);
+		case ENTREE:
+			return model.getEntrees().remove(m);
+		case DESSERT:
+			return model.getDesserts().remove(m);
+			default:
+				return 
+						model.getDrinks().remove(m) ||
+						model.getAppetizers().remove(m) ||
+						model.getEntrees().remove(m) ||
+						model.getDesserts().remove(m);
+		}
 	}
 	
 }

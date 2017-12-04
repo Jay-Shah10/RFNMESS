@@ -9,6 +9,8 @@ import java.util.Optional;
 import events.EmployeeEvent;
 import events.MenuItemEvent;
 import events.OrderEvent;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -16,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -26,9 +29,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import models.AccessLevel;
 import models.Employee;
 import models.Ingredient;
 import models.MenuItem;
+import models.MenuItemType;
 import gui.NodeList;
 import gui.NodeListItem;
 
@@ -49,6 +54,7 @@ public class ManagerView implements View {
 	
 	private ListView<Employee>		employeeList;
 	
+	private ChoiceBox<AccessLevel> 	employeeAccessLevel;
 	private TextField				employeeUsername,
 									employeeFirstName,
 									employeeLastName,
@@ -62,12 +68,16 @@ public class ManagerView implements View {
 	private NodeList<Ingredient>	menuItemAllIngredientsList,
 									menuItemIngredientsList;
 	
+	private ChoiceBox<MenuItemType> menuItemMenuType;
 	private TextField				menuItemName,
-									menuItemDescription;
+									menuItemDescription,
+									menuItemPrice;
 	
 	private Button					menuItemSave,
 									menuItemUpdate,
 									menuItemDelete;
+
+
 	
 								
 
@@ -131,6 +141,14 @@ public class ManagerView implements View {
 		VBox right = new VBox();
 		employeePane.getChildren().add(right);
 		HBox.setHgrow(right, Priority.ALWAYS);
+		
+		HBox accessContainer = new HBox();
+		Text accessLabel = new Text("Access Level");
+		accessContainer.getChildren().add(accessLabel);
+		employeeAccessLevel = new ChoiceBox<AccessLevel>();
+		employeeAccessLevel.getItems().addAll(AccessLevel.values());
+		accessContainer.getChildren().add(employeeAccessLevel);
+		right.getChildren().add(accessContainer);
 		
 		Text usernameLabel = new Text("Username");
 		right.getChildren().add(usernameLabel);
@@ -197,6 +215,7 @@ public class ManagerView implements View {
 					employeeFirstName.setText(e.getFirstName());
 					employeeLastName.setText(e.getLastName());
 					employeePassword.setText("");
+					employeeAccessLevel.setValue(e.getAccessLevel());
 				}
 			}
 		);
@@ -238,6 +257,7 @@ public class ManagerView implements View {
 						evt.setUsername(employeeUsername.getText());
 						evt.setFirstname(employeeFirstName.getText());
 						evt.setLastname(employeeLastName.getText());
+						evt.setAccess(employeeAccessLevel.getValue());
 						evt.setPassword(employeePassword.getText());
 						employeeList.fireEvent(evt);
 					}
@@ -263,6 +283,7 @@ public class ManagerView implements View {
 					evt.setFirstname(employeeFirstName.getText());
 					evt.setLastname(employeeLastName.getText());
 					evt.setPassword(employeePassword.getText());
+					evt.setAccess(employeeAccessLevel.getValue());
 					employeeList.fireEvent(evt);
 				}
 			}
@@ -286,11 +307,34 @@ public class ManagerView implements View {
 		menuItemPane.getChildren().add(right);
 		HBox.setHgrow(right, Priority.ALWAYS);
 		
+		HBox menuTypeContainer = new HBox();
+		Text menuTypeLabel = new Text("Menu Type");
+		menuTypeContainer.getChildren().add(menuTypeLabel);
+		menuItemMenuType = new ChoiceBox<MenuItemType>();
+		menuItemMenuType.getItems().addAll(MenuItemType.values());
+		menuTypeContainer.getChildren().add(menuItemMenuType);
+		right.getChildren().add(menuTypeContainer);
+		
 		Text menuItemNameLabel = new Text("Item Name");
 		right.getChildren().add(menuItemNameLabel);
 		menuItemName = new TextField();
 		menuItemName.getStyleClass().add("form-control");
 		right.getChildren().add(menuItemName);
+		
+		Text menuItemPriceLabel = new Text("Price");
+		right.getChildren().add(menuItemPriceLabel);
+		menuItemPrice = new TextField();
+		menuItemPrice.getStyleClass().add("form-control");
+		menuItemPrice.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*\\.?\\d?\\d?")) {
+		        	menuItemPrice.setText(oldValue);
+		        }
+		    }
+		});
+		right.getChildren().add(menuItemPrice);
 		
 		Text menuItemDescriptionLabel = new Text("Description");
 		right.getChildren().add(menuItemDescriptionLabel);
@@ -351,10 +395,80 @@ public class ManagerView implements View {
 					menuItemUpdate.setVisible(true);
 					menuItemDelete.setVisible(true);
 					menuItemName.setText(i.getName());
+					menuItemPrice.setText(String.valueOf(i.getPrice()));
 					menuItemDescription.setText(i.getDescription());
+					menuItemMenuType.setValue(i.getType());
+					menuItemIngredientsList.clear();
+					for (Ingredient ing : i.getIngredients()) {
+						menuItemIngredientsList.add(ing, false, true, false, null);
+					}
 				}
 			}
 		);
+		
+		menuItemDelete.setOnAction(
+				(event) -> {
+					MenuItem e = menuItemList.getSelectionModel().getSelectedItem();
+					if (e == null) {
+						Alert a = new Alert(AlertType.ERROR, "You have not selected a menu item.", ButtonType.CLOSE);
+						a.setHeaderText(null);
+						a.show();
+					}
+					else {
+						Alert a = new Alert(AlertType.CONFIRMATION, "Are you sure you wish to delete this menu item?", ButtonType.YES, ButtonType.NO);
+						a.setHeaderText(null);
+						Optional<ButtonType> result = a.showAndWait();
+						if (result.get() == ButtonType.YES) {
+							MenuItemEvent evt = new MenuItemEvent(e, menuItemList, MenuItemEvent.DELETE_MENUITEM);
+							menuItemList.fireEvent(evt);
+						}
+					}
+				}
+			);
+			
+			menuItemUpdate.setOnAction(
+				(event) -> {
+					MenuItem e = menuItemList.getSelectionModel().getSelectedItem();
+					if (e == null) {
+						Alert a = new Alert(AlertType.ERROR, "You have not selected a menu item.", ButtonType.CLOSE);
+						a.setHeaderText(null);
+						a.show();
+					}
+					else {
+						Alert a = new Alert(AlertType.CONFIRMATION, "You are about to overwrite this menu item's information.\nDo you wish to proceed?", ButtonType.YES, ButtonType.NO);
+						a.setHeaderText(null);
+						Optional<ButtonType> result = a.showAndWait();
+						if (result.get() == ButtonType.YES) {
+							MenuItemEvent evt = new MenuItemEvent(e, menuItemList, MenuItemEvent.UPDATE_MENUITEM);
+							evt.setType(menuItemMenuType.getValue());
+							evt.setName(menuItemName.getText());
+							evt.setDescription(menuItemDescription.getText());
+							evt.setIngredientList(menuItemIngredientsList.getList());
+							evt.setPrice(Double.parseDouble(menuItemPrice.getText()));
+							menuItemList.fireEvent(evt);
+						}
+					}
+				}
+			);
+			
+			menuItemSave.setOnAction(
+				(event) -> {
+					if (menuItemName.getText() == null || menuItemName.getText().trim().isEmpty()) {
+						Alert a = new Alert(AlertType.ERROR, "Username is required.", ButtonType.CLOSE);
+						a.setHeaderText(null);
+						a.show();
+					}
+					else {
+						MenuItemEvent evt = new MenuItemEvent(null, menuItemList, MenuItemEvent.CREATE_MENUITEM);
+						evt.setType(menuItemMenuType.getValue());
+						evt.setName(menuItemName.getText());
+						evt.setDescription(menuItemDescription.getText());
+						evt.setIngredientList(menuItemIngredientsList.getList());
+						evt.setPrice(Double.parseDouble(menuItemPrice.getText()));
+						menuItemList.fireEvent(evt);
+					}
+				}
+			);
 	}
 	private void initIngredientTab() {
 		ingredientTab = new Tab("Ingredients");

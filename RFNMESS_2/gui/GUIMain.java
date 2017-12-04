@@ -1,5 +1,6 @@
 package gui;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -275,6 +276,57 @@ public class GUIMain extends Application {
 				if(result.get()==ButtonType.OK || result.get()==ButtonType.CLOSE) {
 					a.close();
 				}
+			}
+		);
+		
+		managerView.setOnMenuItemDeleted(
+			(event) -> {
+				String n = event.getMenuItem().getName();
+				orderController.deleteMenuItem(
+						event.getMenuItem()
+				);
+				managerView.populateMenu(orderController.getMenuItems(MenuItemType.ALL));
+				Alert a = new Alert(AlertType.NONE, "Menu Item " + n + " successfully deleted.", ButtonType.OK);
+				a.setHeaderText(null);
+				a.setTitle("Success!");
+				Optional<ButtonType> result = a.showAndWait();
+				if(result.get()==ButtonType.OK || result.get()==ButtonType.CLOSE) {
+					a.close();
+				}
+			}
+		);
+		
+		managerView.setOnMenuItemUpdated(
+			(event) -> {
+				orderController.updateMenuItem(
+					event.getMenuItem(), 
+					event.getType(), 
+					event.getName(), 
+					event.getPrice(), 
+					(ArrayList<Ingredient>) event.getIngredientList(), 
+					event.getDescription()
+				);
+				managerView.populateMenu(orderController.getMenuItems(MenuItemType.ALL));
+				Alert a = new Alert(AlertType.NONE, "Menu Item " + event.getMenuItem().getName() + " successfully updated.", ButtonType.OK);
+				a.setHeaderText(null);
+				a.setTitle("Success!");
+				Optional<ButtonType> result = a.showAndWait();
+				if(result.get()==ButtonType.OK || result.get()==ButtonType.CLOSE) {
+					a.close();
+				}
+			}
+		);
+		
+		managerView.setOnMenuItemCreated(
+			(event) -> {
+				orderController.createMenuItem(
+						event.getType(), 
+						event.getName(), 
+						event.getPrice(), 
+						(ArrayList<Ingredient>) event.getIngredientList(), 
+						event.getDescription()
+				);
+				managerView.populateMenu(orderController.getMenuItems(MenuItemType.ALL));
 			}
 		);
 	}
