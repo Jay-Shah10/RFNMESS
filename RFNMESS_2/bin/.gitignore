@@ -1,16 +1,10 @@
 *.class
 <<<<<<< HEAD
-<<<<<<< HEAD
 /models/
 =======
-=======
->>>>>>> parent of d192ed4... flat file stuff
 /gui/
 /views/
 /controllers/
 /models/
 /events/
-<<<<<<< HEAD
->>>>>>> parent of d192ed4... flat file stuff
-=======
 >>>>>>> parent of d192ed4... flat file stuff
